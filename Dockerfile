@@ -8,8 +8,11 @@ RUN apt update && apt install -y lsof
 RUN pip install --upgrade --no-cache-dir hatch pip
 
 # Install project requirements
-RUN pip install bionetgen
-RUN ln -sf /usr/local/bin/bionetgen /usr/local/bin/BioNetGen
+WORKDIR /tmp
+RUN wget https://github.com/RuleWorld/bionetgen/releases/download/BioNetGen-2.9.2/BioNetGen-2.9.2-linux.tar.gz && \
+    tar -xzf BioNetGen-2.9.2-linux.tar.gz && \
+    mv BioNetGen-2.9.2 /usr/local/share/BioNetGen && \
+    rm BioNetGen-2.9.2-linux.tar.gz
 
 COPY --chown=1000:1000 . /jupyter/
 RUN chown -R 1000:1000 /jupyter
