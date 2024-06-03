@@ -19,7 +19,6 @@ services:
       - ENABLE_CHECKPOINTS=true
     volumes:
       -  ./src/beaker_pysb:/usr/local/lib/python3.10/site-packages/beaker_pysb
-      - ../../askem/jataware-beaker/beaker_kernel:/usr/local/lib/python3.10/site-packages/beaker_kernel
     command: [
       "python",
       "-m",
