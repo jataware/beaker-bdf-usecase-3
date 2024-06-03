@@ -16,6 +16,13 @@
 pip install beaker-pysb
 ```
 
+## Docker quickstart
+
+```
+export OPENAI_API_KEY=your OpenAI key goes here
+docker-compose up --build
+```
+
 ## License
 
 `beaker-pysb` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
