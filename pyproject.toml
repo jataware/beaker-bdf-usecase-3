@@ -32,11 +32,8 @@ require-runtime-dependencies = true
 
 documentation_path = "documentation"
 examples_path = "examples"
-python_libraries = [
-  "pysb",
-]
 
-[tool.hatch.build.hooks.bunsen.library_descriptions]
+[tool.hatch.build.hooks.bunsen.libraries.python3]
 pysb = "Systems biology modeling in Python"
 
 

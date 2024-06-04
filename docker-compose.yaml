@@ -18,7 +18,9 @@ services:
       # - PYTHONPATH=/jupyter
       - ENABLE_CHECKPOINTS=true
     volumes:
-      -  ./src/beaker_pysb:/usr/local/lib/python3.10/site-packages/beaker_pysb
+      - ./src/beaker_pysb:/usr/local/lib/python3.10/site-packages/beaker_pysb
+      - ./build/corpus:/usr/local/share/beaker/corpuses/beaker_pysb
+      - ./build/bunsen_config.json:/usr/local/share/beaker/bunsen/beaker_pysb.json
     command: [
       "python",
       "-m",

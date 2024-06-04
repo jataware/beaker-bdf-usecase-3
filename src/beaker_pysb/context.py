@@ -7,9 +7,8 @@ from .agent import PySbAgent
 class PySbContext(BunsenContext):
 
     agent_cls = PySbAgent
-    enabled_subkernels = "python3"
+    enabled_subkernels = ["python3"]
 
     @classmethod
     def default_payload(cls) -> str:
         return "{}"
-

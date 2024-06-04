@@ -14,6 +14,12 @@ RUN wget https://github.com/RuleWorld/bionetgen/releases/download/BioNetGen-2.9.
     mv BioNetGen-2.9.2 /usr/local/share/BioNetGen && \
     rm BioNetGen-2.9.2-linux.tar.gz
 
+WORKDIR /opt/stochkit
+ENV STOCHKIT_HOME=/opt/stochkit
+RUN git clone https://github.com/StochSS/StochKit.git /opt/stochkit
+RUN bash ./install.sh
+ENV PATH=$PATH:$STOCHKIT_HOME/bin
+
 COPY --chown=1000:1000 . /jupyter/
 RUN chown -R 1000:1000 /jupyter
 RUN pip install -e /jupyter
