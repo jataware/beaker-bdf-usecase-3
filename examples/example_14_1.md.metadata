@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.bngwiki_egfr_simple",
+  "package": "indra.databases.ec_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.bngwiki_egfr_simple",
-  "source_uri": "py-mod:pysb.examples.bngwiki_egfr_simple",
-  "generated_at": "2024-05-31T18:46:35.129686",
-  "source_sha256_hash": "48184f58c24fdae39fba3e47d89d09b9d6f5275373c3b14da67869c2e2b7331b",
-  "start_line": 60,
-  "stop_line": 93
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.ec_client",
+  "source_uri": "py-mod:indra.databases.ec_client",
+  "generated_at": "2024-06-24T20:11:28.204857",
+  "source_sha256_hash": "1bd80fc94e39ce90853bfe3ecf2a2309c45e46b6ecc5af7651545c2bc7852852",
+  "start_line": 29,
+  "stop_line": 32
 }

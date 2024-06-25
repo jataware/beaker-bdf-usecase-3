@@ -1,65 +1,50 @@
 # Description
-This example demonstrates how to set up a model in PySB with initial conditions, where one of the parameters (F_0) is fixed. The example includes the declaration of monomers, parameters, rules for binding, initial conditions, and observables.
+How to get the MGI ID from an MGI gene symbol
 
 # Code
 ```
-from __future__ import print_function
-from pysb import *
+from collections import defaultdict
+from typing import List, Union
+from indra.util import read_unicode_csv
+from indra.resources import get_resource_path
 
-Model()
+# Initialize data structures using the _read_mgi function
+def _read_mgi():
+    fname = get_resource_path('mgi_entries.tsv')
+    mgi_id_to_name = {}
+    mgi_name_to_id = {}
+    mgi_synonyms = {}
+    mgi_synonyms_reverse = defaultdict(list)
+    mgi_id_to_ensembl = {}
+    for mgi_id, name, synonyms_str, ensembl_id in read_unicode_csv(fname, '\t'):
+        if name:
+            mgi_id_to_name[mgi_id] = name
+            mgi_name_to_id[name] = mgi_id
+        if synonyms_str:
+            synonyms = synonyms_str.split('|')
+            mgi_synonyms[mgi_id] = synonyms
+            for synonym in synonyms:
+                mgi_synonyms_reverse[synonym].append(mgi_id)
+        if ensembl_id:
+            mgi_id_to_ensembl[mgi_id] = ensembl_id
 
-Monomer('A', ['b'])
-Monomer('F', ['b'])
+    return mgi_id_to_name, mgi_name_to_id, mgi_synonyms, dict(mgi_synonyms_reverse), mgi_id_to_ensembl
 
-Parameter('kf', 1.0)
-Parameter('kr', 1.0)
-Parameter('A_0', 100)
-Parameter('F_0', 20)
+# Read and assign data structures
+global mgi_name_to_id
 
-Rule('A_bind_F', A(b=None) + F(b=None) | A(b=1) % F(b=1), kf, kr)
+def get_id_from_name(name: str) -> Union[str, None]:
+    """Return an MGI ID from an MGI gene symbol.
 
-Initial(A(b=None), A_0)
-Initial(F(b=None), F_0, fixed=True)
+    Parameters
+    ----------
+    name :
+        The MGI gene symbol whose ID will be returned.
 
-Observable('A_free', A(b=None))
-Observable('F_free', F(b=None))
-
-"""Example of using an initial condition with a fixed amount.
-
-With the amount of free F fixed, most of the free A will be able to bind and
-form the A-F complex before equilibrium is reached. If free F were not fixed,
-its lower initial amount would severely restrict how much complex could form.
-See run_fixed_initial.py for a demonstration of this behavior.
-
-"""
-
-from __future__ import print_function
-from pysb import *
-
-Model()
-
-Monomer('A', ['b'])
-Monomer('F', ['b'])
-
-Parameter('kf', 1.0)
-Parameter('kr', 1.0)
-Parameter('A_0', 100)
-Parameter('F_0', 20)
-
-Rule('A_bind_F', A(b=None) + F(b=None) | A(b=1) % F(b=1), kf, kr)
-
-Initial(A(b=None), A_0)
-Initial(F(b=None), F_0, fixed=True)
-
-Observable('A_free', A(b=None))
-Observable('F_free', F(b=None))
-Observable('AF_complex', A(b=1) % F(b=1))
-
-
-if __name__ == '__main__':
-    print(__doc__, "\n", model)
-    print("""
-NOTE: This model code is designed to be imported and programatically
-manipulated, not executed directly. The above output is merely a
+    Returns
+    -------
+    :
+        The MGI ID (without prefix) or None if not available.
+    """
 
 ```

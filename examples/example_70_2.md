@@ -1,22 +1,19 @@
 # Description
-This example demonstrates how to set up and simulate a model with an initial condition expression involving one parameter using the PySB library.
+Test getting metadata for a DOI
 
 # Code
 ```
-pysb import *
-pysb.testing import *
-pysb.bng import *
-pysb.integrate import Solver
+from __future__ import absolute_import, print_function, unicode_literals
+from builtins import dict, str
+from indra.literature import crossref_client
+from indra.util import unicode_strs
+import pytest
 
-@with_model
-def test_ic_expression_with_one_parameter():
-    Monomer('A')
-    Parameter('k1', 1)
-    Expression('e1', k1)
-    Rule('A_deg', A() >> None, k1)
-    Initial(A(), e1)
-    generate_equations(model)
-    t = np.linspace(0, 1000, 100)
-    sol = Solver(model, t, use_analytic_jacobian=True)
+@pytest.mark.webservice
+def test_get_metadata():
+    metadata = crossref_client.get_metadata(test_doi)
+    assert metadata['DOI'] == test_doi
+    assert unicode_strs(metadata)
+    metadata = crossref_client.get_metadata('xyz')
 
 ```

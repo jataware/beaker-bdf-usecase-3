@@ -1,20 +1,14 @@
 # Description
-Run a Kappa simulation on the Michment model, apply a perturbation, and compare the results with a reference simulation.
+Test the assembly of an agent string for a basic agent without any modifications.
 
 # Code
 ```
-pysb.simulator import KappaSimulator
-pysb.kappa import run_simulation
-pysb.examples import michment
+import indra.assemblers.english.assembler as ea
 
-def test_kappa_sim_michment():
-    perturbation = '%init: 12 E(s[.])'
-
-    orig_sim = run_simulation(michment.model, time=100, points=100,
-                              seed=KAPPA_SEED, perturbation=perturbation)
-
-    sim = KappaSimulator(michment.model, tspan=np.linspace(0, 100, 101))
-    x = sim.run(seed=KAPPA_SEED, perturbation=perturbation)
-
+def test_agent_basic():
+    ag = ea._assemble_agent_str(Agent('EGFR'))
+    assert isinstance(ag, ea.AgentWithCoordinates)
+    print(ag.agent_str)
+    assert ag.agent_str == 'EGFR'
 
 ```

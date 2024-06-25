@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.bngwiki_enzymatic_cycle_mm",
+  "package": "indra.databases.efo_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.bngwiki_enzymatic_cycle_mm",
-  "source_uri": "py-mod:pysb.examples.bngwiki_enzymatic_cycle_mm",
-  "generated_at": "2024-05-31T18:46:36.876816",
-  "source_sha256_hash": "94bf548d8f4ef1aa5710ee567fa3df6ab9abe5c0eeef4351859b2dfc9ce80b91",
-  "start_line": 11,
-  "stop_line": 60
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.efo_client",
+  "source_uri": "py-mod:indra.databases.efo_client",
+  "generated_at": "2024-06-24T20:11:30.930831",
+  "source_sha256_hash": "b939446489b81b1dbdf2aa6dc201765e42d3b1cf3b3b55243c378d6a143a1432",
+  "start_line": 7,
+  "stop_line": 21
 }

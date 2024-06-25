@@ -1,36 +1,36 @@
 # Description
-Test the scipy ODE simulator with dynamic species and generated species configuration.
+This example demonstrates how to expand families within `Phosphorylation` statements using the Indra `Expander` class.
 
 # Code
 ```
-from pysb.simulator import ScipyOdeSimulator
-import numpy as np
+import itertools
+from indra.ontology.bio import bio_ontology
+from indra.tools.expand_families import Expander
+from indra.statements import Agent, Phosphorylation
 
-class TestScipySimulatorBase(object):
-    @with_model
-    def setUp(self):
-        Monomer('A', ['a'])
-        Monomer('B', ['b'])
-        Parameter('ksynthA', 100)
-        Parameter('ksynthB', 100)
-        Parameter('kbindAB', 100)
-        Parameter('A_init', 0)
-        Parameter('B_init', 0)
-        Initial(A(a=None), A_init)
-        Initial(B(b=None), B_init)
-        Observable('A_free', A(a=None))
-        Observable('B_free', B(b=None))
-        Observable('AB_complex', A(a=1) % B(b=1))
-        Rule('A_synth', None >> A(a=None), ksynthA)
-        Rule('B_synth', None >> B(b=None), ksynthB)
-        Rule('AB_bind', A(a=None) + B(b=None) >> A(a=1) % B(b=1), kbindAB)
-        self.model = model
-        self.mon = lambda m: self.model.monomers[m]
-        self.time = np.linspace(0, 1)
+# Get the Expander
 
-"""Test y0 with dynamically generated species."""
-simres = self.sim.run(initials={self.mon('A')(a=None): 0,
-                       self.mon('B')(b=1) % self.mon('A')(a=1): 100,
-                       self.mon('B')(b=None): 0})
+def test_expand_families():
+    # Declare some agents
+    akt = Agent('AKT', db_refs={'FPLX': 'AKT'})
+    raf = Agent('RAF', db_refs={'FPLX': 'RAF'})
+    mek = Agent('MEK', db_refs={'FPLX': 'MEK'})
+    mapk1 = Agent('MAPK1', db_refs={'FPLX': 'MAPK1'})
+    ampk = Agent('AMPK', db_refs={'FPLX': 'AMPK'})
+    # Test case where one agent is a family and the other is a gene
+    st = Phosphorylation(mek, mapk1)
+    expanded_stmts = exp.expand_families([st])
+    assert len(expanded_stmts) == 2
+    # Test for case involving None for one of the agents
+    st = Phosphorylation(None, akt)
+    expanded_stmts = exp.expand_families([st])
+    assert len(expanded_stmts) == 3
+    # Statement with two families: 3 Rafs x 2 Meks
+    st = Phosphorylation(raf, mek, 'S', '202')
+    expanded_stmts = exp.expand_families([st])
+    assert len(expanded_stmts) == 6
+    # Test also for case involving both family and complex relationships
+    st = Phosphorylation(ampk, mek)
+    expanded_stmts = exp.expand_families([st])
 
 ```

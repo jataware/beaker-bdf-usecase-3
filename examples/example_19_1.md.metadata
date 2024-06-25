@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.explicit",
+  "package": "indra.databases.lincs_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.explicit",
-  "source_uri": "py-mod:pysb.examples.explicit",
-  "generated_at": "2024-05-31T18:47:15.862114",
-  "source_sha256_hash": "deabb917ef96d3bf607598890ac4aa9962686c7dc18aa56349888cbe7d05dadd",
-  "start_line": 10,
-  "stop_line": 28
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.lincs_client",
+  "source_uri": "py-mod:indra.databases.lincs_client",
+  "generated_at": "2024-06-24T20:11:54.962202",
+  "source_sha256_hash": "613557ec27c7227026f784d14c1d07852e559994355bf1351483c936c9c0d406",
+  "start_line": 136,
+  "stop_line": 147
 }

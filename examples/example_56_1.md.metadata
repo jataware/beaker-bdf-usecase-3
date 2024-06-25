@@ -1,10 +1,11 @@
 {
-  "package": "pysb.importers.sbml",
+  "package": "indra.tests.test_assemble_corpus",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.importers.sbml",
-  "source_uri": "py-mod:pysb.importers.sbml",
-  "generated_at": "2024-05-31T18:51:03.209510",
-  "source_sha256_hash": "c73b6105281a8d20f7ff5635aee1eb2847743eb490190f04d102b30afbafeb4f",
-  "start_line": 225,
-  "stop_line": 229
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_assemble_corpus",
+  "source_uri": "py-mod:indra.tests.test_assemble_corpus",
+  "generated_at": "2024-06-24T20:20:29.913077",
+  "source_sha256_hash": "a15797aa3664093a7a62c37b8e7bebae7ac3d52e9c0ec8f403cdb7a2ed02f6af",
+  "start_line": 54,
+  "stop_line": 60
 }

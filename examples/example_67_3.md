@@ -1,20 +1,16 @@
 # Description
-Test invalid state assignments in Monomer and MonomerPattern calls.
+This code example shows how to query target data for a target (`braf_chembl_id`) using the `query_target` function from the `chembl_client` module and verifies the target type.
 
 # Code
 ```
-copy
-pysb.testing import *
-pysb.core import *
-functools import partial
-nose.tools import assert_raises
-operator
+from __future__ import absolute_import, print_function, unicode_literals
+from builtins import dict, str
+from indra.databases import chembl_client
+import pytest
 
-@with_model
-def test_invalid_state():
-    Monomer('A', ['a', 'b'], {'a': ['a1', 'a2'], 'b': ['b1']})
-    # Specify invalid state in Monomer.__call__
-    assert_raises(ValueError, A, a='spam')
-    # Specify invalid state in MonomerPattern.__call__
+
+@pytest.mark.webservice
+def test_target_query():
+    target = chembl_client.query_target(braf_chembl_id)
 
 ```

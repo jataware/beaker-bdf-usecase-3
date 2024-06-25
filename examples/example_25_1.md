@@ -1,48 +1,84 @@
 # Description
-A PySB model demonstrating the use of MultiState and local functions to define and observe the interactions and states of biological entities. This example includes definition of monomers, parameters, observables, tag and expressions, rules, and initial conditions.
+Update JSON data by looking up the ontology through PyOBO using `PyOboClient.update_by_prefix`.
 
 # Code
 ```
-from pysb import Model, Monomer, Parameter, Expression, Rule, Observable, Initial, Tag, MultiState
+import json
+import logging
+import os
+import pathlib
+import pickle
+import re
+from collections import defaultdict
+from operator import attrgetter
+from typing import Callable, List, Mapping, Optional
+import pyobo
+from indra.resources import get_resource_path
+
+logger = logging.getLogger(__name__)
+
+def _get_pyobo_rels(term, *, include_relations=False):
+    rv = defaultdict(list)
+    for parent in term.parents:
+        rv["is_a"].append(parent.identifier)
+    if include_relations:
+        for type_def, references in term.relationships.items():
+            for reference in references:
+                rv[type_def.curie].append(reference.curie)
+    return dict(rv)
 
 
-Monomer('A', ['b', 'b', 'b'])
-Monomer('B', ['a'])
-Monomer('C')
+ def prune_standard(entries):
+     return prune_empty_entries(entries, {'synonyms', 'xrefs', 'alt_ids', 'relations'})
 
-Parameter('kp', 0.5)
-Parameter('km', 0.1)
-Parameter('k_synthC', 1e3)
-Parameter('k_degrC', 0.5)
-Parameter('Ab_b_b_0', 1.0)
-Parameter('Ba_0', 3.0)
-Parameter('C_0', 0.0)
 
-Observable('Atot', A())
-Observable('Btot', B())
-Observable('Ctot', C())
-Observable('AB0', A(b=MultiState(None, None, None)), match='species')
-Observable('AB1', A(b=MultiState(1, None, None)) % B(a=1), match='species')
-Observable('AB2', A(b=MultiState(1, 2, None)) % B(a=1) % B(a=2),
-           match='species')
-Observable('AB3', A(b=MultiState(1, 2, 3)) % B(a=1) % B(a=2) % B(a=3),
-           match='species')
-Observable('AB_motif', A(b=1) % B(a=1))
+def prune_empty_entries(entries, keys):
+    for entry in entries:
+        for key in keys:
+            if key in entry and not entry[key]:
+                entry.pop(key)
 
-Tag('x')
+    @classmethod
+    def update_by_prefix(
+        cls,
+        prefix: str,
+        include_relations: bool = False,
+        predicate: Optional[Callable[["pyobo.Term"], bool]] = None,
+        indra_prefix: str = None,
+    ):
+        """Update the JSON data by looking up the ontology through PyOBO."""
+        import pyobo
 
-Expression('f_synth', k_synthC * AB_motif(x) ** 2)
-
-# A synthesizes C with rate dependent on bound B
-Rule('_R1', A() @ x >> A() @ x + C(), f_synth)
-
-# A binds B
-Rule('_R2', A(b=None) + B(a=None) | A(b=1) % B(a=1), kp, km)
-
-# degradation of C
-Rule('_R3', C() >> None, k_degrC)
-
-Initial(A(b=MultiState(None, None, None)), Ab_b_b_0)
-Initial(B(a=None), Ba_0)
+        terms = iter(pyobo.get_ontology(prefix))
+        if predicate:
+            terms = filter(predicate, terms)
+        terms = sorted(terms, key=attrgetter("identifier"))
+        entries = [
+            {
+                'id': term.identifier,
+                'name': term.name,
+                # Synonyms can be duplicated in OBO due to different provenance
+                # so we deduplicate here
+                'synonyms': sorted({synonym.name for synonym in term.synonyms},
+                                   key=lambda x: x.casefold()),
+                'xrefs': [
+                    dict(namespace=xref.prefix, id=xref.identifier)
+                    for xref in term.xrefs
+                ],
+                'alt_ids': sorted([
+                    alt_id.identifier
+                    for alt_id in term.alt_ids
+                ]),
+                'relations': _get_pyobo_rels(
+                    term,
+                    include_relations=include_relations,
+                ),
+            }
+            for term in terms
+        ]
+        entries = prune_standard(entries)
+        indra_prefix = prefix if not indra_prefix else indra_prefix
+        resource_path = get_resource_path(f'{indra_prefix}.json')
+        with open(resource_path, 'w') as file:
 
 ```

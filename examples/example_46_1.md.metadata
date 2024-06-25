@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.tyson_oscillator",
+  "package": "indra.sources.utils",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.tyson_oscillator",
-  "source_uri": "py-mod:pysb.examples.tyson_oscillator",
-  "generated_at": "2024-05-31T18:49:09.976993",
-  "source_sha256_hash": "8cee7b9e08bdda4a2c3d5561ea11e1213430410e8c8cd6a42101def2ae4178f5",
-  "start_line": 31,
-  "stop_line": 81
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.utils",
+  "source_uri": "py-mod:indra.sources.utils",
+  "generated_at": "2024-06-24T20:17:26.359718",
+  "source_sha256_hash": "27bff22e9c4b1274357d56ddc8faa64fb898c0371b1efec51632eb5e4809a446",
+  "start_line": 30,
+  "stop_line": 55
 }

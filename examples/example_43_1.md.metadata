@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.tutorial_a",
+  "package": "indra.sources.hypothesis",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.tutorial_a",
-  "source_uri": "py-mod:pysb.examples.tutorial_a",
-  "generated_at": "2024-05-31T18:49:01.317410",
-  "source_sha256_hash": "c8e81517db55ec82c752e5662dd46bd73b4897ecaaf5492e574954ca5b17d6fc",
-  "start_line": 2,
-  "stop_line": 6
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.hypothesis",
+  "source_uri": "py-mod:indra.sources.hypothesis",
+  "generated_at": "2024-06-24T20:17:11.070827",
+  "source_sha256_hash": "818d97d21a257cd0e0e519e40a957e9153b402c8c5bc5b6a983b2b52ffd36f6c",
+  "start_line": 19,
+  "stop_line": 35
 }

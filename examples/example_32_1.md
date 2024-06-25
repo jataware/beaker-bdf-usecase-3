@@ -1,63 +1,74 @@
 # Description
-Simulating and plotting figure 4A from the EARM 1.0 publication.
+Check article entitlement using the Elsevier API.
 
 # Code
 ```
-from __future__ import print_function
-from pysb.simulator import ScipyOdeSimulator
-import matplotlib.pyplot as plt
-from numpy import *
-from earm_1_0 import model
+import os
+import re
+import logging
+import textwrap
+import datetime
+import xml.etree.ElementTree as ET
+import requests
+from time import sleep
+from indra.util import flatten
+from indra import has_config, get_config
+from functools import lru_cache, wraps
+from indra.util import UnicodeXMLTreeBuilder as UTB
 
-# saturating level of ligand (corresponding to ~1000 ng/ml SuperKiller TRAIL)
-Lsat = 6E4;
+logger = logging.getLogger(__name__)
 
-# relationship of ligand concentration in the model (in # molecules/cell) to actual TRAIL concentration (in ng/ml)
-Lfactor = model.parameters['L_0'].value / 50;
+elsevier_api_url = 'https://api.elsevier.com/content'
+elsevier_entitlement_url = '%s/article/entitlement/doi' % elsevier_api_url
 
-L_0_baseline = model.parameters['L_0'].value
+ELSEVIER_KEYS = None
+API_KEY_ENV_NAME = 'ELSEVIER_API_KEY'
+INST_KEY_ENV_NAME = 'ELSEVIER_INST_KEY'
 
 
-def fig_4a():
-    print("Simulating model for figure 4A...")
-    t = linspace(0, 20*3600, 20*60+1)  # 20 hours, in seconds, 1 min sampling
-    dt = t[1] - t[0]
+def _ensure_api_keys(task_desc, failure_ret=None):
+    def check_func_wrapper(func):
+        @wraps(func)
+        def check_api_keys(*args, **kwargs):
+            global ELSEVIER_KEYS
+            if ELSEVIER_KEYS is None:
+                ELSEVIER_KEYS = {}
+                if not has_config(INST_KEY_ENV_NAME):
+                    logger.warning('Institution API key %s not found in config '
+                                   'file or environment variable: this will '
+                                   'limit access for %s'
+                                   % (INST_KEY_ENV_NAME, task_desc))
+                ELSEVIER_KEYS['X-ELS-Insttoken'] = get_config(INST_KEY_ENV_NAME)
+                if not has_config(API_KEY_ENV_NAME):
+                    logger.error('API key %s not found in configuration file '
+                                 'or environment variable: cannot %s'
+                                 % (API_KEY_ENV_NAME, task_desc))
+                    return failure_ret
+                ELSEVIER_KEYS['X-ELS-APIKey'] = get_config(API_KEY_ENV_NAME)
+            elif 'X-ELS-APIKey' not in ELSEVIER_KEYS.keys():
+                logger.error('No Elsevier API key %s found: cannot %s'
+                             % (API_KEY_ENV_NAME, task_desc))
+                return failure_ret
+            return func(*args, **kwargs)
+        return check_api_keys
 
-    Ls_exp = Lsat / array([1, 4, 20, 100, 500])
-    Td_exp = [144.2, 178.7, 236,   362.5, 656.5]
-    Td_std = [32.5,   32.2,  36.4,  78.6, 171.6]
-    Ts_exp = [21.6,   23.8,  27.2,  22.0,  19.0]
-    Ts_std = [9.5,     9.5,  12.9,   7.7,  10.5]
+@_ensure_api_keys('check article entitlement', False)
+def check_entitlement(doi):
+    """Check whether IP and credentials enable access to content for a doi.
 
-    CVenv = 0.2
-    # num steps was originally 40, but 15 is plenty smooth enough for screen display
-    Ls = floor(logspace(1,5,15))
-
-    fs = empty_like(Ls)
-    Ts = empty_like(Ls)
-    Td = empty_like(Ls)
-    print("Scanning over %d values of L_0" % len(Ls))
-    for i, L_0 in enumerate(Ls):
-        print("  L_0 = %g" % L_0)
-        x = sim.run(tspan=t, param_values={"L_0": L_0}).all
-
-        fs[i] = (x['PARP_unbound'][0] - x['PARP_unbound'][-1]) / x['PARP_unbound'][0]
-        dP = 60 * (x['PARP_unbound'][:-1] - x['PARP_unbound'][1:]) / (dt * x['PARP_unbound'][0])  # in minutes
-        ttn = argmax(dP)
-        dPmax = dP[ttn]
-        Ts[i] = 1 / dPmax  # minutes
-        Td[i] = t[ttn] / 60  # minutes
-
-    plt.figure("Figure 4A")
-    plt.plot(Ls/Lfactor, Td, 'g-', Ls/Lfactor, (1-CVenv)*Td, 'g--', Ls/Lfactor,
-          (1+CVenv)*Td, 'g--')
-    plt.errorbar(Ls_exp/Lfactor, Td_exp, Td_std, None, 'go', capsize=0),
-    plt.ylabel('Td (min)'),
-    plt.xlabel('TRAIL (ng/ml)'),
-    a = plt.gca()
-    a.set_xscale('log')
-    a.set_xlim((min(Ls) / Lfactor, max(Ls) / Lfactor))
-    a.set_ylim((0, 1000))
-
+    This function uses the entitlement endpoint of the Elsevier API to check
+    whether an article is available to a given institution. Note that this
+    feature of the API is itself not available for all institution keys.
+    """
+    if doi.lower().startswith('doi:'):
+        doi = doi[4:]
+    url = '%s/%s' % (elsevier_entitlement_url, doi)
+    params = {'httpAccept': 'text/xml'}
+    res = requests.get(url, params, headers=ELSEVIER_KEYS)
+    if not res.status_code == 200:
+        logger.error('Could not check entitlements for article %s: '
+                     'status code %d' % (doi, res.status_code))
+        logger.error('Response content: %s' % res.text)
+        return False
 
 ```

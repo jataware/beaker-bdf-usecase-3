@@ -1,15 +1,15 @@
 # Description
-Run a Kappa simulation with a single time point, ensuring that Kappa correctly handles this case.
+Test the assembly of an agent string for an agent bound to another agent.
 
 # Code
 ```
-pysb.simulator import KappaSimulator
-pysb.examples import michment
+import indra.assemblers.english.assembler as ea
 
-def test_kappa_1timepoint():
-    michment.model.reset_equations()
-    sim = KappaSimulator(michment.model, tspan=[0, 1])
-    # This set of parameter values causes Kappa to abort after 1st time point
-    res = sim.run(param_values=[100, 100, 10, 10, 100, 100], seed=KAPPA_SEED)
+def test_agent_bound():
+    bc = BoundCondition(Agent('EGF'), True)
+    a = Agent('EGFR', bound_conditions=[bc])
+    ag = ea._assemble_agent_str(a)
+    print(ag.agent_str)
+    assert ag.agent_str == 'EGFR bound to EGF'
 
 ```

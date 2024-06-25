@@ -1,0 +1,11 @@
+{
+  "package": "indra.explanation.pathfinding.pathfinding",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.explanation.pathfinding.pathfinding",
+  "source_uri": "py-mod:indra.explanation.pathfinding.pathfinding",
+  "generated_at": "2024-06-24T20:55:34.716661",
+  "source_sha256_hash": "8f7a275b3a48f8be44fa5def4e9309a98fe1124afd1e8f3267d3c960c0f5dc5f",
+  "start_line": 80,
+  "stop_line": 96
+}

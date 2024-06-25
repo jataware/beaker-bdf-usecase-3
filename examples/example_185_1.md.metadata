@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.dgi.__main__",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.dgi.__main__",
+  "source_uri": "py-mod:indra.sources.dgi.__main__",
+  "generated_at": "2024-06-24T20:59:57.459161",
+  "source_sha256_hash": "6d99b1e3718f3addeb43990cf7b107a99ad3af8b924acab22a3c1afe6a3b16dc",
+  "start_line": 11,
+  "stop_line": 44
+}

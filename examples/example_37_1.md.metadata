@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.run_michment",
+  "package": "indra.preassembler.custom_preassembly",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.run_michment",
-  "source_uri": "py-mod:pysb.examples.run_michment",
-  "generated_at": "2024-05-31T18:48:42.529313",
-  "source_sha256_hash": "b1d52f969b6741831b7ab5badc0cc150e62b8e3c99c82a6866dbd7a9681c6e01",
-  "start_line": 6,
-  "stop_line": 29
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.preassembler.custom_preassembly",
+  "source_uri": "py-mod:indra.preassembler.custom_preassembly",
+  "generated_at": "2024-06-24T20:16:29.097198",
+  "source_sha256_hash": "1fe9388bdf34b366c51a276a57b791cce598f4840c851d61c667f9d952d086f1",
+  "start_line": 12,
+  "stop_line": 18
 }

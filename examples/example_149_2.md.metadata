@@ -1,0 +1,11 @@
+{
+  "package": "indra.tools.incremental_model",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tools.incremental_model",
+  "source_uri": "py-mod:indra.tools.incremental_model",
+  "generated_at": "2024-06-24T20:50:24.932547",
+  "source_sha256_hash": "041982a8f8c457e262d4d47ea93e3fc97da81b46adc170655f8bdebe2cfc3925",
+  "start_line": 133,
+  "stop_line": 145
+}

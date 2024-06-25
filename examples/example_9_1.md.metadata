@@ -1,10 +1,11 @@
 {
-  "package": "pysb.pattern",
+  "package": "indra.databases.cbio_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.pattern",
-  "source_uri": "py-mod:pysb.pattern",
-  "generated_at": "2024-05-31T18:46:05.860096",
-  "source_sha256_hash": "adaee18ca1bb0e2b5d7243db994c8ac4d0523af5666d8e533ddfc33b05421cd0",
-  "start_line": 176,
-  "stop_line": 181
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.cbio_client",
+  "source_uri": "py-mod:indra.databases.cbio_client",
+  "generated_at": "2024-06-24T20:10:35.330431",
+  "source_sha256_hash": "84ea749be9e608aaa64d4749f07fdd50b5b9f209319931d7895e9a4bbdf014d4",
+  "start_line": 72,
+  "stop_line": 125
 }

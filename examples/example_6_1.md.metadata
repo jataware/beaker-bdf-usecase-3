@@ -1,10 +1,11 @@
 {
-  "package": "pysb.kappa",
+  "package": "indra.benchmarks.benchmark_db_coverage",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.kappa",
-  "source_uri": "py-mod:pysb.kappa",
-  "generated_at": "2024-05-31T18:44:59.742149",
-  "source_sha256_hash": "c0f1e7de280ccac8be68ee671581c13f4477885081028cabfd028571893f92ad",
-  "start_line": 61,
-  "stop_line": 215
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.benchmarks.benchmark_db_coverage",
+  "source_uri": "py-mod:indra.benchmarks.benchmark_db_coverage",
+  "generated_at": "2024-06-24T20:08:56.280021",
+  "source_sha256_hash": "70d36c42921a14610365a2efb3996fed82b4577b0d8487b05419b3c785c9942d",
+  "start_line": 35,
+  "stop_line": 65
 }

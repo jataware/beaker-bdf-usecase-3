@@ -1,28 +1,34 @@
 # Description
-Complete example of defining a simple model using PySB that includes monomer definitions, initial conditions, parameter definitions, rules, observables, and a complex expression referencing observables.
+Get the MESH label for a given MESH ID using the NLM REST API.
 
 # Code
 ```
+import requests
+from functools import lru_cache
 
-Model()
+@lru_cache(maxsize=1000)
+def get_mesh_name_from_web(mesh_id):
+    """Get the MESH label for the given MESH ID using the NLM REST API.
 
-Monomer('Bax', ['conf'], {'conf': ['c0', 'c1', 'c2']})
+    Parameters
+    ----------
+    mesh_id : str
+        MESH Identifier, e.g. 'D003094'.
 
-Initial(Bax(conf='c0'), Parameter('Bax_0', 1))
-
-Parameter('k1', 1)
-Parameter('k2', 1)
-Parameter('c0_scaling', 0)
-Parameter('c1_scaling', 2)
-Parameter('c2_scaling', 5)
-
-Rule('c0_to_c1', Bax(conf='c0') >> Bax(conf='c1'), k1)
-Rule('c1_to_c2', Bax(conf='c1') >> Bax(conf='c2'), k2)
-
-Observable('Bax_c0', Bax(conf='c0'))
-Observable('Bax_c1', Bax(conf='c1'))
-Observable('Bax_c2', Bax(conf='c2'))
-
-Expression('NBD_signal',
+    Returns
+    -------
+    str
+        Label for the MESH ID, or None if the query failed or no label was
+        found.
+    """
+    url = MESH_URL + mesh_id + '.json'
+    resp = requests.get(url)
+    if resp.status_code != 200:
+        return None
+    mesh_json = resp.json()
+    try:
+        label = mesh_json['label']['@value']
+    except (KeyError, IndexError, TypeError) as e:
+        return None
 
 ```

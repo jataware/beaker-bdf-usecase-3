@@ -1,10 +1,11 @@
 {
-  "package": "pysb.simulator.cupsoda",
+  "package": "indra.tests.test_biofactoid",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.simulator.cupsoda",
-  "source_uri": "py-mod:pysb.simulator.cupsoda",
-  "generated_at": "2024-05-31T18:51:32.215587",
-  "source_sha256_hash": "d605657bcf1aa7a7064c37c090e8a4da8c6b3066b22edb129948419020d5b204",
-  "start_line": 682,
-  "stop_line": 700
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_biofactoid",
+  "source_uri": "py-mod:indra.tests.test_biofactoid",
+  "generated_at": "2024-06-24T20:21:23.188371",
+  "source_sha256_hash": "2172bcf18f3b53b5e3a8a59410d510d076974fa1dd03e11397d715b0c4381f8b",
+  "start_line": 7,
+  "stop_line": 36
 }

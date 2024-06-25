@@ -1,17 +1,35 @@
 # Description
-Load parameter values from a CSV file into a dictionary.
+Return protein amino acid changes in given genes and cell types using the `cbio_client` from the `indra` database.
 
 # Code
 ```
+from __future__ import absolute_import, print_function, unicode_literals
+from builtins import dict, str
+from indra.databases import cbio_client
+try:
+    basestring
+except:
 
-def load_params(fname):
-    """load the parameter values from a csv file, return them as dict.
+def get_mutations(gene_names, cell_types):
+    """Return protein amino acid changes in given genes and cell types.
+
+    Parameters
+    ----------
+    gene_names : list
+        HGNC gene symbols for which mutations are queried.
+    cell_types : list
+        List of cell type names in which mutations are queried.
+        The cell type names follow the CCLE database conventions.
+
+        Example: LOXIMVI_SKIN, BT20_BREAST
+
+    Returns
+    -------
+    res : dict[dict[list]]
+        A dictionary keyed by cell line, which contains another dictionary
+        that is keyed by gene name, with a list of amino acid substitutions
+        as values.
     """
-    parmsff = {}
-    # FIXME: This might fail if a parameter name is larger than 50 characters.
-    # FIXME: Maybe do this with the csv module instead?
-    temparr = numpy.loadtxt(fname, dtype=([('a','S50'),('b','f8')]), delimiter=',') 
-    for i in temparr:
-        parmsff[i[0]] = i[1]
+    mutations = cbio_client.get_ccle_mutations(gene_names, cell_types)
 
 ```

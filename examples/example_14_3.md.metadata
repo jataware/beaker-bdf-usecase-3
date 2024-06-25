@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.ec_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.ec_client",
+  "source_uri": "py-mod:indra.databases.ec_client",
+  "generated_at": "2024-06-24T20:11:28.204857",
+  "source_sha256_hash": "1bd80fc94e39ce90853bfe3ecf2a2309c45e46b6ecc5af7651545c2bc7852852",
+  "start_line": 70,
+  "stop_line": 73
+}

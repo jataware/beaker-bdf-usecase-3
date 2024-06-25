@@ -1,70 +1,34 @@
 # Description
-Generate the reversible binding reaction S1 + S2 | S1:S2 with optional complexes attached using bind_complex function.
+Identifies the overlap of phosphorylation statements between predicted data and reference data.
 
 # Code
 ```
+import os
+import pickle
+import pandas
+import logging
+from indra.databases import hgnc_client
+from indra.statements import Phosphorylation, Agent, Evidence
+from indra.preassembler import Preassembler
+from indra.ontology.bio import bio_ontology
+from indra.preassembler.grounding_mapper import default_mapper
+from indra.preassembler.sitemapper import SiteMapper, default_site_map
 
-    Examples
-    --------
 
-    Binding between ``A:B`` and ``C:D``:
-
-        >>> Model() # doctest:+ELLIPSIS
-        <Model '_interactive_' ...>
-        >>> Monomer('A', ['a', 'b'])
-        Monomer('A', ['a', 'b'])
-        >>> Monomer('B', ['c', 'd'])
-        Monomer('B', ['c', 'd'])
-        >>> Monomer('C', ['e', 'f'])
-        Monomer('C', ['e', 'f'])
-        >>> Monomer('D', ['g', 'h'])
-        Monomer('D', ['g', 'h'])
-        >>> bind_complex(A(a=1) % B(c=1), 'b', C(e=2) % D(g=2), 'h', [1e-4, \
-            1e-1]) #doctest:+NORMALIZE_WHITESPACE
-        ComponentSet([
-        Rule('bind_AB_DC', A(a=1, b=None) % B(c=1) + D(g=3, h=None) % C(e=3)
-          | A(a=1, b=50) % B(c=1) % D(g=3, h=50) % C(e=3), bind_AB_DC_kf,
-          bind_AB_DC_kr),
-        Parameter('bind_AB_DC_kf', 0.0001),
-        Parameter('bind_AB_DC_kr', 0.1),
-        ])
-
-    Execution:
-
-        >>> Model() # doctest:+ELLIPSIS
-        <Model '_interactive_' ...>
-        >>> Monomer('A', ['a', 'b'])
-        Monomer('A', ['a', 'b'])
-        >>> Monomer('B', ['c', 'd'])
-        Monomer('B', ['c', 'd'])
-        >>> Monomer('C', ['e', 'f'])
-        Monomer('C', ['e', 'f'])
-        >>> Monomer('D', ['g', 'h'])
-        Monomer('D', ['g', 'h'])
-        >>> bind(A, 'a', B, 'c', [1e4, 1e-1]) #doctest:+NORMALIZE_WHITESPACE
-        ComponentSet([
-        Rule('bind_A_B',
-          A(a=None) + B(c=None) | A(a=1) % B(c=1),
-          bind_A_B_kf, bind_A_B_kr),
-        Parameter('bind_A_B_kf', 10000.0),
-        Parameter('bind_A_B_kr', 0.1),
-        ])
-        >>> bind(C, 'e', D, 'g', [1e4, 1e-1]) #doctest:+NORMALIZE_WHITESPACE
-        ComponentSet([
-        Rule('bind_C_D',
-          C(e=None) + D(g=None) | C(e=1) % D(g=1),
-          bind_C_D_kf, bind_C_D_kr),
-        Parameter('bind_C_D_kf', 10000.0),
-        Parameter('bind_C_D_kr', 0.1),
-        ])
-        >>> bind_complex(A(a=1) % B(c=1), 'b', C(e=2) % D(g=2), 'h', [1e-4, \
-            1e-1]) #doctest:+NORMALIZE_WHITESPACE
-        ComponentSet([
-        Rule('bind_AB_DC',
-          A(a=1, b=None) % B(c=1) + D(g=3, h=None) % C(e=3) | A(a=1,
-          b=50) % B(c=1) % D(g=3, h=50) % C(e=3),
-          bind_AB_DC_kf, bind_AB_DC_kr),
-        Parameter('bind_AB_DC_kf', 0.0001),
-        Parameter('bind_AB_DC_kr', 0.1),
+def compare_overlap(stmts_pred, stmts_ref):
+    # Ras Machine statements that are in Phosphosite
+    found_stmts = []
+    not_found_stmts = []
+    for i, stmt_pred in enumerate(stmts_pred):
+        found = False
+        for stmt_ref in stmts_ref:
+            if stmt_pred.matches(stmt_ref) or \
+                stmt_ref.refinement_of(stmt_pred, bio_ontology):
+                    found = True
+                    break
+        if found:
+            found_stmts.append(stmt_pred)
+        else:
+            not_found_stmts.append(stmt_pred)
 
 ```

@@ -1,38 +1,54 @@
 # Description
-Run the Extrinsic Apoptosis Reaction Model (EARM) using BioNetGen's Hybrid-Particle Population (HPP) algorithm. This example showcases setting up the model, defining population maps, running simulations, and plotting results.
+A function to send a request to the NewsAPI web service and return the response as JSON.
 
 # Code
 ```
-from pysb.examples.earm_1_0 import model
-from pysb.simulator import BngSimulator
-from pysb.simulator.bng import PopulationMap
-from pysb import Parameter
-import matplotlib.pyplot as plt
+import logging
+import requests
+from indra import has_config, get_config
 
-PARP, CPARP, Mito, mCytoC = [model.monomers[x] for x in
-                             ['PARP', 'CPARP', 'Mito', 'mCytoC']]
-klump = Parameter('klump', 10000, _export=False)
-model.add_component(klump)
+logger = logging.getLogger(__name__)
 
-population_maps = [
-    PopulationMap(PARP(b=None), klump),
-    PopulationMap(CPARP(b=None), klump),
-    PopulationMap(Mito(b=None), klump),
-    PopulationMap(mCytoC(b=None), klump)
-]
+api_key = None
+if not has_config('NEWSAPI_API_KEY'):
+    logger.error('NewsAPI API key could not be found in config file or environment variable.')
+else:
+    api_key = get_config('NEWSAPI_API_KEY')
 
-sim = BngSimulator(model, tspan=np.linspace(0, 20000, 101))
-simres = sim.run(n_runs=20, method='nf', population_maps=population_maps)
 
-trajectories = simres.all
-tout = simres.tout
+def send_request(endpoint, **kwargs):
+    """Return the response to a query as JSON from the NewsAPI web service.
 
-plot_mean_min_max('Bid_unbound')
-plot_mean_min_max('PARP_unbound')
-plot_mean_min_max('mSmac_unbound')
-plot_mean_min_max('tBid_total')
-plot_mean_min_max('CPARP_total')
-plot_mean_min_max('cSmac_total')
+    The basic API is limited to 100 results which is chosen unless explicitly
+    given as an argument. Beyond that, paging is supported through the "page"
+    argument, if needed.
 
+    Parameters
+    ----------
+    endpoint : str
+        Endpoint to query, e.g. "everything" or "top-headlines"
+
+    kwargs : dict
+        A list of keyword arguments passed as parameters with the query.
+        The basic ones are "q" which is the search query, "from" is a start
+        date formatted as for instance 2018-06-10 and "to" is an end date
+        with the same format.
+
+    Returns
+    -------
+    res_json : dict
+        The response from the web service as a JSON dict.
+    """
+    if api_key is None:
+        logger.error('NewsAPI cannot be used without an API key')
+        return None
+    url = '%s/%s' % (newsapi_url, endpoint)
+    if 'apiKey' not in kwargs:
+        kwargs['apiKey'] = api_key
+    if 'pageSize' not in kwargs:
+        kwargs['pageSize'] = 100
+    res = requests.get(url, params=kwargs)
+    res.raise_for_status()
+    res_json = res.json() 
 
 ```

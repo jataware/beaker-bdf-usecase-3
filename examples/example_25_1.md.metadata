@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.localfunc",
+  "package": "indra.databases.obo_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.localfunc",
-  "source_uri": "py-mod:pysb.examples.localfunc",
-  "generated_at": "2024-05-31T18:48:03.856564",
-  "source_sha256_hash": "8bd27e6a026593e45157be473ebf1f38cc5312aea4f9726f83f40b7012533135",
-  "start_line": 12,
-  "stop_line": 51
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.obo_client",
+  "source_uri": "py-mod:indra.databases.obo_client",
+  "generated_at": "2024-06-24T20:13:05.706875",
+  "source_sha256_hash": "156deb703cc404eda6335a2c91a037d8d2536fe0c380835e3ef120f489e2599f",
+  "start_line": 365,
+  "stop_line": 408
 }

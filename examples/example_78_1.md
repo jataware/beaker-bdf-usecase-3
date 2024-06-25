@@ -1,40 +1,27 @@
 # Description
-A simple test of simulating a model using BngSimulator and retrieving the output.
+Process a DrugBank XML file and perform assertions on the data to validate the processing.
 
 # Code
 ```
-from pysb.testing import *
-import numpy as np
-from pysb import Monomer, Parameter, Initial, Observable, Rule
-from pysb.simulator.bng import BngSimulator
-from pysb.bng import generate_equations
+import os
+from indra.sources import drugbank
 
-BNG_SEED = 123
 
-class TestBngSimulator(object):
-    @with_model
-    def setUp(self):
-        Monomer('A', ['a'])
-        Monomer('B', ['b'])
-        Parameter('ksynthA', 100)
-        Parameter('ksynthB', 100)
-        Parameter('kbindAB', 100)
-        Parameter('A_init', 0)
-        Parameter('B_init', 0)
-        Initial(A(a=None), A_init)
-        Initial(B(b=None), B_init)
-        Observable('A_free', A(a=None))
-        Observable('B_free', B(b=None))
-        Observable('AB_complex', A(a=1) % B(b=1))
-        Rule('A_synth', None >> A(a=None), ksynthA)
-        Rule('B_synth', None >> B(b=None), ksynthB)
-        Rule('AB_bind', A(a=None) + B(b=None) >> A(a=1) % B(b=1), kbindAB)
-        self.model = model
-        generate_equations(self.model)
-        self.mon = lambda m: self.model.monomers[m]
-        self.time = np.linspace(0, 1)
+def test_drugbank_sample():
+    dp = drugbank.process_xml(test_file)
+    assert len(dp.statements) == 1
+    stmt = dp.statements[0]
+    assert len(stmt.evidence) == 6
+    assert all(ev.pmid for ev in stmt.evidence)
+    assert all(ev.source_api == 'drugbank' for ev in stmt.evidence)
+    drug = stmt.subj
+    assert drug.name == 'lepirudin'
+    assert drug.db_refs['DRUGBANK'] == 'DB00001'
+    assert drug.db_refs['CAS'] == '138068-37-8'
 
-def test_1_simulation(self):
-    x = self.sim.run()
+    target = stmt.obj
+    assert target.name == 'F2'
+    assert target.db_refs['HGNC'] == '3535'
+    assert target.db_refs['UP'] == 'P00734'
 
 ```

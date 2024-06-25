@@ -1,26 +1,19 @@
 # Description
-Generate an influence map using pySB's Kasa and verify its type.
+Test for node attributes from combined phosphorylation and dephosphorylation statements using `CxAssembler`.
 
 # Code
 ```
-pysb.testing import *
-pysb import *
-pysb.kappa import *
+from indra.statements import *
+from indra.assemblers.cx import CxAssembler
 
-@with_model
-def test_influence_map_kasa():
-    Monomer('A', [])
-    Monomer('B', ['active'], {'active': ['y', 'n']})
-    Monomer('C', ['active'], {'active': ['y', 'n']})
-    Initial(A(), Parameter('A_0', 100))
-    Initial(B(active='n'), Parameter('B_0', 100))
-    Initial(C(active='n'), Parameter('C_0', 100))
-    Rule('A_activates_B',
-         A() + B(active='n') >> A() + B(active='y'),
-         Parameter('k_A_activates_B', 1))
-    Rule('B_activates_C',
-         B(active='y') + C(active='n') >> B(active='y') + C(active='y'),
-         Parameter('k_B_activates_C', 1))
-    res = influence_map(model, cleanup=True)
+mek = Agent('MAP2K1', db_refs={'HGNC': '6840'})
+erk = Agent('MAPK1', db_refs={'UP': 'P28482'})
+dusp = Agent('DUSP4')
+st_phos = Phosphorylation(mek, erk)
+
+def test_node_attributes():
+    cxa = CxAssembler()
+    cxa.add_statements([st_phos, st_dephos])
+    cxa.make_model()
 
 ```

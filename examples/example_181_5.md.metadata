@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.biopax.api",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.biopax.api",
+  "source_uri": "py-mod:indra.sources.biopax.api",
+  "generated_at": "2024-06-24T20:57:27.975105",
+  "source_sha256_hash": "d39ed7df28c58f1875fba518f213cb75617d44f1b2c305b540dcebbe6b4b231c",
+  "start_line": 178,
+  "stop_line": 193
+}

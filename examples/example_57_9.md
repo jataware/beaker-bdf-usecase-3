@@ -1,19 +1,32 @@
 # Description
-Another example of calculating an observable trajectory on demand using a different pattern.
+Testing the belief engine's hierarchical probabilities with a hierarchy involving more supporting statements.
 
 # Code
 ```
-from pysb import ANY
-from pysb.examples import earm_1_0
-from pysb.simulator import ScipyOdeSimulator
-simres = ScipyOdeSimulator(earm_1_0.model, tspan=range(5)).run()
+from copy import deepcopy
+import pytest
+from indra.statements import Evidence, Agent, Phosphorylation
+from indra.belief import BeliefEngine, load_default_probs
 
->>> simres.observable(m.AMito(b=1) % m.mCytoC(b=1))
-time
-0    0.000000e+00
-1    1.477319e-77
-2    1.669917e-71
-3    5.076939e-69
-4    1.157400e-66
+default_probs = load_default_probs()
+ev1 = Evidence(source_api='reach')
+ev2 = Evidence(source_api='trips')
+
+def test_hierarchy_probs4():
+    be = BeliefEngine()
+    st1 = Phosphorylation(None, Agent('a'), evidence=[ev1])
+    st2 = Phosphorylation(None, Agent('b'), evidence=[ev2])
+    st3 = Phosphorylation(None, Agent('c'), evidence=[deepcopy(ev1)])
+    st4 = Phosphorylation(None, Agent('d'), evidence=[deepcopy(ev1)])
+    st4.supports = [st1, st2, st3]
+    st3.supports = [st1]
+    st2.supports = [st1]
+    st1.supported_by = [st2, st3, st4]
+    st2.supported_by = [st4]
+    st3.supported_by = [st4]
+    be.set_hierarchy_probs([st1, st2, st3, st4])
+    assert_close_enough(st1.belief, 1-0.35)
+    assert_close_enough(st2.belief, 1-0.35*0.35)
+    assert_close_enough(st3.belief, 1-(0.05 + 0.3*0.3))
 
 ```

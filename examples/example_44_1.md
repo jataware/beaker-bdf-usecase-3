@@ -1,10 +1,10 @@
 # Description
-Defines a basic PySB model with two monomers: Raf and MEK. Each monomer has sites and states defined.
+Access and process biomolecular interaction data using the OmniPath module.
 
 # Code
 ```
 
-Model()
-Monomer('Raf', ['s', 'k'], {'s': ['u', 'p']})
+from indra.sources.omnipath import process_from_web
+omnipath_processor = process_from_web()
 
 ```

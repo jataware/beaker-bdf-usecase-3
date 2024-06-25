@@ -1,10 +1,11 @@
 {
-  "package": "pysb.logging",
+  "package": "indra.benchmarks.bioprocesses",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.logging",
-  "source_uri": "py-mod:pysb.logging",
-  "generated_at": "2024-05-31T18:45:07.895756",
-  "source_sha256_hash": "9809d11cd6cb1b558abba88bfe45bd9ddf465a513e2cce1a8167761db3a92c80",
-  "start_line": 195,
-  "stop_line": 199
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.benchmarks.bioprocesses",
+  "source_uri": "py-mod:indra.benchmarks.bioprocesses",
+  "generated_at": "2024-06-24T20:09:22.365355",
+  "source_sha256_hash": "d0f6eb4b459bc80efb7616252964004d2af88bcde80b91800e89b849dd9a9a2f",
+  "start_line": 69,
+  "stop_line": 95
 }

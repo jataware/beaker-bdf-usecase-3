@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.run_tyson_oscillator_stochkit",
+  "package": "indra.sources.drugbank",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.run_tyson_oscillator_stochkit",
-  "source_uri": "py-mod:pysb.examples.run_tyson_oscillator_stochkit",
-  "generated_at": "2024-05-31T18:48:56.255699",
-  "source_sha256_hash": "2a2de9eda5f07f72cb369a89bd6bb2001dfe33e815419619702a3b06f852370e",
-  "start_line": 24,
-  "stop_line": 35
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.drugbank",
+  "source_uri": "py-mod:indra.sources.drugbank",
+  "generated_at": "2024-06-24T20:17:05.143833",
+  "source_sha256_hash": "4a00213cb44133afe83e7afd9bf5b4c0ee62cd39318fc8766fd56f2d970c48a3",
+  "start_line": 13,
+  "stop_line": 18
 }

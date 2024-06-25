@@ -1,16 +1,14 @@
 # Description
-Use the model equations generation with a Kappa simulation for a single time point to ensure proper handling and output verification.
+Test the assembly of an agent string for an agent with an activation condition.
 
 # Code
 ```
-pysb.simulator import KappaSimulator
-pysb.bng import generate_equations
-pysb.examples import michment
+import indra.assemblers.english.assembler as ea
 
-def test_kappa_1timepoint_with_netgen():
-    generate_equations(michment.model)
-    sim = KappaSimulator(michment.model, tspan=[0, 1])
-    # This set of parameter values causes Kappa to abort after 1st time point
-    res = sim.run(param_values=[100, 100, 10, 10, 100, 100], seed=KAPPA_SEED)
+def test_agent_activity():
+    a = Agent('BRAF', activity=ActivityCondition('activity', True))
+    ag = ea._assemble_agent_str(a)
+    print(ag.agent_str)
+    assert ag.agent_str == 'active BRAF'
 
 ```

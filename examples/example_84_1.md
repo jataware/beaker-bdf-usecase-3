@@ -1,22 +1,27 @@
 # Description
-Testing the alias_model_components() function from pysb.util to ensure it exports components to the global namespace.
+Example demonstrating the usage of GenewaysSymbols to parse symbols data.
 
 # Code
 ```
-from pysb.core import Model, Monomer
+from __future__ import absolute_import, print_function, unicode_literals
+from builtins import dict, str
+from os.path import join, dirname, abspath
+from indra.sources.geneways.symbols_parser import GenewaysSymbols
+from indra.sources.geneways.api import process_geneways_files
 
-def test_alias_model_components():
-    """
-    Tests that alias_model_components() exports to the global namespace
-    """
-    m = Model(_export=False)
-    m.add_component(Monomer('A', _export=False))
-    assert 'A' not in globals()
-    alias_model_components(m)
+# Path to the Geneways test/dummy data folder
+path_this = dirname(abspath(__file__))
+data_folder = join(path_this, 'geneways_tests_data')
 
-    # A should now be defined in the namespace - try deleting it
-    assert isinstance(globals()['A'], Monomer)
+def test_geneways_symbols_parser():
+    symbols = GenewaysSymbols(symbols_file)
 
-    # Delete the monomer to cleanup the global namespace
+    print(symbols.symbol_to_id('Akt') == ['1'])
+    assert symbols.symbol_to_id('Akt') == ['1']
+    assert symbols.symbol_to_id('c-Src') == ['2']
+
+    assert symbols.id_to_symbol('1') == 'Akt'
+    assert symbols.id_to_symbol('2') == 'c-Src'
+
 
 ```

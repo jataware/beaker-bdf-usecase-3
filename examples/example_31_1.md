@@ -1,21 +1,33 @@
 # Description
-Simulate a model using the BngSimulator from the PySB package and plot the result.
+Defines a function to get the metadata of an article given its DOI using CrossRef API.
 
 # Code
 ```
-import matplotlib.pyplot as plt
-import numpy as np
-from pysb.simulator.bng import BngSimulator
+from __future__ import absolute_import, print_function, unicode_literals
+from builtins import dict, str
+import os
+import logging
+import requests
+from indra.config import get_config
+from indra.literature import pubmed_client
+try:
+    from functools import lru_cache
+except ImportError:
+    from functools32 import lru_cache
 
-# We will integrate from t=0 to t=40
-t = np.linspace(0, 40, 50)
+logger = logging.getLogger(__name__)
 
-# Simulate the model
-print("Simulating...")
-sim = BngSimulator(model)
-x = sim.run(tspan=t, verbose=False, n_runs=5, method='ssa')
-tout = x.tout
-y = np.array(x.observables)
-plt.plot(tout.T, y['ppMEK'].T)
+@lru_cache(maxsize=100)
+def get_metadata(doi):
+    """Returns the metadata of an article given its DOI from CrossRef
+    as a JSON dict"""
+    url = crossref_url + 'works/' + doi
+    res = requests.get(url)
+    if res.status_code != 200:
+        logger.info('Could not get CrossRef metadata for DOI %s, code %d' %
+                    (doi, res.status_code))
+        return None
+    raw_message = res.json()
+    metadata = raw_message.get('message')
 
 ```

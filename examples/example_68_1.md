@@ -1,59 +1,14 @@
 # Description
-Run network generation on all example models using `pysb.bng.generate_network`.
+A unit test for the citation count retrieving functionalities of the `coci_client` module from `indra.literature`. The test is skipped because the COCI web service is not currently working.
 
 # Code
 ```
-from pysb.bng import generate_network, NoInitialConditionsError, NoRulesError
-from pysb.core import SelfExporter
-import traceback
-import os
-import importlib
-import sys
+from unittest import skip
 
-expected_exceptions = {
-    'tutorial_b': (NoInitialConditionsError, NoRulesError),
-    'tutorial_c': (NoInitialConditionsError, NoRulesError),
-}
-
-
-def get_example_models():
-    """Generator that yields the model objects for all example models"""
-    example_dir = os.path.join(os.path.dirname(__file__), '..', 'examples')
-    for filename in os.listdir(example_dir):
-        if filename.endswith('.py') and not filename.startswith('run_') \
-               and not filename.startswith('__'):
-            modelname = filename[:-3]  # strip .py
-
-            if modelname == 'localfunc' and sys.version_info.major < 3:
-                # Uses __matmul__ for local function, skip it on Python 2.7
-                continue
-
-            package = 'pysb.examples.' + modelname
-            module = importlib.import_module(package)
-            # Reset do_export to the default in case the model changed it.
-            # FIXME the self-export mechanism should be more self-contained so
-            # this isn't needed here.
-            SelfExporter.do_export = True
-            yield module.model
-
-
-def check_generate_network(model):
-    """Tests that network generation runs without error for the given model"""
-    success = False
-    try:
-        generate_network(model)
-        success = True
-    except Exception as e:
-        # Some example models are deliberately incomplete, so here we will treat
-        # any of these "expected" exceptions as a success.
-        model_base_name = model.name.rsplit('.', 1)[1]
-        exception_classes = expected_exceptions.get(model_base_name)
-        if exception_classes and isinstance(e, exception_classes):
-            success = True
-    assert success, "Network generation failed on model %s:\n-----\n%s" % \
-
-def test_generate_network():
-    """Run network generation on all example models"""
-    for model in get_example_models():
+@skip('COCI web service not working currently')
+def test_citation_count():
+    pmid = '24624335'
+    doi = '10.1016/J.redox.2013.12.020'
+    assert coci_client.get_citation_count_for_pmid(pmid) > 200
 
 ```

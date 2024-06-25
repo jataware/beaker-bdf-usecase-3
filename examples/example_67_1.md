@@ -1,37 +1,27 @@
 # Description
-Test introspection functions to check if components are correctly tagged with the function names where they are defined.
+This code example demonstrates how to use the `get_inhibition` function from the `chembl_client` module to retrieve inhibition data for the drug VEMURAFENIB targeting BRAF and verify the returned statement.
 
 # Code
 ```
-copy
-pysb.testing import *
-pysb.core import *
-functools import partial
-nose.tools import assert_raises
-operator
+from __future__ import absolute_import, print_function, unicode_literals
+from builtins import dict, str
+from indra.statements import Agent
+from indra.databases import chembl_client
+from indra.util import unicode_strs
+import pytest
 
-@with_model
-def test_function_introspection():
-    # Case 1: Component defined inside function
-    Monomer('A')
-    assert A._function == 'test_function_introspection'
+vem = Agent('VEMURAFENIB', db_refs={'CHEBI': '63637', 'TEXT': 'VEMURAFENIB'})
 
-    # Case 2: Component defined inside nested function
-    def define_monomer_b():
-        Monomer('B')
-    define_monomer_b()
-    assert B._function == 'define_monomer_b'
-
-    # Case 3: Component defined by macro
-    from pysb.macros import equilibrate
-    equilibrate(A(), B(), [1, 1])
-
-    assert model.rules['equilibrate_A_to_B']._function == 'equilibrate'
-
-    # Case 4: Component defined by macro inside function
-    def define_macro_inside_function():
-        Monomer('C')
-        equilibrate(A(), C(), [2, 2])
-    define_macro_inside_function()
+@pytest.mark.webservice
+@pytest.mark.slow
+def test_get_inhibitions():
+    stmt = chembl_client.get_inhibition(vem, braf)
+    assert stmt is not None
+    assert unicode_strs(stmt)
+    assert len(stmt.evidence) > 5
+    for ev in stmt.evidence:
+        assert ev.pmid
+        assert ev.annotations
+        assert ev.source_api == 'chembl'
 
 ```

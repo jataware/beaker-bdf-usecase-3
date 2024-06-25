@@ -1,28 +1,13 @@
 # Description
-Perform sequential simulations with network reloading using the `pysb` library.
+Testing the conversion of CAS numbers to ChEBI identifiers.
 
 # Code
 ```
-from pysb import *
+indra.databases import chebi_client
+indra.util import unicode_strs
 
-@with_model
-def test_sequential_simulations():
-    Monomer('A')
-    Parameter('A_0', 1)
-    Initial(A(), A_0)
-    Parameter('k', 1)
-    Rule('degrade', A() >> None, k)
-    # Suppress network overwrite warning from simulate command
-    with BngFileInterface(model) as bng:
-        bng.action('generate_network')
-        bng.action('simulate', method='ssa', t_end=20000, n_steps=100)
-        bng.execute()
-        yfull1 = bng.read_simulation_results()
-        ok_(yfull1.size == 101)
-
-        # Run another simulation by reloading the existing network file
-        bng.action('simulate', method='ssa', t_end=10000, n_steps=50)
-        bng.execute(reload_netfile=True)
-        yfull2 = bng.read_simulation_results()
+def test_cas_to_chebi():
+    assert chebi_client.get_chebi_id_from_cas('23261-20-3') == 'CHEBI:18035'
+    assert chebi_client.get_chebi_id_from_cas('100-51-6') == 'CHEBI:17987'
 
 ```

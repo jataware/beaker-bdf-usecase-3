@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.run_earm_hpp",
+  "package": "indra.literature.newsapi_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.run_earm_hpp",
-  "source_uri": "py-mod:pysb.examples.run_earm_hpp",
-  "generated_at": "2024-05-31T18:48:32.166132",
-  "source_sha256_hash": "1a21ce734afd80b703726e8e65cf4ef408589ee194c6a4c804be3316e85d9da7",
-  "start_line": 39,
-  "stop_line": 65
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.literature.newsapi_client",
+  "source_uri": "py-mod:indra.literature.newsapi_client",
+  "generated_at": "2024-06-24T20:15:07.939036",
+  "source_sha256_hash": "a53cc35a0cabd4b42cbf812bdf0242ae22b5a7bb6cce410242ff8d328e00d815",
+  "start_line": 28,
+  "stop_line": 63
 }

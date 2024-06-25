@@ -1,10 +1,11 @@
 {
-  "package": "pysb.anneal_mod",
+  "package": "indra.belief",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.anneal_mod",
-  "source_uri": "py-mod:pysb.anneal_mod",
-  "generated_at": "2024-05-31T18:42:24.291102",
-  "source_sha256_hash": "5121f9278135ebe93d5c89465b6d993adddd3b83bf626838836c75157fe98197",
-  "start_line": 323,
-  "stop_line": 336
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.belief",
+  "source_uri": "py-mod:indra.belief",
+  "generated_at": "2024-06-24T20:07:49.271584",
+  "source_sha256_hash": "b64a38bf3b8667d287b9eb24f28e227d01210242aaa7004206174846d668c07c",
+  "start_line": 90,
+  "stop_line": 232
 }

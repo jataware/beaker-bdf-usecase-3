@@ -1,58 +1,39 @@
 # Description
-Wrapper method for running cupSODA simulations using the `CupSodaSimulator` class. This example demonstrates how to set up the simulator with a model and time span, specify initial conditions and parameters, and run the simulations to obtain the results.
+This example demonstrates how to process a Biofactoid document using the `indra.sources.biofactoid` library. It includes loading the document, processing it to extract statements, and making assertions about the extracted information.
 
 # Code
 ```
-from pysb.simulator.base import Simulator, SimulatorException, SimulationResult
-import pysb
-import pysb.bng
-import numpy as np
-from scipy.constants import N_A
 import os
-import re
-import subprocess
-import tempfile
-import time
-import logging
-from pysb.logging import EXTENDED_DEBUG
-import shutil
-from pysb.pathfinder import get_path
-import sympy
-import collections
-from collections.abc import Iterable
-try:
-    import pandas as pd
-except ImportError:
-    pd = None
-try:
-    import pycuda.driver as cuda
-except ImportError:
-    cuda = None
+import json
+from indra.sources import biofactoid
 
-class CupSodaSimulator(Simulator):
-    # (Class definition goes here, with all necessary imports and attributes)
-    
-    def __init__(self, model, tspan=None, initials=None, param_values=None, verbose=False, **kwargs):
-        # (Constructor implementation goes here)
-
-    def run(self, tspan=None, initials=None, param_values=None):
-
-def run_cupsoda(model, tspan, initials=None, param_values=None,
-                integrator='cupsoda', cleanup=True, verbose=False, **kwargs):
-    """Wrapper method for running cupSODA simulations.
-    
-    Parameters
-    ----------
-    See ``CupSodaSimulator`` constructor.
-    
-    Returns
-    -------
-    SimulationResult.all : list of record arrays
-        List of trajectory sets. The first dimension contains species,
-        observables and expressions (in that order)
-    """
-    sim = CupSodaSimulator(model, tspan=tspan, integrator=integrator,
-                           cleanup=cleanup, verbose=verbose, **kwargs)
-    simres = sim.run(initials=initials, param_values=param_values)
+def test_process_document():
+    doc_json = os.path.join(here, 'biofactoid_doc.json')
+    with open(doc_json, 'r') as fh:
+        doc = json.load(fh)
+    bp = biofactoid.process_json([doc])
+    assert len(bp.statements) == 2
+    assert {s.__class__.__name__ for s in bp.statements} == \
+        {'Inhibition', 'Phosphorylation'}
+    for stmt in bp.statements:
+        agents = stmt.agent_list()
+        assert agents[0].name == 'AKT1'
+        assert agents[0].db_refs == \
+            {'EGID': '207', 'HGNC': '391', 'ENSEMBL': 'ENSG00000142208'}
+        assert agents[1].name == 'FOXO3', agents
+        assert agents[1].db_refs == \
+            {'EGID': '2309', 'HGNC': '3821', 'ENSEMBL': 'ENSG00000118689'}
+        ev = stmt.evidence[0]
+        assert ev.pmid == '29886111'
+        assert ev.text == 'AKT1 inhibits FOXO3 via phosphorylation.'
+        assert ev.annotations == \
+            {"biofactoid_document": "3d2a77ba-55c1-463b-aff3-9acaa0307b62",
+             "created_date": "2020-09-07T16:38:08.837Z",
+             "lsatEditedDate": "2020-09-10T01:13:41.528Z"}
+        assert ev.text_refs == \
+               {'PMID': '29886111',
+                'DOI': '10.1016/j.cels.2018.05.004',
+                'PII': 'S2405-4712(18)30192-3',
+                'PMCID': 'PMC6322215'}
 
 ```

@@ -1,19 +1,27 @@
 # Description
-Calculating observable trajectories on demand using the SimulationResult object.
+Testing the belief engine's hierarchical probabilities with yet another configuration of evidence hierarchy.
 
 # Code
 ```
-from pysb import ANY
-from pysb.examples import earm_1_0
-from pysb.simulator import ScipyOdeSimulator
-simres = ScipyOdeSimulator(earm_1_0.model, tspan=range(5)).run()
+from copy import deepcopy
+import pytest
+from indra.statements import Evidence, Agent, Phosphorylation
+from indra.belief import BeliefEngine, load_default_probs
 
->>> simres.observable(m.Bid(b=ANY))
-time
-0    0.000000e+00
-1    1.190933e-12
-2    2.768582e-11
-3    1.609716e-10
-4    5.320530e-10
+default_probs = load_default_probs()
+ev1 = Evidence(source_api='reach')
+ev2 = Evidence(source_api='trips')
+
+def test_hierarchy_probs3():
+    be = BeliefEngine()
+    st1 = Phosphorylation(None, Agent('a'), evidence=[ev1])
+    st2 = Phosphorylation(None, Agent('b'), evidence=[ev2])
+    st3 = Phosphorylation(None, Agent('c'), evidence=[ev4])
+    st3.supports = [st1, st2]
+    st1.supported_by = [st3]
+    st2.supported_by = [st3]
+    be.set_hierarchy_probs([st1, st2, st3])
+    assert_close_enough(st1.belief, 1-0.35)
+    assert_close_enough(st2.belief, 1-0.35)
 
 ```

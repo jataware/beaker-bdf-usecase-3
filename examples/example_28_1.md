@@ -1,30 +1,31 @@
 # Description
-This example demonstrates how to define a simple three-species chemical kinetics system using PySB and generate the corresponding system of differential equations.
+Retrieve text content for articles that contain a particular gene using the gene's HGNC name.
 
 # Code
 ```
-from __future__ import print_function
+import time
+import logging
+from indra.literature import pubmed_client, pmc_client, elsevier_client
 
-Model()
+logger = logging.getLogger(__name__)
 
-Monomer('A')
-Monomer('B')
-Monomer('C')
+# the elsevier_client will log messages that it is safe to ignore
+el = logging.getLogger('indra.literature.elsevier_client')
 
-#       A -> B         0.04
-Rule('A_to_B', A() >> B(), Parameter('k1', 0.04))
-#      2B -> B + C     3.0e7
-Rule('BB_to_BC', B() + B() >> B() + C(), Parameter('k2', 3.0e7))
-#   B + C -> A + C     1.0e4
-Rule('BC_to_AC', B() + C() >> A() + C(), Parameter('k3', 1.0e4))
+def get_text_content_for_gene(hgnc_name):
+    """Get articles that have been annotated to contain gene in entrez
 
-# The system is known to be stiff for initial values A=1, B=0, C=0
-Initial(A(), Parameter('A_0', 1.0))
-Initial(B(), Parameter('B_0', 0.0))
-Initial(C(), Parameter('C_0', 0.0))
+    Parameters
+    ----------
+    hgnc_name : str
+       HGNC name for gene
 
-# Observe total amount of each monomer
-Observable('A_total', A())
-Observable('B_total', B())
+    Returns
+    -------
+    text_content : list of str
+        xmls of fulltext if available otherwise abstracts for all articles
+        that haven been annotated in entrez to contain the given gene
+    """
+    pmids = pubmed_client.get_ids_for_gene(hgnc_name)
 
 ```

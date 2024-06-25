@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tests.test_core",
+  "package": "indra.tests.test_chembl_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tests.test_core",
-  "source_uri": "py-mod:pysb.tests.test_core",
-  "generated_at": "2024-05-31T18:52:31.111762",
-  "source_sha256_hash": "e5ccc4fa97986196f154a2027b7f2be4b7f03a2129daf192a65764540a77481e",
-  "start_line": 43,
-  "stop_line": 67
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_chembl_client",
+  "source_uri": "py-mod:indra.tests.test_chembl_client",
+  "generated_at": "2024-06-24T20:23:11.802302",
+  "source_sha256_hash": "6dbc4619e17200ba670fa0e2392585f4280f127889e60bf260bac66f98e129d3",
+  "start_line": 22,
+  "stop_line": 35
 }

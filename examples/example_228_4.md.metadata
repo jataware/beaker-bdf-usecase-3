@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_obo_clients.test_mondo_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_obo_clients.test_mondo_client",
+  "source_uri": "py-mod:indra.tests.test_obo_clients.test_mondo_client",
+  "generated_at": "2024-06-24T21:06:44.947292",
+  "source_sha256_hash": "309062c826ba50e53899d245e87d829f815bdca5c23a21b4ba760f6c6235335c",
+  "start_line": 24,
+  "stop_line": 28
+}

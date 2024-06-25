@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_bioregistry",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_bioregistry",
+  "source_uri": "py-mod:indra.tests.test_bioregistry",
+  "generated_at": "2024-06-24T20:21:58.692569",
+  "source_sha256_hash": "f28da549898db5a07983cb0c3ee01b6f82f16cd8af4af4d1f5e2e1efdf099aa0",
+  "start_line": 52,
+  "stop_line": 57
+}

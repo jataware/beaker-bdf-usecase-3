@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.kinase_cascade",
+  "package": "indra.databases.ndex_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.kinase_cascade",
-  "source_uri": "py-mod:pysb.examples.kinase_cascade",
-  "generated_at": "2024-05-31T18:48:01.441173",
-  "source_sha256_hash": "4824a3ab976ee96502789dab6a06e784b7c3c065972d2ef24d765f8b5e5eb343",
-  "start_line": 69,
-  "stop_line": 91
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.ndex_client",
+  "source_uri": "py-mod:indra.databases.ndex_client",
+  "generated_at": "2024-06-24T20:12:59.099777",
+  "source_sha256_hash": "0e2ed1b95a514b22ba7a0e6de927db22d66fccfd68a7d9c6cbe849a376d6c7b5",
+  "start_line": 91,
+  "stop_line": 148
 }

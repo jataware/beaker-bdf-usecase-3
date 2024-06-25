@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tools.sensitivity_analysis",
+  "package": "indra.tests.test_graph_assembler",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tools.sensitivity_analysis",
-  "source_uri": "py-mod:pysb.tools.sensitivity_analysis",
-  "generated_at": "2024-05-31T18:59:04.720617",
-  "source_sha256_hash": "e450e0e125d7ed2892af3d78af4073f3aec125ed548b03d7a7f58ed5d2d8a7de",
-  "start_line": 75,
-  "stop_line": 204
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_graph_assembler",
+  "source_uri": "py-mod:indra.tests.test_graph_assembler",
+  "generated_at": "2024-06-24T20:26:57.705238",
+  "source_sha256_hash": "511aa555b8712eb51454f9b6ebcb82d40828dc3aa9270db22181cc47db89da4c",
+  "start_line": 6,
+  "stop_line": 14
 }

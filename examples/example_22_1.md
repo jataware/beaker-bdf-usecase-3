@@ -1,30 +1,55 @@
 # Description
-Defines the initial conditions for the model by setting parameter values corresponding to the initial amounts of different molecules (in molecules per cell) and creating monomers for each component of the model.
+Read miRBase data into lookup dictionaries
 
 # Code
 ```
-from pysb import *
+import os
 
-# Non-zero initial conditions (in molecules per cell):
-Parameter('L_0'        , 1500e3); # baseline level of ligand for most experiments (corresponding to 50 ng/ml SuperKiller TRAIL)
-Parameter('pR_0'       , 170.999e3);  # TRAIL receptor (for experiments not involving siRNA)
-Parameter('FADD_0'     , 133.165e3);
-Parameter('flipL_0'    , 0.49995e3);  # FlipL 1X = 0.49995e3
-Parameter('flipS_0'    , 0.422e3);  # Flip
-Parameter('pC8_0'      , 200.168e3);  # procaspase-8 (pro-C8)
-Parameter('Bid_0'       , 100e3);  # Bid
+HERE = os.path.dirname(os.path.abspath(__file__))
 
-Monomer('L', ['b'])
-Monomer('pR', ['b', 'rf'])
-Monomer('FADD', ['rf', 'fe'])
-Monomer('flipL', ['b', 'fe', 'ee', 'D384'],
-        {'D384': ['U','C']}
-        )
-Monomer('flipS', ['b', 'fe', 'ee'])
-Monomer('pC8', ['fe', 'ee', 'D384', 'D400'],
-        {'D384': ['U','C'],
-	 'D400': ['U','C']}
-        )
-Monomer('Bid') #called Apoptosis substrat in Lavrik's model
+def _read():
+    """Read the miRBase data into some lookup dictionaries."""
+    mirbase_id_to_name = {}
+    mirbase_name_to_id = {}
+    hgnc_id_to_mirbase_id = {}
+    mirbase_id_to_hgnc_id = {}
+    hgnc_symbol_to_mirbase_id = {}
+    mirbase_id_to_hgnc_symbol = {}
+
+    with open(MIRBASE_FILE) as file:
+        next(file)
+        for line in file:
+            try:
+                mirbase_id, mirbase_name, db, identifier, name = \
+                                                line.strip().split('\t')
+            except ValueError:  # fails on WORMBASE since no names
+                continue
+
+            mirbase_id_to_name[mirbase_id] = mirbase_name
+            mirbase_name_to_id[mirbase_name] = mirbase_id
+
+            if db == 'HGNC':
+                hgnc_id_to_mirbase_id[identifier] = mirbase_id
+                mirbase_id_to_hgnc_id[mirbase_id] = identifier
+                hgnc_symbol_to_mirbase_id[name] = mirbase_id
+                mirbase_id_to_hgnc_symbol[mirbase_id] = name
+
+    return (
+        mirbase_id_to_name,
+        mirbase_name_to_id,
+        hgnc_id_to_mirbase_id,
+        mirbase_id_to_hgnc_id,
+        hgnc_symbol_to_mirbase_id,
+        mirbase_id_to_hgnc_symbol,
+    )
+
+
+(
+    _mirbase_id_to_name,
+    _mirbase_name_to_id,
+    _hgnc_id_to_mirbase_id,
+    _mirbase_id_to_hgnc_id,
+    _hgnc_symbol_to_mirbase_id,
+    _mirbase_id_to_hgnc_symbol,
 
 ```

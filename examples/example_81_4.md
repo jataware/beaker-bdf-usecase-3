@@ -1,16 +1,15 @@
 # Description
-Run a Kappa simulation with multiple initial conditions to check proper handling of variable initial conditions.
+Test the assembly of an agent string for an agent with a modification specifying the residue and position.
 
 # Code
 ```
-pysb.simulator import KappaSimulator
-pysb.examples import michment
+import indra.assemblers.english.assembler as ea
 
-def test_kappa_2initials():
-    sim = KappaSimulator(michment.model, tspan=np.linspace(0, 100, 101))
-    res = sim.run(initials={
-        michment.model.initials[0].pattern: [10, 100],
-        michment.model.initials[1].pattern: [100, 1000]
-    }, seed=KAPPA_SEED)
+def test_agent_mod3():
+    mc = ModCondition('phosphorylation', 'tyrosine', '1111')
+    a = Agent('EGFR', mods=mc)
+    ag = ea._assemble_agent_str(a)
+    print(ag.agent_str)
+    assert ag.agent_str == 'EGFR phosphorylated on Y1111'
 
 ```

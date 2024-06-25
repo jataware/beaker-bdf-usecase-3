@@ -1,10 +1,11 @@
 {
-  "package": "pysb.integrate",
+  "package": "indra.belief.skl",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.integrate",
-  "source_uri": "py-mod:pysb.integrate",
-  "generated_at": "2024-05-31T18:44:44.020059",
-  "source_sha256_hash": "94092e6f8f622e1497285eb6aa61b902bc02fc2f9d787d9c5b9a9a9bc1f4daac",
-  "start_line": 211,
-  "stop_line": 218
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.belief.skl",
+  "source_uri": "py-mod:indra.belief.skl",
+  "generated_at": "2024-06-24T20:08:48.652038",
+  "source_sha256_hash": "a5ed47937f5f9da61925bde81b289b43513ce158884664dbcc42ba44c1a732d9",
+  "start_line": 295,
+  "stop_line": 304
 }

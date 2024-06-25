@@ -1,17 +1,21 @@
 # Description
-Run a Kappa simulation with state values and verify results.
+Test to set context to nodes using `CxAssembler`.
 
 # Code
 ```
-pysb.testing import *
-pysb import *
+from indra.statements import *
+from indra.assemblers.cx import CxAssembler
 
-@with_model
-def test_kappa_state_values():
-    Monomer('A', ['a'], {'a': ['_', '_1', '_2', '_a', 'a']})
-    Parameter('k', 1.0)
-    Rule('a_synth', None >> A(a='_2'), k)
-    Observable('A_', A())
+mek = Agent('MAP2K1', db_refs={'HGNC': '6840'})
+erk = Agent('MAPK1', db_refs={'UP': 'P28482'})
+dusp = Agent('DUSP4')
+st_phos = Phosphorylation(mek, erk)
 
+def test_set_context():
+    cxa = CxAssembler()
+    cxa.add_statements([st_phos, st_dephos])
+    cxa.make_model()
+    cxa.set_context('BT20_BREAST')
+    print(cxa.cx['nodeAttributes'])
 
 ```

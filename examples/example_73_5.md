@@ -1,18 +1,19 @@
 # Description
-Display a ValueError when running static analysis on an invalid model.
+Test for the complex statement using `CxAssembler` to verify the generated CX model.
 
 # Code
 ```
-pysb.testing import *
-pysb import *
+from indra.statements import *
+from indra.assemblers.cx import CxAssembler
 
-@raises(ValueError)
-@with_model
-def test_run_static_analysis_valueerror():
-    Monomer('A', ['b'])
-    Monomer('B', ['b'])
-    Rule('A_binds_B', A(b=None) + B(b=None) >> A(b=1) % B(b=1),
-         Parameter('k_A_binds_B', 1))
-    Observable('AB', A(b=1) % B(b=1))
+mek = Agent('MAP2K1', db_refs={'HGNC': '6840'})
+erk = Agent('MAPK1', db_refs={'UP': 'P28482'})
+dusp = Agent('DUSP4')
+
+def test_complex():
+    cxa = CxAssembler()
+    cxa.add_statements([st_complex])
+    cxa.make_model()
+    assert len(cxa.cx['nodes']) == 3
 
 ```

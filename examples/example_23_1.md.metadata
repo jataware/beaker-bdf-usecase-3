@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.hello_pysb",
+  "package": "indra.databases.mondo_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.hello_pysb",
-  "source_uri": "py-mod:pysb.examples.hello_pysb",
-  "generated_at": "2024-05-31T18:47:40.176583",
-  "source_sha256_hash": "11c1aa653c35af4717539e5cde06430e802c51ffdeb839b340b0f858d94b3a63",
-  "start_line": 8,
-  "stop_line": 44
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.mondo_client",
+  "source_uri": "py-mod:indra.databases.mondo_client",
+  "generated_at": "2024-06-24T20:12:47.897624",
+  "source_sha256_hash": "454159e39e99ff5ecf3dce5aa87037a2bb3b077f4231faea33d5d953a2846f8d",
+  "start_line": 45,
+  "stop_line": 63
 }

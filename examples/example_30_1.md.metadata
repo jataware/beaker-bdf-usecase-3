@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.run_bax_pore_sequential",
+  "package": "indra.literature.coci_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.run_bax_pore_sequential",
-  "source_uri": "py-mod:pysb.examples.run_bax_pore_sequential",
-  "generated_at": "2024-05-31T18:48:20.706393",
-  "source_sha256_hash": "322fcc278c2f3ebd53b12de5b54c2352342e8246b7b540fa19f53437ac152e43",
-  "start_line": 12,
-  "stop_line": 32
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.literature.coci_client",
+  "source_uri": "py-mod:indra.literature.coci_client",
+  "generated_at": "2024-06-24T20:14:09.211011",
+  "source_sha256_hash": "6db7a7b2cdc14e79d9c18d35dbd76a40d4201b4fcbe97aec44ddc97d47d7de1f",
+  "start_line": 16,
+  "stop_line": 37
 }

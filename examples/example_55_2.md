@@ -1,25 +1,19 @@
 # Description
-Create a PySB model from a JSON string.
+Test the extraction of paragraphs from a PMC article using its PMC ID.
 
 # Code
 ```
-import json
-from pysb.builder import Builder
-from pysb.core import RuleExpression, ReactionPattern, ComplexPattern, MonomerPattern, MultiState, ANY, WILD, Parameter, Expression
-from pysb.annotation import Annotation
-from pysb.pattern import SpeciesPatternMatcher
-import sympy
-import re
-import warnings
-from collections.abc import Mapping
-from sympy.parsing.sympy_parser import parse_expr
+import logging
+import unittest
+import pytest
+from indra.literature.adeft_tools import universal_extract_paragraphs, filter_paragraphs
+from indra.literature import pmc_client, elsevier_client, pubmed_client
 
-class PySBJSONDecodeError(ValueError):
-    pass
 
-class PySBJSONDecoder(JSONDecoder):
-    MAX_SUPPORTED_PROTOCOL = 2
-
-def model_from_json(json_str):
+@pytest.mark.webservice
+def test_universal_extract_paragraphs_pmc():
+    pmc_id = 'PMC3262597'
+    xml_str = pmc_client.get_xml(pmc_id)
+    paragraphs = universal_extract_paragraphs(xml_str)
 
 ```

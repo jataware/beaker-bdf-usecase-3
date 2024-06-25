@@ -1,11 +1,19 @@
 # Description
-Create a PySB Model based on a BioModels SBML model, then print the model's summary.
+Loading statements from a pickle file and verifying them.
 
 # Code
 ```
+import pickle
+from indra.tools import assemble_corpus as ac
+from indra.statements import *
 
-from pysb.importers.sbml import model_from_biomodels
-model = model_from_biomodels('1')           #doctest: +SKIP
-print(model)                                #doctest: +SKIP
+# Assuming these statements have been defined earlier in the script
+# Example of an Inhibition statement:
+
+def test_load_stmts():
+    with open('_test.pkl', 'wb') as fh:
+        pickle.dump([st1], fh)
+    st_loaded = ac.load_statements('_test.pkl')
+    assert len(st_loaded) == 1
 
 ```

@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tests.test_bng",
+  "package": "indra.tests.test_chebi_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tests.test_bng",
-  "source_uri": "py-mod:pysb.tests.test_bng",
-  "generated_at": "2024-05-31T18:52:23.174097",
-  "source_sha256_hash": "c29b9920578a76dec33d7657d7bf46b2c7fbacecf964458fc53ce4dae793bc97",
-  "start_line": 25,
-  "stop_line": 36
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_chebi_client",
+  "source_uri": "py-mod:indra.tests.test_chebi_client",
+  "generated_at": "2024-06-24T20:22:58.180722",
+  "source_sha256_hash": "0b73a31dc955f23eb8dd7cc9ab7e3429b1e4db7ef9129e5f0071a5cd7fecc116",
+  "start_line": 26,
+  "stop_line": 30
 }

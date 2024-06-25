@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.run_earm_stochkit",
+  "package": "indra.literature.pmc_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.run_earm_stochkit",
-  "source_uri": "py-mod:pysb.examples.run_earm_stochkit",
-  "generated_at": "2024-05-31T18:48:34.111957",
-  "source_sha256_hash": "2dc359d9f0067c3f114eac9f92791fb8bb425a946c3a95eacc11a90a58624540",
-  "start_line": 11,
-  "stop_line": 39
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.literature.pmc_client",
+  "source_uri": "py-mod:indra.literature.pmc_client",
+  "generated_at": "2024-06-24T20:15:24.539055",
+  "source_sha256_hash": "2be42bf9497ee0a1c411b1825e5c23513b41eb2a7b343f3bee899349e80acdab",
+  "start_line": 39,
+  "stop_line": 91
 }

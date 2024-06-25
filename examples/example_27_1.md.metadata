@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.move_connected",
+  "package": "indra.databases.taxonomy_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.move_connected",
-  "source_uri": "py-mod:pysb.examples.move_connected",
-  "generated_at": "2024-05-31T18:48:08.575761",
-  "source_sha256_hash": "38bd604b3d5c37d152ec7c30a1ab76fc403278fb316bfc8bdd3c0557bc16f147",
-  "start_line": 11,
-  "stop_line": 36
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.taxonomy_client",
+  "source_uri": "py-mod:indra.databases.taxonomy_client",
+  "generated_at": "2024-06-24T20:13:18.742844",
+  "source_sha256_hash": "dc8b619e771a269b9bdf5430fc2cc7a12250c33c0714942c476301c5b0d25be5",
+  "start_line": 18,
+  "stop_line": 38
 }

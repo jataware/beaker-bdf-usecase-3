@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.bax_pore_sequential",
+  "package": "indra.databases.doid_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.bax_pore_sequential",
-  "source_uri": "py-mod:pysb.examples.bax_pore_sequential",
-  "generated_at": "2024-05-31T18:46:23.656403",
-  "source_sha256_hash": "c4a2084e42e0e260283ccb37a57ffdf660e93683b6888fabfef456a4fb674a95",
-  "start_line": 39,
-  "stop_line": 50
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.doid_client",
+  "source_uri": "py-mod:indra.databases.doid_client",
+  "generated_at": "2024-06-24T20:11:23.172730",
+  "source_sha256_hash": "bc0eba5773b935c638035df1549a281abb3c1911ecd3c7c4aa1c71d38a412410",
+  "start_line": 7,
+  "stop_line": 22
 }

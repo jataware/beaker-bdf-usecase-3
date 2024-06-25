@@ -1,22 +1,15 @@
 # Description
-Test saving and loading observables and expressions
+Shows processing the neighborhood of specific genes using BioPAX.
 
 # Code
 ```
-import io
-from pysb.simulator import ScipyOdeSimulator
-from pysb.simulator.base import SimulationResult
-import numpy as np
-from pysb.examples import tyson_oscillator
+from indra.sources import biopax
 
-def test_save_load_observables_expressions():
-    buff = io.BytesIO()
-    tspan = np.linspace(0, 100, 100)
-    sim = ScipyOdeSimulator(tyson_oscillator.model, tspan).run()
-    sim.save(buff, include_obs_exprs=True)
-
-    sim2 = SimulationResult.load(buff)
-    assert len(sim2.observables) == len(tspan)
-    # Tyson oscillator doesn't have expressions
+@pytest.mark.slow
+def test_readme_using_indra5():
+    from indra.sources import biopax
+    # Process the neighborhood of BRAF and MAP2K1
+    biopax_processor = biopax.process_pc_pathsfromto(['BRAF', 'RAF1'],
+                                                     ['MAP2K1', 'MAP2K2'])
 
 ```

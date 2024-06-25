@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.fricker_2010_apoptosis",
+  "package": "indra.databases.mirbase_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.fricker_2010_apoptosis",
-  "source_uri": "py-mod:pysb.examples.fricker_2010_apoptosis",
-  "generated_at": "2024-05-31T18:47:38.464508",
-  "source_sha256_hash": "5b45c9ef695d42cf77cc5bba02a9ef9be8d16144376cbe47e0def4326f388514",
-  "start_line": 17,
-  "stop_line": 39
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.mirbase_client",
+  "source_uri": "py-mod:indra.databases.mirbase_client",
+  "generated_at": "2024-06-24T20:12:46.289326",
+  "source_sha256_hash": "198b6cb9cdbfa771e14f659370d2d50a6ad9aa7bd12c096b9fc4ff55d5a268c3",
+  "start_line": 98,
+  "stop_line": 143
 }

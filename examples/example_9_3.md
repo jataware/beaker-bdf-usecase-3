@@ -1,73 +1,94 @@
 # Description
-Usage examples of the SpeciesPatternMatcher class, including pattern matching using Monomer, MonomerPattern, and ComplexPattern.
+Example code to obtain copy number alterations (CNAs) for a given list of genes and optionally specified cell lines from the CCLE study using the cBioPortal API.
 
 # Code
 ```
-from pysb.examples.earm_1_0 import model
-from pysb.bng import generate_equations
-from pysb.pattern import SpeciesPatternMatcher
-from pysb import ANY, WILD, Model, Monomer, as_complex_pattern
+import json
+import logging
+import requests
+from functools import lru_cache
+from indra.databases import hgnc_client
+
+logger = logging.getLogger(__name__)
+
+cbio_url = 'https://www.cbioportal.org/api'
+ccle_study = 'cellline_ccle_broad'
 
 
-    Create a PatternMatcher for the EARM 1.0 model
+def send_request(method, endpoint, json_data=None):
+    json_data_str = json.dumps(json_data) if json_data else None
+    res = _send_request_cached(method, endpoint, json_data_str)
+    return res
 
-    >>> from pysb.examples.earm_1_0 import model
-    >>> from pysb.bng import generate_equations
-    >>> from pysb.pattern import SpeciesPatternMatcher
-    >>> from pysb import ANY, WILD, Model, Monomer, as_complex_pattern
-    >>> generate_equations(model)
-    >>> spm = SpeciesPatternMatcher(model)
 
-    Assign two monomers to variables (only needed when importing a model
-    instead of defining one interactively)
+@lru_cache(maxsize=1000)
+def _send_request_cached(method, endpoint, json_data_str=None):
+    if endpoint.startswith('/'): endpoint = endpoint[1:]
+    json_data = json.loads(json_data_str) if json_data_str else {}
+    request_fun = getattr(requests, method)
+    full_url = cbio_url + '/' + endpoint
+    res = request_fun(full_url, json=json_data)
+    if res.status_code != 200: logger.error(f'Request returned with code {res.status_code}: {res.text}'); return
+    return res.json()
 
-    >>> Bax4 = model.monomers['Bax4']
-    >>> Bcl2 = model.monomers['Bcl2']
 
-    Search using a Monomer
+def get_profile_data(study_id, gene_list, profile_filter, case_set_filter=None):
+    genetic_profiles = get_genetic_profiles(study_id, profile_filter)
+    if genetic_profiles: genetic_profile = genetic_profiles[0]
+    else: return {}
+    case_set_ids = get_case_lists(study_id)
+    if case_set_filter: case_set_id = [x for x in case_set_ids if case_set_filter in x][0]
+    else: case_set_id = study_id + '_all'
+    entrez_to_gene_symbol = get_entrez_mappings(gene_list)
+    entrez_ids = list(entrez_to_gene_symbol)
+    res = send_request('post', f'molecular-profiles/{genetic_profile}/molecular-data/fetch', {'sampleListId': case_set_id, 'entrezGeneIds': entrez_ids})
+    profile_data = {}
+    for sample in res:
+        sample_id = sample['sampleId']
+        if sample_id not in profile_data: profile_data[sample_id] = {}
+        gene_symbol = entrez_to_gene_symbol[str(sample['entrezGeneId'])]
+        profile_data[sample_id][gene_symbol] = sample['value']
+    return profile_data
 
-    >>> spm.match(Bax4)
-    [Bax4(b=None), Bax4(b=1) % Bcl2(b=1), Bax4(b=1) % Mito(b=1)]
-    >>> spm.match(Bcl2) # doctest:+NORMALIZE_WHITESPACE
-    [Bax2(b=1) % Bcl2(b=1),
-    Bax4(b=1) % Bcl2(b=1),
-    Bcl2(b=None),
-    Bcl2(b=1) % MBax(b=1)]
 
-    Search using a MonomerPattern (ANY and WILD keywords can be used)
+def get_entrez_mappings(gene_list):
+    if gene_list:
+        hgnc_mappings = {g: hgnc_client.get_hgnc_id(g) for g in gene_list}
+        entrez_mappings = {g: hgnc_client.get_entrez_id(hgnc_mappings[g]) for g in gene_list if hgnc_mappings[g] is not None}
+        entrez_to_gene_symbol = {v: k for k, v in entrez_mappings.items() if v is not None and k is not None}
+    else:
+        entrez_to_gene_symbol = {}
 
-    >>> spm.match(Bax4(b=WILD))
-    [Bax4(b=None), Bax4(b=1) % Bcl2(b=1), Bax4(b=1) % Mito(b=1)]
-    >>> spm.match(Bcl2(b=ANY))
-    [Bax2(b=1) % Bcl2(b=1), Bax4(b=1) % Bcl2(b=1), Bcl2(b=1) % MBax(b=1)]
+def get_ccle_cna(gene_list, cell_lines=None):
+    """Return a dict of CNAs in given genes and cell lines from CCLE.
 
-    Search using a ComplexPattern
+    CNA values correspond to the following alterations
 
-    >>> spm.match(Bax4(b=1) % Bcl2(b=1))
-    [Bax4(b=1) % Bcl2(b=1)]
-    >>> spm.match(Bax4() % Bcl2())
-    [Bax4(b=1) % Bcl2(b=1)]
+    -2 = homozygous deletion
 
-    Contrived example to test a site with both a bond and state defined
+    -1 = hemizygous deletion
 
-    >>> model = Model(_export=False)
-    >>> A = Monomer('A', ['a'], {'a': ['u', 'p']}, _export=False)
-    >>> model.add_component(A)
-    >>> species = [                                                     \
-            A(a='u'),                                                   \
-            A(a=1) % A(a=1),                                            \
-            A(a=('u', 1)) % A(a=('u', 1)),                              \
-            A(a=('p', 1)) % A(a=('p', 1))                               \
-        ]
-    >>> model.species = [as_complex_pattern(sp) for sp in species]
-    >>> spm2 = SpeciesPatternMatcher(model)
-    >>> spm2.match(A()) # doctest:+NORMALIZE_WHITESPACE
-    [A(a='u'), A(a=1) % A(a=1), A(a=('u', 1)) % A(a=('u', 1)),
-     A(a=('p', 1)) % A(a=('p', 1))]
-    >>> spm2.match(A(a='u'))
-    [A(a='u')]
-    >>> spm2.match(A(a=('u', ANY)))
-    [A(a=('u', 1)) % A(a=('u', 1))]
-    >>> spm2.match(A(a=('u', WILD)))
+    0 = neutral / no change
+
+    1 = gain
+
+    2 = high level amplification
+
+    Parameters
+    ----------
+    gene_list : list[str]
+        A list of HGNC gene symbols to get mutations in
+    cell_lines : Optional[list[str]]
+        A list of CCLE cell line names to get mutations for.
+
+    Returns
+    -------
+    profile_data : dict[dict[int]]
+        A dict keyed to cases containing a dict keyed to genes
+        containing int
+    """
+    profile_data = get_profile_data(ccle_study, gene_list,
+                                    'COPY_NUMBER_ALTERATION', 'all')
+    return {cell_line: value for cell_line, value in profile_data.items()
 
 ```

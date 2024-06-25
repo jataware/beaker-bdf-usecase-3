@@ -1,42 +1,20 @@
 # Description
-Test SimulationResult.dataframe()
+Demonstrates processing a natural language description of a mechanism using TRIPS and assembling the mechanism using PysbAssembler.
 
 # Code
 ```
-from pysb.simulator import ScipyOdeSimulator
-import numpy as np
+from indra.sources import trips
 
-def test_simres_dataframe():
-    """ Test SimulationResult.dataframe() """
-
-    tspan1 = np.linspace(0, 100, 100)
-    tspan2 = np.linspace(50, 100, 50)
-    tspan3 = np.linspace(100, 150, 100)
-    model = tyson_oscillator.model
-    sim = ScipyOdeSimulator(model, integrator='lsoda')
-    simres1 = sim.run(tspan=tspan1)
-    # Check retrieving a single simulation dataframe
-    df_single = simres1.dataframe
-
-    # Generate multiple trajectories
-    trajectories1 = simres1.species
-    trajectories2 = sim.run(tspan=tspan2).species
-    trajectories3 = sim.run(tspan=tspan3).species
-
-    # Try a simulation result with two different tspan lengths
-    sim = ScipyOdeSimulator(model, param_values={'k6' : [1.,1.]}, integrator='lsoda')
-    simres = SimulationResult(sim, [tspan1, tspan2], [trajectories1, trajectories2])
-    df = simres.dataframe
-
-    assert df.shape == (len(tspan1) + len(tspan2),
-                        len(model.species) + len(model.observables))
-
-    # Next try a simulation result with two identical tspan lengths, stacked
-    # into a single 3D array of trajectories
-    simres2 = SimulationResult(sim, [tspan1, tspan3],
-                               np.stack([trajectories1, trajectories3]))
-    df2 = simres2.dataframe
-
-    assert df2.shape == (len(tspan1) + len(tspan3),
+def test_readme_using_indra1():
+    from indra.sources import trips
+    from indra.assemblers.pysb import PysbAssembler
+    pa = PysbAssembler()
+    # Process a natural language description of a mechanism
+    trips_processor = trips.process_text(
+        'MEK2 phosphorylates ERK1 at Thr-202 and Tyr-204')
+    # Collect extracted mechanisms in PysbAssembler
+    pa.add_statements(trips_processor.statements)
+    # Assemble the model
+    model = pa.make_model(policies='two_step')
 
 ```

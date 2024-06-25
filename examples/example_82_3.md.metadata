@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tests.test_simulator_scipy",
+  "package": "indra.tests.test_expand_families",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tests.test_simulator_scipy",
-  "source_uri": "py-mod:pysb.tests.test_simulator_scipy",
-  "generated_at": "2024-05-31T18:57:48.791728",
-  "source_sha256_hash": "3dcb688f76f3c90a589a61dc8734ca5db2b7e7ca418135fd086812a27e7a6bbe",
-  "start_line": 417,
-  "stop_line": 428
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_expand_families",
+  "source_uri": "py-mod:indra.tests.test_expand_families",
+  "generated_at": "2024-06-24T20:26:05.650656",
+  "source_sha256_hash": "ea0681f071defca5d25fdfd8878827c3d6c7a3e25d8af9b349894204c95c8a81",
+  "start_line": 43,
+  "stop_line": 56
 }

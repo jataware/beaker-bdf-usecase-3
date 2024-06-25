@@ -1,30 +1,24 @@
 # Description
-Example of writing a model using PySB without using SelfExporter
+Load the LINCS drug target data into a list of dictionaries by fetching and processing a CSV file from a URL.
 
 # Code
 ```
-from __future__ import print_function
-from pysb import *
-import pysb.core
+import os
+import sys
+import requests
+from io import StringIO, BytesIO
+from indra.util import read_unicode_csv_fileobj
 
-# disable SelfExporter from doing its thing
 
-model = Model('explicit')
+def get_drug_target_data():
+    """Load the csv into a list of dicts containing the LINCS drug target data.
 
-L = Monomer('L', ['r'])
-R = Monomer('R', ['l'])
-model.add_component(L)
-model.add_component(R)
-
-kf = Parameter('kf', 1e-6)
-L_binds_R = Rule('L_binds_R', L(r=None) + R(l=None) >> L(r=1) % R(l=1), kf)
-model.add_component(kf)
-model.add_component(L_binds_R)
-
-L_0 = Parameter('L_0', 1e2)
-R_0 = Parameter('R_0', 1e4)
-model.add_component(L_0)
-model.add_component(R_0)
-model.add_initial(Initial(L(r=None), L_0))
+    Returns
+    -------
+    data : list[dict]
+        A list of dicts, each keyed based on the header of the csv, with values
+        as the corresponding column values.
+    """
+    url = LINCS_URL + '/datasets/20000/results'
 
 ```

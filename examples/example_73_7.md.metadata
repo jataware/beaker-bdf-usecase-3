@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tests.test_kappa",
+  "package": "indra.tests.test_cx_assembler",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tests.test_kappa",
-  "source_uri": "py-mod:pysb.tests.test_kappa",
-  "generated_at": "2024-05-31T18:54:14.883873",
-  "source_sha256_hash": "17ebdb65b547fa0136cefbe3ba6d73b74588a16ef84ebc92d89b405b1c85d8e9",
-  "start_line": 130,
-  "stop_line": 147
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_cx_assembler",
+  "source_uri": "py-mod:indra.tests.test_cx_assembler",
+  "generated_at": "2024-06-24T20:24:24.564046",
+  "source_sha256_hash": "dc685884d1167b22884f59af26d59758795c0a7e3fb2cc91bc1e7a0d273a0b34",
+  "start_line": 69,
+  "stop_line": 75
 }

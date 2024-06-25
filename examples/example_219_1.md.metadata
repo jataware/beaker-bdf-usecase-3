@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.trrust.api",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.trrust.api",
+  "source_uri": "py-mod:indra.sources.trrust.api",
+  "generated_at": "2024-06-24T21:05:37.945982",
+  "source_sha256_hash": "8f28a9fb8e0fccaa229f4b8cab5c3f186bf25323d291fe42f69ad0e8474a4187",
+  "start_line": 17,
+  "stop_line": 33
+}

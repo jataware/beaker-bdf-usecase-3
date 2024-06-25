@@ -1,18 +1,28 @@
 # Description
-Setup and run SSA simulations using CUDA SSASimulator for multiple parameters.
+Test the `process_text_bio` function from the `indra.sources.eidos` library with a mock Eidos JSON response to confirm that it generates an `Activation` statement.
 
 # Code
 ```
-import numpy as np
-from pysb.examples.schloegl import model
-from pysb.simulator import CudaSSASimulator
-model.parameters['X_0'].value = 400
-simulator = CudaSSASimulator(model)
-tspan = np.linspace(0, 100, 101)
+import os
+import json
+from unittest.mock import patch
+from indra.sources import eidos
+from indra.statements import Activation
 
-def test_run_by_multi_params(self):
-    param_values = np.array(
-        [p.value for p in self.model.parameters])
-    param_values = np.repeat([param_values], self.n_sim, axis=0)
+path_this = os.path.dirname(os.path.abspath(__file__))
+
+def _read_eidos_sentence_json():
+    jsonld = os.path.join(path_this, 'eidos_bio_abstract.json')
+    with open(jsonld, 'r') as fh:
+        js = json.load(fh)
+
+@patch('indra.sources.eidos.api._run_eidos_on_text')
+def test_process_text_bio(mock_read):
+    mock_read.return_value = _read_eidos_sentence_json()
+    ep = eidos.process_text_bio('virus increases death')
+    assert ep is not None
+    assert len(ep.statements) == 1
+    stmt = ep.statements[0]
+    from indra.statements import Activation
 
 ```

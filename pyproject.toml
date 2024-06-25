@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "beaker-pysb"
+name = "beaker-bdf"
 dynamic = ["version"]
 description = ''
 readme = "README.md"
@@ -11,7 +11,7 @@ requires-python = ">=3.10"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "Matthew Printz", email = "matt@jataware.com" },
+  { name = "Brandon Rose", email = "brandon@jataware.com" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -24,7 +24,8 @@ classifiers = [
 ]
 dependencies = [
     "beaker-bunsen>=0.0.6",
-    "pysb"
+    "pysb",
+    "indra@git+https://github.com/sorgerlab/indra.git"
 ]
 
 [tool.hatch.build.hooks.bunsen]
@@ -34,16 +35,19 @@ documentation_path = "documentation"
 examples_path = "examples"
 
 [tool.hatch.build.hooks.bunsen.libraries.python3]
-pysb = "Systems biology modeling in Python"
+indra = "Automated model assembly system, originally developed for molecular systems biology"
 
 
 [project.urls]
-Documentation = "https://github.com/unknown/beaker-pysb#readme"
-Issues = "https://github.com/unknown/beaker-pysb/issues"
-Source = "https://github.com/unknown/beaker-pysb"
+Documentation = "https://github.com/unknown/beaker-bdf#readme"
+Issues = "https://github.com/unknown/beaker-bdf/issues"
+Source = "https://github.com/unknown/beaker-bdf"
 
 [tool.hatch.version]
-path = "src/beaker_pysb/__about__.py"
+path = "src/beaker_bdf/__about__.py"
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.hatch.envs.default]
 dependencies = [
@@ -70,19 +74,19 @@ dependencies = [
   "mypy>=1.0.0",
 ]
 [tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/beaker_pysb tests}"
+check = "mypy --install-types --non-interactive {args:src/beaker_bdf tests}"
 
 [tool.coverage.run]
-source_pkgs = ["beaker_pysb", "tests"]
+source_pkgs = ["beaker_bdf", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/beaker_pysb/__about__.py",
+  "src/beaker_bdf/__about__.py",
 ]
 
 [tool.coverage.paths]
-beaker_pysb = ["src/beaker_pysb", "*/beaker-pysb/src/beaker_pysb"]
-tests = ["tests", "*/beaker-pysb/tests"]
+beaker_bdf = ["src/beaker_bdf", "*/beaker-bdf/src/beaker_bdf"]
+tests = ["tests", "*/beaker-bdf/tests"]
 
 [tool.coverage.report]
 exclude_lines = [

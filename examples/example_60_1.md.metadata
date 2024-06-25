@@ -1,10 +1,11 @@
 {
-  "package": "pysb.simulator.kappa",
+  "package": "indra.tests.test_biogrid",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.simulator.kappa",
-  "source_uri": "py-mod:pysb.simulator.kappa",
-  "generated_at": "2024-05-31T18:51:35.701123",
-  "source_sha256_hash": "636bb1a2d522542b755769f593435da492a8f9b8816ba2f0aabcf8ec505e0059",
-  "start_line": 69,
-  "stop_line": 75
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_biogrid",
+  "source_uri": "py-mod:indra.tests.test_biogrid",
+  "generated_at": "2024-06-24T20:21:24.963178",
+  "source_sha256_hash": "3b26d5a14dda71df0b25f90b99a10277c5e6ca72ce8b335a9717744f95ac6e78",
+  "start_line": 8,
+  "stop_line": 30
 }

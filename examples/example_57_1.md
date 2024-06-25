@@ -1,13 +1,21 @@
 # Description
-Using ScipyOdeSimulator to run a simulation with a model.
+Testing the belief engine's ability to set prior probabilities for a single source of evidence.
 
 # Code
 ```
-from pysb.examples.expression_observables import model
-from pysb.simulator import ScipyOdeSimulator
-import numpy as np
+from copy import deepcopy
+import pytest
+from indra.statements import Evidence, Agent, Phosphorylation
+from indra.belief import BeliefEngine, load_default_probs
 
->>> sim = ScipyOdeSimulator(model, tspan=np.linspace(0, 40, 10), \
-                            integrator_options={'atol': 1e-20})
+default_probs = load_default_probs()
+
+def test_prior_prob_one():
+    be = BeliefEngine()
+    prob = 1 - (default_probs['rand']['reach'] +
+                default_probs['syst']['reach'])
+    st = Phosphorylation(None, Agent('a'), evidence=[ev1])
+    assert st.belief == 1
+    be.set_prior_probs([st])
 
 ```

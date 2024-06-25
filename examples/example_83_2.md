@@ -1,12 +1,13 @@
 # Description
-Run a stochastic simulation with an invalid keyword argument, expecting it to raise a ValueError.
+Fix invalidities in evidence object using the `fix_invalidities_evidence` function.
 
 # Code
 ```
-pysb.simulator import StochKitSimulator
-pysb.examples import earm_1_0
+from indra.statements import Evidence
 
-@raises(ValueError)
-def test_stochkit_invalid_init_kwarg():
+def test_fix_evidence():
+    ev = Evidence(pmid='123', text_refs={'pmcid': 'PMC1234'})
+    fix_invalidities_evidence(ev)
+    assert ev.pmid == '123'
 
 ```

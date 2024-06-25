@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_literature",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_literature",
+  "source_uri": "py-mod:indra.tests.test_literature",
+  "generated_at": "2024-06-24T20:34:12.333867",
+  "source_sha256_hash": "550573112831884c8c35ecb8845b8ba5131471f83910241086c92d74eec2c257",
+  "start_line": 38,
+  "stop_line": 47
+}

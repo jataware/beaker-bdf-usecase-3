@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_kami_assembler",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_kami_assembler",
+  "source_uri": "py-mod:indra.tests.test_kami_assembler",
+  "generated_at": "2024-06-24T20:33:48.892580",
+  "source_sha256_hash": "0b116a352e97b3c4a2159997abca974ec42c61e2b4a7fb34433d5592a4fc3935",
+  "start_line": 102,
+  "stop_line": 115
+}

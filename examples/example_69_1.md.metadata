@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tests.test_exporters",
+  "package": "indra.tests.test_context",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tests.test_exporters",
-  "source_uri": "py-mod:pysb.tests.test_exporters",
-  "generated_at": "2024-05-31T18:52:45.065201",
-  "source_sha256_hash": "5e1016e71fd2e98ce45b495e1291f64e2ef6ec75e3845d51902cf93c525c5a7e",
-  "start_line": 31,
-  "stop_line": 141
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_context",
+  "source_uri": "py-mod:indra.tests.test_context",
+  "generated_at": "2024-06-24T20:23:21.055036",
+  "source_sha256_hash": "a7a16f30c68aefb39328972e0bda09f234ad9056b743673be5470ce8a4d597af",
+  "start_line": 6,
+  "stop_line": 14
 }

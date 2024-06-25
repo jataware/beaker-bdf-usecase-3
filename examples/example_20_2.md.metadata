@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.mesh_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.mesh_client",
+  "source_uri": "py-mod:indra.databases.mesh_client",
+  "generated_at": "2024-06-24T20:12:14.459057",
+  "source_sha256_hash": "433cda17bf93dbbfd6dd6b35abb39f8b324fdb2280304327e23595254a3e2a69",
+  "start_line": 112,
+  "stop_line": 138
+}

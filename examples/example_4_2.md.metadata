@@ -1,10 +1,11 @@
 {
-  "package": "pysb.export",
+  "package": "indra.preassembler",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.export",
-  "source_uri": "py-mod:pysb.export",
-  "generated_at": "2024-05-31T18:44:36.835433",
-  "source_sha256_hash": "3a35aa205820bd9be15635ac07fd58a8e555742789ad4922a1b20b17180f71cc",
-  "start_line": 100,
-  "stop_line": 104
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.preassembler",
+  "source_uri": "py-mod:indra.preassembler",
+  "generated_at": "2024-06-24T20:08:34.923408",
+  "source_sha256_hash": "d50d4993eb8f51ed4e140190b7b57653f854837ed3cb50253fac218ce0555c8c",
+  "start_line": 278,
+  "stop_line": 291
 }

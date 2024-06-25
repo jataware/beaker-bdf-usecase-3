@@ -1,25 +1,19 @@
 # Description
-This example demonstrates how to use a piecewise expression within a rule to set up and simulate a model using the PySB library.
+Test getting license links for a DOI
 
 # Code
 ```
-from pysb import *
-from pysb.testing import *
-from pysb.bng import *
-from pysb.integrate import Solver
-import numpy as np
+from __future__ import absolute_import, print_function, unicode_literals
+from builtins import dict, str
+from indra.literature import crossref_client
+from indra.util import unicode_strs
+import pytest
 
-@with_model
-def test_piecewise_expression():
-    Monomer('A')
-    Observable('A_total', A())
-    Expression('A_deg_expr', Piecewise((0, A_total < 400.0),
-                                       (0.001, A_total < 500.0),
-                                       (0.01, True)))
-    Initial(A(), Parameter('A_0', 1000))
-    Rule('A_deg', A() >> None, A_deg_expr)
-    generate_equations(model)
-    t = np.linspace(0, 1000, 100)
-    sol = Solver(model, t, use_analytic_jacobian=True)
+@pytest.mark.webservice
+def test_get_license_links():
+    links = crossref_client.get_license_links(test_doi)
+    assert links[0] == 'https://www.elsevier.com/tdm/userlicense/1.0/'
+    assert unicode_strs(links)
+    links = crossref_client.get_license_links('xyz')
 
 ```

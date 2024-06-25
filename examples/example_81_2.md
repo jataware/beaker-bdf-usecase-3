@@ -1,13 +1,15 @@
 # Description
-Run a Kappa simulation with an invalid argument to ensure it raises a ValueError.
+Test the assembly of an agent string for an agent with a single modification.
 
 # Code
 ```
-pysb.simulator import KappaSimulator
-pysb.examples import michment
+import indra.assemblers.english.assembler as ea
 
-@raises(ValueError)
-def test_kappa_sim_invalid_arg():
-    sim = KappaSimulator(michment.model, tspan=range(10))
+def test_agent_mod():
+    mc = ModCondition('phosphorylation')
+    a = Agent('EGFR', mods=mc)
+    ag = ea._assemble_agent_str(a)
+    print(ag.agent_str)
+    assert ag.agent_str == 'phosphorylated EGFR'
 
 ```

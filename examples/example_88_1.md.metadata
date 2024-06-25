@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tools.species_graph",
+  "package": "indra.tests.test_groundingmapper",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tools.species_graph",
-  "source_uri": "py-mod:pysb.tools.species_graph",
-  "generated_at": "2024-05-31T18:59:09.639625",
-  "source_sha256_hash": "419da8380ef0deccc6c998cb3dd1cdd1e8f3164e83156198fa3dba5e29568e43",
-  "start_line": 40,
-  "stop_line": 124
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_groundingmapper",
+  "source_uri": "py-mod:indra.tests.test_groundingmapper",
+  "generated_at": "2024-06-24T20:27:40.716351",
+  "source_sha256_hash": "8904be757611d6e7faf86c44f2f9792b8c8d3a6c2cdf8cfabe8f5a2ba4bc8cf2",
+  "start_line": 11,
+  "stop_line": 19
 }

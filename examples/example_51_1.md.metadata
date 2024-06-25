@@ -1,10 +1,11 @@
 {
-  "package": "pysb.export.potterswheel",
+  "package": "indra.statements.statements",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.export.potterswheel",
-  "source_uri": "py-mod:pysb.export.potterswheel",
-  "generated_at": "2024-05-31T18:50:27.705950",
-  "source_sha256_hash": "3c7979bc6c106c72ff794141c452f91619f5f0a74f666e83c0a083e5884fb901",
-  "start_line": 77,
-  "stop_line": 165
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.statements.statements",
+  "source_uri": "py-mod:indra.statements.statements",
+  "generated_at": "2024-06-24T20:19:12.808913",
+  "source_sha256_hash": "e7c270ee1affdd1afef9f01dba0f67b12a81314aea1bf04c40321b681fb108d6",
+  "start_line": 906,
+  "stop_line": 911
 }

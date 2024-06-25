@@ -1,36 +1,41 @@
 # Description
-Demonstration of defining and manipulating compartments, monomers, and rules with the `move_connected` keyword in PySB.
+Retrieve the taxonomy ID for a given taxonomy name using the Entrez Taxonomy web service.
 
 # Code
 ```
-from __future__ import print_function
-from pysb import *
-Model()
-Monomer('A', ['b'])
+import requests
 
-# One main 3d compartment and two 2d membranes inside it
-Parameter('Vmain', 1)
-Parameter('Vx', 1)
-Parameter('Vy', 1)
-Compartment('Main', None, 3, Vmain)
-Compartment('X', Main, 2, Vx)
-Compartment('Y', Main, 2, Vy)
+base_url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi'
 
-# A and B, both embedded in membrane X, bind reversibly
-Parameter('Kab_f', 1)
-Parameter('Kab_r', 1)
-Rule('Ax_bind_Bx', A(b=None) ** X + B(a=None) ** X | A(b=1) ** X % B(a=1) ** X,
-     Kab_f, Kab_r)
 
-# The A:B complex is transported back and forth from X to Y
-Parameter('Ktrans_f', 1)
-Parameter('Ktrans_r', 1)
-# move_connected is required or B will be "left behind" and BNG will complain
-# (change move_connected to False and run pysb.tools.export_bng_net on this file
-# and watch for the WARNING line in the output log)
-Rule('ABx_trans_y', A(b=ANY) ** X | A(b=ANY) ** Y,
-     Ktrans_f, Ktrans_r, move_connected=True)
+def _send_search_request(term):
+    params = {
+        'db': 'taxonomy',
+        'term': term,
+        'retmode': 'json'
+    }
+    res = requests.get(base_url, params=params)
+    if not res.status_code == 200:
+        return None
 
-Parameter('ABx_0', 1)
+def get_taxonomy_id(name):
+    """Return the taxonomy ID corresponding to a taxonomy name.
+
+    Parameters
+    ----------
+    name : str
+        The name of the taxonomy entry.
+        Example: "Severe acute respiratory syndrome coronavirus 2"
+
+    Returns
+    -------
+    str or None
+        The taxonomy ID corresponding to the given name or None
+        if not available.
+    """
+    res = _send_search_request(name)
+    idlist = res.get('idlist')
+    if not idlist:
+        return None
 
 ```

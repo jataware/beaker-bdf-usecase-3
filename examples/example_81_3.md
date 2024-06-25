@@ -1,13 +1,15 @@
 # Description
-Run a Kappa simulation with two runs to verify the simulation count.
+Test the assembly of an agent string for an agent with a modification specifying the residue.
 
 # Code
 ```
-pysb.simulator import KappaSimulator
-pysb.examples import michment
+import indra.assemblers.english.assembler as ea
 
-def test_kappa_2sims():
-    sim = KappaSimulator(michment.model, tspan=np.linspace(0, 100, 101))
-    res = sim.run(n_runs=2, seed=KAPPA_SEED)
+def test_agent_mod2():
+    mc = ModCondition('phosphorylation', 'tyrosine')
+    a = Agent('EGFR', mods=mc)
+    ag = ea._assemble_agent_str(a)
+    print(ag.agent_str)
+    assert ag.agent_str == 'tyrosine-phosphorylated EGFR'
 
 ```

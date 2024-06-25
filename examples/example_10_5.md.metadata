@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.chebi_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.chebi_client",
+  "source_uri": "py-mod:indra.databases.chebi_client",
+  "generated_at": "2024-06-24T20:10:57.092493",
+  "source_sha256_hash": "e826dda175300a852dfda21824ebc373f6677585d7ba1b744b2c75e890f3b1a9",
+  "start_line": 94,
+  "stop_line": 109
+}

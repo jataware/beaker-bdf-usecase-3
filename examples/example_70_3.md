@@ -1,23 +1,19 @@
 # Description
-This example shows how to use an observable within an expression to set up and simulate a model using the PySB library.
+Test getting publisher information for a DOI
 
 # Code
 ```
-pysb import *
-pysb.testing import *
-pysb.bng import *
-pysb.integrate import Solver
+from __future__ import absolute_import, print_function, unicode_literals
+from builtins import dict, str
+from indra.literature import crossref_client
+from indra.util import unicode_strs
+import pytest
 
-@with_model
-def test_expressions_with_one_observable():
-    Monomer('A')
-    Parameter('k1', 1)
-    Observable('o1', A())
-    Expression('e1', o1)
-    Rule('A_deg', A() >> None, k1)
-    Initial(A(), k1)
-    generate_equations(model)
-    t = np.linspace(0, 1000, 100)
-    sol = Solver(model, t, use_analytic_jacobian=True)
+@pytest.mark.webservice
+def test_get_publisher():
+    publisher = crossref_client.get_publisher(test_doi)
+    assert publisher == 'Elsevier BV'
+    assert unicode_strs(publisher)
+    publisher = crossref_client.get_publisher('xyz')
 
 ```

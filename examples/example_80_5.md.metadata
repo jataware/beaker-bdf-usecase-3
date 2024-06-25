@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tests.test_simulator_cupsoda",
+  "package": "indra.tests.test_elsevier_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tests.test_simulator_cupsoda",
-  "source_uri": "py-mod:pysb.tests.test_simulator_cupsoda",
-  "generated_at": "2024-05-31T18:57:26.297418",
-  "source_sha256_hash": "3aa0e0c5bf3091c4373abf703aa5bd91849b70fb09eddb5560eeed8d31f5c728",
-  "start_line": 54,
-  "stop_line": 59
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_elsevier_client",
+  "source_uri": "py-mod:indra.tests.test_elsevier_client",
+  "generated_at": "2024-06-24T20:25:46.345893",
+  "source_sha256_hash": "285db4cabe6f717604cdc9746e0a8b19b1b17cce8747733f726649506111029f",
+  "start_line": 64,
+  "stop_line": 73
 }

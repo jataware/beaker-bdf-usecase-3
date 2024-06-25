@@ -1,16 +1,23 @@
 # Description
-Changes the initial condition values of various components in the model.
+Retrieve IDO identifier from an IDO name using OwlClient.
 
 # Code
 ```
-from pysb import *
-import pysb.bng
-import pysb.examples.earm_1_0
+typing import Optional
+indra.databases.owl_client import OwlClient
 
-pR_0.value = 1000
-flip_0.value = 2000
-pC8_0.value = 10000
-Bid_0.value = 60000
-Bax_0.value = 80000
+def get_ido_id_from_ido_name(ido_name: str) -> Optional[str]:
+    """Return the HP identifier corresponding to the given IDO name.
+
+    Parameters
+    ----------
+    ido_name :
+        The IDO name to be converted. Example: "parasite role"
+
+    Returns
+    -------
+    :
+        The IDO identifier corresponding to the given IDO name.
+    """
 
 ```

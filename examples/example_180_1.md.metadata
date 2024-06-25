@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.biofactoid.processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.biofactoid.processor",
+  "source_uri": "py-mod:indra.sources.biofactoid.processor",
+  "generated_at": "2024-06-24T20:57:21.289382",
+  "source_sha256_hash": "4880b8f75ec46d722b1d3a406c473e409f2c645393e0e22402a34a359786aff1",
+  "start_line": 6,
+  "stop_line": 175
+}

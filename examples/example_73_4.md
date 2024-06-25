@@ -1,19 +1,20 @@
 # Description
-Run a Kappa simulation with wildcards in initial conditions and reactions.
+Test for combined phosphorylation and dephosphorylation statements using `CxAssembler` to verify the generated CX model.
 
 # Code
 ```
-pysb.testing import *
-pysb import *
+from indra.statements import *
+from indra.assemblers.cx import CxAssembler
 
-@with_model
-def test_kappa_wild():
-    Monomer('A',['site'])
-    Monomer('B',['site'])
-    Initial(A(site=None), Parameter('A_0', 100))
-    Initial(B(site=None), Parameter('B_0', 100))
-    Initial(A(site=1) % B(site=1), Parameter('AB_0', 1000))
-    Rule('deg_A', A(site=pysb.WILD) >> None, Parameter('k', 1))
-    Observable('A_', A())
+mek = Agent('MAP2K1', db_refs={'HGNC': '6840'})
+erk = Agent('MAPK1', db_refs={'UP': 'P28482'})
+dusp = Agent('DUSP4')
+st_phos = Phosphorylation(mek, erk)
+
+def test_dephos():
+    cxa = CxAssembler()
+    cxa.add_statements([st_phos, st_dephos])
+    cxa.make_model()
+    assert len(cxa.cx['nodes']) == 3
 
 ```

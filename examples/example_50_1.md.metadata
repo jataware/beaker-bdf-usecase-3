@@ -1,10 +1,11 @@
 {
-  "package": "pysb.export.matlab",
+  "package": "indra.statements.io",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.export.matlab",
-  "source_uri": "py-mod:pysb.export.matlab",
-  "generated_at": "2024-05-31T18:50:25.198422",
-  "source_sha256_hash": "e6b5260a982de7a19a0a12f822f84c6332655aec9a92008e8413691540a4bf27",
-  "start_line": 81,
-  "stop_line": 88
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.statements.io",
+  "source_uri": "py-mod:indra.statements.io",
+  "generated_at": "2024-06-24T20:18:54.914252",
+  "source_sha256_hash": "5e4bf580842759908b12140d0fa8c3ff76d12fa1f3c5b51df24ca057f45eb162",
+  "start_line": 70,
+  "stop_line": 85
 }

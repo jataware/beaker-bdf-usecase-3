@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.minerva.minerva_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.minerva.minerva_client",
+  "source_uri": "py-mod:indra.sources.minerva.minerva_client",
+  "generated_at": "2024-06-24T21:02:58.915754",
+  "source_sha256_hash": "2b886e26b5d38e102fc7a1ad77785596095bc56c93874d7dee261e25c0244a9a",
+  "start_line": 77,
+  "stop_line": 86
+}

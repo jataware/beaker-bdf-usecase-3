@@ -1,52 +1,47 @@
 # Description
-This example illustrates how to use the `MatchOnce` function to ensure that a pattern only matches once per species, even if it could match multiple times within that species. This is useful for adjusting reaction rate multiplicity to prevent a species from degrading or reacting faster than desired when it contains multiple identical molecules.
+Inference of Complexes from Statements implying physical interaction
 
 # Code
 ```
-import sympy
-import networkx as nx
-from collections.abc import Iterable
+import uuid
+import logging
+import networkx
+import itertools
+from indra.util import fast_deepcopy
+from indra.statements import *
+from indra.ontology.bio import bio_ontology
 
-class Component:
-    pass
+def _get_statements_by_type(stmts, stmt_type):
+    return [st for st in stmts if isinstance(st, stmt_type)]
 
-class Model:
-    pass
+logger = logging.getLogger(__name__)
 
-class Rule(object):
-    def __init__(self, name, reactant, product, k):
-        self.name = name
-        self.reactant = reactant
-        self.product = product
-        self.k = k
+class LinkedStatement(object):
+    def __init__(self, source_stmts, inferred_stmt):
+        self.source_stmts = source_stmts
+        self.inferred_stmt = inferred_stmt
 
-def as_complex_pattern(pattern):
-    # This is a mock implementation. The real one should convert pattern to ComplexPattern.
+class Complex(Statement):
 
-def MatchOnce(pattern):
-    """
-    Make a ComplexPattern match-once.
+    def infer_complexes(stmts):
+        """Return inferred Complex from Statements implying physical interaction.
 
-    ``MatchOnce`` adjusts reaction rate multiplicity by only counting a pattern
-    match once per species, even if it matches within that species multiple
-    times.
+        Parameters
+        ----------
+        stmts : list[indra.statements.Statement]
+            A list of Statements to infer Complexes from.
 
-    For example, if one were to have molecules of ``A`` degrading with a
-    specified rate:
-
-    >>> Rule('A_deg', A() >> None, kdeg)                # doctest: +SKIP
-
-    In the situation where multiple molecules of ``A()`` were present in a
-    species (e.g. ``A(a=1) % A(a=1)``), the above ``A_deg`` rule would have
-    multiplicity equal to the number of occurences of ``A()`` in the degraded
-    species. Thus, ``A(a=1) % A(a=1)`` would degrade twice as fast
-    as ``A(a=None)`` under the above rule. If this behavior is not desired,
-    the multiplicity can be fixed at one using the ``MatchOnce`` keyword:
-
-    >>> Rule('A_deg', MatchOnce(A()) >> None, kdeg)     # doctest: +SKIP
-
-    """
-    cp = as_complex_pattern(pattern).copy()
-    cp.match_once = True
+        Returns
+        -------
+        linked_stmts : list[indra.mechlinker.LinkedStatement]
+            A list of LinkedStatements representing the inferred Statements.
+        """
+        interact_stmts = _get_statements_by_type(stmts, Modification)
+        linked_stmts = []
+        for mstmt in interact_stmts:
+            if mstmt.enz is None:
+                continue
+            st = Complex([mstmt.enz, mstmt.sub], evidence=mstmt.evidence)
+            linked_stmts.append(st)
 
 ```

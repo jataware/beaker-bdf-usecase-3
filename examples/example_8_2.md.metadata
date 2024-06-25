@@ -1,10 +1,11 @@
 {
-  "package": "pysb.macros",
+  "package": "indra.benchmarks.phosphorylations",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.macros",
-  "source_uri": "py-mod:pysb.macros",
-  "generated_at": "2024-05-31T18:45:32.302691",
-  "source_sha256_hash": "e17e59f2d73a86aa321adc4537fbb74948c23e596815a73a57dd557a268fc246",
-  "start_line": 341,
-  "stop_line": 364
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.benchmarks.phosphorylations",
+  "source_uri": "py-mod:indra.benchmarks.phosphorylations",
+  "generated_at": "2024-06-24T20:09:40.164860",
+  "source_sha256_hash": "a8000bcf5cf824c764f339f75b86322ddf60eeb1a4425a1e202563ad552b748d",
+  "start_line": 48,
+  "stop_line": 92
 }

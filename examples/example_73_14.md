@@ -1,23 +1,18 @@
 # Description
-Run a Kappa simulation with two ghost agents and demonstrate reaction pattern addition.
+Test for supports using `CxAssembler` to verify supports in the generated CX model.
 
 # Code
 ```
-pysb.testing import *
-pysb import *
+from indra.statements import *
+from indra.assemblers.cx import CxAssembler
 
-@with_model
-def test_kappa_two_ghost_agents():
-    Monomer('A')
-    Monomer('M')
-    Parameter('k', 3.0)
-    Rule('synthesize_A_and_B', M() + None + None >> M() + A() + A(), k)
-    Initial(M(), Parameter('M_0', 1000))
-    Observable('A_', A())
+mek = Agent('MAP2K1', db_refs={'HGNC': '6840'})
+erk = Agent('MAPK1', db_refs={'UP': 'P28482'})
 
-    # check the ReactionPattern.__radd__ version
-    rp = None + (None + A())
-    assert len(rp.complex_patterns) == 3
-
+def test_supports():
+    cxa = CxAssembler()
+    cxa.add_statements([st_cited])
+    cxa.make_model()
+    assert len(cxa.cx['supports']) == 1
 
 ```

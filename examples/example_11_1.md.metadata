@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tests",
+  "package": "indra.databases.chembl_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tests",
-  "source_uri": "py-mod:pysb.tests",
-  "generated_at": "2024-05-31T18:46:10.329322",
-  "source_sha256_hash": "18d5d789b45ae647a5e2c58b91db126148cbea6f32f999e7b17b0d844077a884",
-  "start_line": 0,
-  "stop_line": 6
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.chembl_client",
+  "source_uri": "py-mod:indra.databases.chembl_client",
+  "generated_at": "2024-06-24T20:11:15.854568",
+  "source_sha256_hash": "39d741c7a98116d20fcb066448b9a923d6900a4c4fc79774c63cd85056d76573",
+  "start_line": 45,
+  "stop_line": 102
 }

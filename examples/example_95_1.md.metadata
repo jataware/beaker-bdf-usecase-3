@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_index_card_assembler",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_index_card_assembler",
+  "source_uri": "py-mod:indra.tests.test_index_card_assembler",
+  "generated_at": "2024-06-24T20:31:49.758453",
+  "source_sha256_hash": "2a0fa2e83cf1347d32a40d44fc773ea4b0f255c5f129e3f62f10a813b0ce6862",
+  "start_line": 41,
+  "stop_line": 48
+}

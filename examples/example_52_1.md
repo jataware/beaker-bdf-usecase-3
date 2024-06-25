@@ -1,267 +1,91 @@
 # Description
-Convert the PySB model to a libSBML document using the SbmlExporter class.
+This script initializes a BioOntology instance, selectively keeps certain nodes based on fixed criteria, builds necessary ontology structures, saves the modified ontology to a file, and uploads it to an S3 bucket.
 
 # Code
 ```
-import pysb
-import pysb.bng
-from pysb.export import Exporter
-from sympy.printing.mathml import MathMLPrinter
-from sympy import Symbol
-from xml.dom.minidom import Document
-import itertools
-try:
-    import libsbml
-except ImportError:
-    libsbml = None
+import os
+import boto3
+import pickle
+from indra.ontology.bio.ontology import BioOntology, CACHE_DIR
 
-class MathMLContentPrinter(MathMLPrinter):
-    def _print_Symbol(self, sym):
-        ci = self.dom.createElement(self.mathml_tag(sym))
-        ci.appendChild(self.dom.createTextNode(sym.name))
-        return ci
+always_include = {
+    'FPLX:ERK', 'HGNC:6871', 'HGNC:6877',
+    'FPLX:AKT', 'FPLX:RAF', 'FPLX:MEK', 'FPLX:AMPK',
+    'FPLX:SHC', 'FPLX:MAPK', 'FPLX:JNK',
+    'FPLX:FOS_family', 'FPLX:JUN_family',
+    'HGNC:9376', 'HGNC:9377', 'HGNC:9378', 'HGNC:9379',
+    'HGNC:9385', 'HGNC:9386', 'HGNC:9387', 'FPLX:SRC', 'HGNC:391', 'HGNC:9955',
+    'HGNC:6840', 'HGNC:6871', 'UP:Q13422',
+    'CHEBI:CHEBI:76971', 'CHEBI:CHEBI:37045', 'CHEBI:CHEBI:15996',
+    'CHEBI:CHEBI:75771', 'CHEBI:CHEBI:37121', 'CHEBI:CHEBI:57600',
+    'UP:P04585', 'HP:HP:0031801', 'GO:GO:0006915',
+    'MESH:D008545', 'MESH:D058750', 'GO:GO:0001837', 'MESH:D058750',
+    'CHEBI:CHEBI:46661', 'MESH:D000067777', 'HGNC:3313', 'UP:Q12926',
+    'HP:HP:0000002', 'DOID:DOID:0014667', 'EFO:1002050', 'EFO:0000001',
+    'EFO:0009502', 'HP:HP:0031801', 'MESH:D064706', 'DOID:DOID:0060495',
+    'MESH:D000071017', 'HP:HP:0031801', 'UPPRO:PRO_0000032458', 'HGNC:3467',
+    'HGNC:13006', 'HGNC:6407', 'UP:Q15208', 'UP:Q92597', 'UP:Q6IE75',
+    'CHEBI:CHEBI:63637', 'UP:P04608', 'UP:O43687', 'HGNC:377', 'UP:Q9UGI9',
+    'UP:Q8BGM7', 'EFO:0000694', 'GO:GO:0005783', 'UP:Q13422',
+    'MESH:D000938', 'FPLX:HIF_alpha', 'FPLX:HIF',
+    'CHEBI:CHEBI:87307', 'CHEBI:CHEBI:36962',
+    'UP:P15056', 'UP:Q32ZE1', 'UP:P15056', 'UP:P28482', 'UP:Q6P5R6',
+    'UP:P62993', 'HGNC:4566', 'HGNC:18181', 'HGNC:10840',
+    'HGNC:29869', 'HGNC:16743', 'GO:GO:0005737', 'GO:GO:0005575',
+    'GO:GO:0005622', 'CHEBI:CHEBI:22950', 'CHEBI:CHEBI:37581',
+    'CHEBI:CHEBI:25000', 'CHEBI:CHEBI:35701', 'CHEBI:CHEBI:36963',
+    'GO:GO:0005886', 'GO:GO:0005737', 'GO:GO:0098826',
+    'GO:GO:0016020', 'GO:GO:0005634',
+    'UP:Q02750', 'UP:P01112', 'UP:P01019', 'UP:Q9MZT7', 'UP:Q13422',
+    'HMDB:HMDB0000122', 'HGNC:7', 'HGNC:5', 'MIRBASE:MI0001730',
+    'HGNC:31476', 'DRUGBANK:DB00001', 'MESH:D013812', 'CHEBI:CHEBI:26523',
+    'UP:Q99490', 'MESH:D008099', 'MESH:D057189',
+    'UP:P15056', 'UP:O60674', 'UP:P0DP23', 'UP:Q13507', 'UP:P36507',
+    'DRUGBANK:DB00305', 'HGNC:23077', 'HGNC:17347', 'EGID:27113',
+    'EGID:10320', 'EGID:116986', 'EFO:0004542', 'UP:P04377',
+    'CHEBI:CHEBI:136692', 'EGID:1022', 'HGNC:1778',
+    'CHEMBL:CHEMBL296468', 'UP:P41180', 'MESH:D000077191',
+    'MESH:C475455', 'MESH:D015032', 'CHEBI:CHEBI:27363', 'CAS:7440-66-6',
+    'EGID:673', 'EGID:5594', 'EGID:5595', 'IDO:0000514', 'LSPCI:18',
+    'EGID:109880', 'PUBCHEM:56649450', 'MESH:D000086382', 'UP:C7U1M6',
+    'GO:GO:0008553', "ECCODE:1.1.1.1", "ECCODE:1.1.1", "ECCODE:1.1",
+    "ECCODE:1",
+}
 
-    def to_xml(self, expr):
-        return self._print(expr)
+always_include_ns = {'FPLX', 'INDRA_ACTIVITIES', 'INDRA_MODS'}
 
-def _check(value):
-    if type(value) is int and value != libsbml.LIBSBML_OPERATION_SUCCESS:
-        raise ValueError(
-            'Error encountered converting to SBML. '
-            'LibSBML returned error code {}: "{}"'.format(
-                value,
-                libsbml.OperationReturnValue_toString(value).strip()
-            )
-        )
-    elif value is None:
-        raise ValueError('LibSBML returned a null value')
+def keep_node(node):
+    ns = bio_ontology.get_ns(node)
+    if ns in always_include_ns:
+        return True
+    if node in always_include:
+        return True
+    neigh = set(bio_ontology.successors(node)) | set(bio_ontology.predecessors(node))
+    if neigh & always_include:
+        return True
+    if {bio_ontology.get_ns(n) for n in neigh} & always_include_ns:
+        return True
 
-def _add_ci(x_doc, x_parent, name):
-    ci = x_doc.createElement('ci')
-    ci.appendChild(x_doc.createTextNode(name))
-    x_parent.appendChild(ci)
-
-def _xml_to_ast(x_element):
-    x_doc = Document()
-    x_mathml = x_doc.createElement('math')
-    x_mathml.setAttribute('xmlns', 'http://www.w3.org/1998/Math/MathML')
-    x_mathml.appendChild(x_element)
-    x_doc.appendChild(x_mathml)
-    mathml_ast = libsbml.readMathMLFromString(x_doc.toxml())
-    _check(mathml_ast)
-    return mathml_ast
-
-def _mathml_expr_call(expr):
-    x_doc = Document()
-    x_apply = x_doc.createElement('apply')
-    x_doc.appendChild(x_apply)
-    _add_ci(x_doc, x_apply, expr.name)
-    for sym in expr.expand_expr(expand_observables=True).free_symbols:
-        if isinstance(sym, pysb.Expression):
-            continue
-        _add_ci(x_doc, x_apply, sym.name if isinstance(sym, pysb.Parameter) else str(sym))
-    return x_apply
-
-class SbmlExporter(Exporter):
-    def __init__(self, *args, **kwargs):
-        if not libsbml:
-            raise ImportError('The SbmlExporter requires the libsbml python package')
-        super(SbmlExporter, self).__init__(*args, **kwargs)
-
-    def _sympy_to_sbmlast(self, sympy_expr):
-
-    def convert(self, level=(3, 2)):
-        """
-        Convert the PySB model to a libSBML document
-
-        Requires the libsbml python package
-
-        Parameters
-        ----------
-        level: (int, int)
-            The SBML level and version to use. The default is SBML level 3, version 2. Conversion
-            to other levels/versions may not be possible or may lose fidelity.
-
-        Returns
-        -------
-        libsbml.SBMLDocument
-            A libSBML document converted form the PySB model
-        """
-        doc = libsbml.SBMLDocument(3, 2)
-        smodel = doc.createModel()
-        _check(smodel)
-        _check(smodel.setName(self.model.name))
-
-        pysb.bng.generate_equations(self.model)
-
-        # Docstring
-        if self.docstring:
-            notes_str = """
-            <notes>
-                <body xmlns="http://www.w3.org/1999/xhtml">
-                    <p>%s</p>
-                </body>
-            </notes>""" % self.docstring.replace("\n", "<br />\n"+" "*20)
-            _check(smodel.setNotes(notes_str))
-
-        # Compartments
-        if self.model.compartments:
-            for cpt in self.model.compartments:
-                c = smodel.createCompartment()
-                _check(c)
-                _check(c.setId(cpt.name))
-                _check(c.setSpatialDimensions(cpt.dimension))
-                _check(c.setSize(1 if cpt.size is None else cpt.size.value))
-                _check(c.setConstant(True))
-        else:
-            c = smodel.createCompartment()
-            _check(c)
-            _check(c.setId('default'))
-            _check(c.setSpatialDimensions(3))
-            _check(c.setSize(1))
-            _check(c.setConstant(True))
-
-        # Expressions
-        for expr in itertools.chain(
-                self.model.expressions_constant(),
-                self.model.expressions_dynamic(include_local=False),
-                self.model._derived_expressions
-        ):
-            # create an observable "parameter"
-            e = smodel.createParameter()
-            _check(e)
-            _check(e.setId(expr.name))
-            _check(e.setName(expr.name))
-            _check(e.setConstant(False))
-
-            # create an assignment rule which assigns the expression to the parameter
-            expr_rule = smodel.createAssignmentRule()
-
-            _check(expr_rule)
-            _check(expr_rule.setVariable(e.getId()))
-
-            expr_mathml = self._sympy_to_sbmlast(expr.expand_expr(expand_observables=True))
-            _check(expr_rule.setMath(expr_mathml))
-
-        # Initial values/assignments
-        fixed_species_idx = set()
-        initial_species_idx = set()
-        for ic in self.model.initials:
-            sp_idx = self.model.get_species_index(ic.pattern)
-            ia = smodel.createInitialAssignment()
-            _check(ia)
-            _check(ia.setSymbol('__s{}'.format(sp_idx)))
-            init_mathml = self._sympy_to_sbmlast(Symbol(ic.value.name))
-            _check(ia.setMath(init_mathml))
-            initial_species_idx.add(sp_idx)
-
-            if ic.fixed:
-                fixed_species_idx.add(sp_idx)
-
-        # Species
-        for i, s in enumerate(self.model.species):
-            sp = smodel.createSpecies()
-            _check(sp)
-            _check(sp.setId('__s{}'.format(i)))
-            if self.model.compartments:
-                # Try to determine compartment, which must be unique for the species
-                mon_cpt = set(mp.compartment for mp in s.monomer_patterns if mp.compartment is not None)
-                if len(mon_cpt) == 0 and s.compartment:
-                    compartment_name = s.compartment_name
-                elif len(mon_cpt) == 1:
-                    mon_cpt = mon_cpt.pop()
-                    if s.compartment is not None and mon_cpt != s.compartment:
-                        raise ValueError('Species {} has different monomer and species compartments, '
-                                         'which is not supported in SBML'.format(s))
-                    compartment_name = mon_cpt.name
-                else:
-                    raise ValueError('Species {} has more than one different monomer compartment, '
-                                     'which is not supported in SBML'.format(s))
-            else:
-                compartment_name = 'default'
-            _check(sp.setCompartment(compartment_name))
-            _check(sp.setName(str(s).replace('% ', '._br_')))
-            _check(sp.setBoundaryCondition(i in fixed_species_idx))
-            _check(sp.setConstant(False))
-            _check(sp.setHasOnlySubstanceUnits(True))
-            if i not in initial_species_idx:
-                _check(sp.setInitialAmount(0.0))
-
-
-        # Parameters
-
-        for param in itertools.chain(self.model.parameters,
-                                     self.model._derived_parameters):
-            p = smodel.createParameter()
-            _check(p)
-            _check(p.setId(param.name))
-            _check(p.setName(param.name))
-            _check(p.setValue(param.value))
-            _check(p.setConstant(True))
-
-        # Reactions
-        for i, reaction in enumerate(self.model.reactions_bidirectional):
-            rxn = smodel.createReaction()
-            _check(rxn)
-            _check(rxn.setId('r{}'.format(i)))
-            _check(rxn.setName(' + '.join(reaction['rule'])))
-            _check(rxn.setReversible(reaction['reversible']))
-
-            for sp in reaction['reactants']:
-                reac = rxn.createReactant()
-                _check(reac)
-                _check(reac.setSpecies('__s{}'.format(sp)))
-                _check(reac.setConstant(True))
-
-            for sp in reaction['products']:
-                prd = rxn.createProduct()
-                _check(prd)
-                _check(prd.setSpecies('__s{}'.format(sp)))
-                _check(prd.setConstant(True))
-
-            for symbol in reaction['rate'].free_symbols:
-                if isinstance(symbol, pysb.Expression):
-                    expr = symbol.expand_expr(expand_observables=True)
-                    for sym in expr.free_symbols:
-                        if not isinstance(sym, (pysb.Parameter, pysb.Expression)):
-                            # Species reference, needs to be specified as modifier
-                            modifier = rxn.createModifier()
-                            _check(modifier)
-                            _check(modifier.setSpecies(str(sym)))
-
-            rate = rxn.createKineticLaw()
-            _check(rate)
-            rate_mathml = self._sympy_to_sbmlast(reaction['rate'])
-            _check(rate.setMath(rate_mathml))
-
-        # Observables
-        for i, observable in enumerate(self.model.observables):
-            # create an observable "parameter"
-            obs = smodel.createParameter()
-            _check(obs)
-            _check(obs.setId('__obs{}'.format(i)))
-            _check(obs.setName(observable.name))
-            _check(obs.setConstant(False))
-
-            # create an assignment rule which assigns the observable expression to the parameter
-            obs_rule = smodel.createAssignmentRule()
-
-            _check(obs_rule)
-            _check(obs_rule.setVariable(obs.getId()))
-
-            obs_mathml = self._sympy_to_sbmlast(observable.expand_obs())
-            _check(obs_rule.setMath(obs_mathml))
-
-
-
-
-        # Apply any requested level/version conversion
-        if level != (3, 2):
-            prop = libsbml.ConversionProperties(libsbml.SBMLNamespaces(*level))
-            prop.addOption('strict', False)
-            prop.addOption('setLevelAndVersion', True)
-            prop.addOption('ignorePackages', True)
-            _check(doc.convert(prop))
-
+if __name__ == '__main__':
+    bio_ontology = BioOntology()
+    bio_ontology.initialize()
+    keep_nodes = set()
+    for node in bio_ontology.nodes:
+        ns = bio_ontology.get_ns(node)
+        if keep_node(node):
+            keep_nodes.add(node)
+    for node in list(bio_ontology.nodes):
+        if node not in keep_nodes:
+            bio_ontology.remove_node(node)
+    bio_ontology._build_name_lookup()
+    bio_ontology._build_transitive_closure()
+    fname = os.path.join(CACHE_DIR, 'mock_ontology.pkl')
+    with open(fname, 'wb') as fh:
+        pickle.dump(bio_ontology, fh, protocol=4)
+    # Uploading to S3
+    s3 = boto3.client('s3')
+    s3.put_object(Body=pickle.dumps(bio_ontology), Bucket='bigmech',
+                  Key=(f'travis/bio_ontology/{bio_ontology.version}/'
+                       f'mock_ontology.pkl'),
 
 ```

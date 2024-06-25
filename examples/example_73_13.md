@@ -1,21 +1,18 @@
 # Description
-Simulate a model with a dangling bond and ensure it raises KasimInterfaceError.
+Test for invalid cited statements using `CxAssembler` to ensure no invalid citations are present in the generated CX model.
 
 # Code
 ```
-pysb.testing import *
-pysb import *
+from indra.statements import *
+from indra.assemblers.cx import CxAssembler
 
-@with_model
-def test_kappa_error():
-    # Model with a dangling bond should raise a KasimInterfaceError
-    Monomer('A', ['b'])
-    Monomer('B', ['b'])
-    Initial(A(b=None), Parameter('A_0', 100))
+mek = Agent('MAP2K1', db_refs={'HGNC': '6840'})
+erk = Agent('MAPK1', db_refs={'UP': 'P28482'})
 
-    # Can't model this as a PySB rule, since it would generate a
-    # DanglingBondError. Directly inject kappa code for rule instead.
-    assert_raises(KasimInterfaceError, run_simulation, model, time=10,
-                  perturbation="'A_binds_B' A(b),B(b) -> A(b!1),B(b) @ "
+def test_invalid_cited():
+    cxa = CxAssembler()
+    cxa.add_statements([st_invalid_cited])
+    cxa.make_model()
+    assert not cxa.cx['citations']
 
 ```

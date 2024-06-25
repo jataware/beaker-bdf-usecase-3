@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_statement_validate",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_statement_validate",
+  "source_uri": "py-mod:indra.tests.test_statement_validate",
+  "generated_at": "2024-06-24T20:44:39.806619",
+  "source_sha256_hash": "5a880075f14dfa5acdd234cce8fe566c2a78ef3b5f5b9f8ab449a59083fc9175",
+  "start_line": 60,
+  "stop_line": 67
+}

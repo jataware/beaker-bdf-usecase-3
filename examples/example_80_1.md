@@ -1,16 +1,21 @@
 # Description
-Example of setting up and running the CupSodaSimulator with specific initial concentrations and checking the volume attribute.
+Test for retrieving the full text of an article using its DOI. This test checks whether the article is accessible through the API.
 
 # Code
 ```
-import numpy as np
-from pysb.examples.tyson_oscillator import model
+import logging
+from indra.literature import elsevier_client as ec
+import pytest
 
-def test_use_of_volume(self):
-    # Initial concentrations
-    self.solver.run(initials=self.y0)
-    print(self.solver.vol)
-    assert self.solver.vol is None
-    self.solver.vol = 1e-20
+
+@pytest.mark.nonpublic
+@pytest.mark.webservice
+@pytest.mark.nogha
+def test_get_fulltext_article():
+    # This article is not open access so in order to get a full text response
+    # with a body element requires full text access keys to be correctly
+    # set up.
+    doi = '10.1016/j.cell.2016.02.059'
+    text = ec.get_article(doi)
 
 ```

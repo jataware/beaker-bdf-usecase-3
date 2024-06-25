@@ -1,48 +1,45 @@
 # Description
-Convert a BioNetGen .bngl model file into a PySB Model.
+Example of using the AdaptiveAssembler with Refinement Filters from INDRA.
 
 # Code
 ```
-from pysb.builder import Builder
-from pysb.bng import BngFileInterface
-import xml.etree.ElementTree as ET
-import re
-import warnings
-import pysb.logging
-import collections
-import numbers
+indra.statements import *
+indra.tools.adaptive_assembly import AdaptiveAssembler
+indra.preassembler import OntologyRefinementFilter, RefinementConfirmationFilter
 
-def model_from_bngl(filename, force=False, cleanup=True):
-    """
-    Convert a BioNetGen .bngl model file into a PySB Model.
+def test_adaptive_assembly():
+    erk = Agent('ERK', db_refs={'FPLX': 'ERK'})
+    mek = Agent('MEK', db_refs={'FPLX': 'MEK'})
+    mapk = Agent('MAPK', db_refs={'FPLX': 'MAPK'})
 
-    Notes
-    -----
+    stmts = [
+        Phosphorylation(mek, erk),
+        Phosphorylation(mek, mapk, 'T'),
+        Phosphorylation(mek, erk, 'T')
+    ]
+    hashes = [stmt.get_hash() for stmt in stmts]
+    filters = [
+        OntologyRefinementFilter(ontology=bio_ontology),
+        RefinementConfirmationFilter(ontology=bio_ontology),
+    ]
+    aa = AdaptiveAssembler(stmts, filters=filters)
 
-    The following features are not supported in PySB and will cause an error
-    if present in a .bngl file:
+    all_refinements = aa.get_all_refinements()
+    assert set(all_refinements) == {(hashes[2], hashes[0]),
+                                    (hashes[2], hashes[1])}
 
-    * Fixed species (with a ``$`` prefix, like ``$Null``)
-    * BNG excluded or included reaction patterns (deprecated in BNG)
-    * BNG local functions
-    * Molecules with identically named sites, such as ``M(l,l)``
-    * BNG's custom rate law functions, such as ``MM`` and ``Sat``
-      (deprecated in BNG)
+    test_stmt = Phosphorylation(mek, mapk)
+    test_refinements = aa.get_more_specifics(test_stmt)
+    # All of these are refinements
+    assert test_refinements == set(hashes)
 
-    Parameters
-    ----------
-    filename : string
-        A BioNetGen .bngl file
-    force : bool, optional
-        The default, False, will raise an Exception if there are any errors
-        importing the model to PySB, e.g. due to unsupported features.
-        Setting to True will attempt to ignore any import errors, which may
-        lead to a model that only poorly represents the original. Use at own
-        risk!
-    cleanup : bool
-        Delete temporary directory on completion if True. Set to False for
-        debugging purposes.
-    """
-    bb = BnglBuilder(filename, force=force, cleanup=cleanup)
+    test_stmt = Phosphorylation(mek, erk, 'T', '185')
+    test_refinements = aa.get_less_specifics(test_stmt)
+    # All of these are refinements
+    assert test_refinements == set(hashes)
+
+    test_stmt = Phosphorylation(mek, erk, 'T', '185')
+    test_refinements = aa.get_more_specifics(test_stmt)
+    # All of these are refinements
 
 ```

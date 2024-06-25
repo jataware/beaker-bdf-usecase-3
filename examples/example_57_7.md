@@ -1,19 +1,28 @@
 # Description
-Accessing observable and expression concentrations at specific time points using pandas DataFrame.
+Testing the belief engine's hierarchical probabilities with a more complex hierarchy of evidence.
 
 # Code
 ```
-from pysb.examples.expression_observables import model
-from pysb.simulator import ScipyOdeSimulator
-import numpy as np
-np.set_printoptions(precision=4)
-sim = ScipyOdeSimulator(model, tspan=np.linspace(0, 40, 10), integrator_options={'atol': 1e-20})
+from copy import deepcopy
+import pytest
+from indra.statements import Evidence, Agent, Phosphorylation
+from indra.belief import BeliefEngine, load_default_probs
 
->>> df = simulation_result.dataframe
->>> print(df.loc[5:15, ['Bax_c0', 'NBD_signal']]) \
-    #doctest: +NORMALIZE_WHITESPACE
-             Bax_c0  NBD_signal
-time
-8.888889   0.000138    4.995633
+default_probs = load_default_probs()
+ev1 = Evidence(source_api='reach')
+ev2 = Evidence(source_api='trips')
+
+def test_hierarchy_probs2():
+    be = BeliefEngine()
+    st1 = Phosphorylation(None, Agent('a'), evidence=[ev1])
+    st2 = Phosphorylation(None, Agent('b'), evidence=[ev2])
+    st3 = Phosphorylation(None, Agent('c'), evidence=[ev4])
+    st2.supports = [st1]
+    st3.supports = [st1, st2]
+    st1.supported_by = [st2, st3]
+    st2.supported_by = [st3]
+    be.set_hierarchy_probs([st1, st2, st3])
+    assert_close_enough(st1.belief, 1-0.35)
+    assert_close_enough(st2.belief, 1-0.35*0.35)
 
 ```

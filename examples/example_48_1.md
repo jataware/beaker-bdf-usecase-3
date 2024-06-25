@@ -1,200 +1,127 @@
 # Description
-Export a PySB model to JSON using the JsonExporter class. This example demonstrates how to generate a JSON representation of a PySB model.
+Create a Concept object and serialize it to JSON.
 
 # Code
 ```
-from pysb.export import Exporter
-from pysb.bng import generate_equations
-import json
-from pysb.core import Model, MultiState, KeywordMeta, Parameter, Expression
+import logging
+from collections import OrderedDict as _o
 
-class PySBJSONEncoder(json.JSONEncoder):
-    PROTOCOL = 2
-    @classmethod
-    def encode_keyword(cls, keyword):
-        return {'__object__': str(keyword)}
-    @classmethod
-    def encode_multistate(cls, stateval):
-        return {
-            '__object__': '__multistate__',
-            'sites': stateval.sites
-        }
-    @classmethod
-    def encode_monomer(cls, mon):
-        return {
-            'name': mon.name,
-            'sites': mon.sites,
-            'states': mon.site_states
-        }
-    @classmethod
-    def encode_compartment(cls, cpt):
-        return {
-            'name': cpt.name,
-            'parent': cpt.parent.name if cpt.parent else None,
-            'dimension': cpt.dimension,
-            'size': cpt.size.name if cpt.size else None
-        }
-    @classmethod
-    def encode_parameter(cls, par):
-        return {
-            'name': par.name,
-            'value': par.value
-        }
-    @classmethod
-    def encode_expression(cls, expr):
-        return {
-            'name': expr.name,
-            'expr': expr.expr.name if isinstance(
-                expr.expr, (Parameter, Expression)) else str(expr.expr)
-        }
-    @classmethod
-    def encode_monomer_pattern(cls, mp):
-        return {
-            'monomer': mp.monomer.name,
-            'site_conditions': mp.site_conditions,
-            'compartment': mp.compartment.name if mp.compartment else None,
-            'tag': mp._tag.name if mp._tag else None
-        }
-    @classmethod
-    def encode_complex_pattern(cls, cp):
-        return {
-            'monomer_patterns': [cls.encode_monomer_pattern(mp)
-                                 for mp in cp.monomer_patterns],
-            'compartment': cp.name if cp.compartment else None,
-            'match_once': cp.match_once,
-            'tag': cp._tag.name if cp._tag else None
-        }
-    @classmethod
-    def encode_reaction_pattern(cls, rp):
-        return {
-            'complex_patterns': [cls.encode_complex_pattern(cp)
-                                 for cp in rp.complex_patterns]
-        }
-    @classmethod
-    def encode_rule_expression(cls, rexp):
-        return {
-            'reactant_pattern': cls.encode_reaction_pattern(
-                rexp.reactant_pattern),
-            'product_pattern': cls.encode_reaction_pattern(
-                rexp.product_pattern),
-            'reversible': rexp.is_reversible
-        }
-    @classmethod
-    def encode_rule(cls, r):
-        return {
-            'name': r.name,
-            'rule_expression': cls.encode_rule_expression(r.rule_expression),
-            'rate_forward': r.rate_forward.name,
-            'rate_reverse': r.rate_reverse.name if r.rate_reverse else None,
-            'delete_molecules': r.delete_molecules,
-            'move_connected': r.move_connected,
-            'energy': r.energy,
-        }
-    @classmethod
-    def encode_energypattern(cls, ep):
-        return {
-            'name': ep.name,
-            'pattern': cls.encode_complex_pattern(ep.pattern),
-            'energy': ep.energy.name,
-        }
-    @classmethod
-    def encode_observable(cls, obs):
-        return {
-            'name': obs.name,
-            'reaction_pattern': cls.encode_reaction_pattern(
-                obs.reaction_pattern),
-            'match': obs.match
-        }
-    @classmethod
-    def encode_initial(cls, init):
-        return {
-            'pattern': cls.encode_complex_pattern(init.pattern),
-            'parameter_or_expression': init.value.name,
-            'fixed': init.fixed
-        }
-    @classmethod
-    def encode_annotation(cls, ann):
-        return {
-            'subject': 'model' if isinstance(ann.subject, Model)
-            else ann.subject.name,
-            'object': str(ann.object),
-            'predicate': str(ann.predicate)
-        }
-    @classmethod
-    def encode_tag(cls, tag):
-        return {
-            'name': tag.name
-        }
-    @classmethod
-    def encode_model(cls, model):
-        d = dict(protocol=cls.PROTOCOL, name=model.name)
-        encoders = {
-            'monomers': cls.encode_monomer,
-            'compartments': cls.encode_compartment,
-            'tags': cls.encode_tag,
-            'parameters': cls.encode_parameter,
-            'expressions': cls.encode_expression,
-            'rules': cls.encode_rule,
-            'energypatterns': cls.encode_energypattern,
-            'observables': cls.encode_observable,
-            'initials': cls.encode_initial,
-            'annotations': cls.encode_annotation
-        }
-        for component_type, encoder in encoders.items():
-            d[component_type] = [encoder(component)
-                                 for component in
-                                 getattr(model, component_type)]
-        return d
-    def default(self, o):
-        if isinstance(o, Model):
-            return self.encode_model(o)
-        elif isinstance(o, MultiState):
-            return self.encode_multistate(o)
-        elif isinstance(o, KeywordMeta):
-            return self.encode_keyword(o)
-        return super(PySBJSONEncoder, self).default(o)
 
-class PySBJSONWithNetworkEncoder(PySBJSONEncoder):
-    @classmethod
-    def encode_reaction(cls, rxn):
-        rxn = rxn.copy()
-        rxn['rate'] = rxn['rate'].name if isinstance(rxn['rate'], (Parameter, Expression)) else str(rxn['rate'])
-        return rxn
-    @classmethod
-    def encode_observable(cls, obs):
-        o = super(PySBJSONWithNetworkEncoder, cls).encode_observable(obs)
-        o['species'] = obs.species
-        o['coefficients'] = obs.coefficients
-        return o
-    @classmethod
-    def encode_model(cls, model):
-        d = super(PySBJSONWithNetworkEncoder, cls).encode_model(model)
-        generate_equations(model)
-        additional_encoders = {
-            '_derived_parameters': cls.encode_parameter,
-            '_derived_expressions': cls.encode_expression,
-            'reactions': cls.encode_reaction,
-            'reactions_bidirectional': cls.encode_reaction,
-            'species': cls.encode_complex_pattern
-        }
-        for component_type, encoder in additional_encoders.items():
-            d[component_type] = [encoder(component) for component in getattr(model, component_type)]
+class Concept(object):
+    """A concept/entity of interest that is the argument of a Statement
 
-    def export(self, include_netgen=False):
-        """Generate the corresponding JSON for the PySB model associated
-        with the exporter.
+    Parameters
+    ----------
+    name : str
+        The name of the concept, possibly a canonicalized name.
+    db_refs : dict
+        Dictionary of database identifiers associated with this concept.
+    """
+    def __init__(self, name, db_refs=None):
+        self.name = name
+        self.db_refs = db_refs if db_refs else {}
 
-        Parameters
-        ----------
-        include_netgen: bool
-            Include cached network generation data (reactions, species,
-            local function-derived parameters and expressions) if True.
+    def matches(self, other):
+        return self.matches_key() == other.matches_key()
 
-        Returns
-        -------
-        string
-            The JSON output for the model.
-        """
-        return json.dumps(self.model, cls=PySBJSONWithNetworkEncoder
+    def matches_key(self):
+        key = self.entity_matches_key()
+        return str(key)
+
+    def entity_matches(self, other):
+        return self.entity_matches_key() == other.entity_matches_key()
+
+    def entity_matches_key(self):
+        # Get the grounding first
+        db_ns, db_id = self.get_grounding()
+        # If there's no grounding, just use the name as key
+        if not db_ns and not db_id:
+            return self.name
+        return str((db_ns, db_id))
+
+    def equals(self, other):
+        matches = (self.name == other.name) and \
+                  (self.db_refs == other.db_refs)
+        return matches
+
+    def get_grounding(self, ns_order=None):
+        # There are the following possibilities here:
+        # 1. a single unscored entry (str)
+        # 2. a list of scored entries with one element per entry
+        #    (list of tuple(str, float))
+        # 3. a list of entries with each entry cosisting of a tuple
+        #    of 4 scored groundings (list of tuple(tuple(str, float)))
+        ns_order = ns_order if ns_order else default_ns_order
+        for db_ns in ns_order:
+            # If there is no such entry, we continue
+            db_id = self.db_refs.get(db_ns)
+            # Note, this includes an empty list in case that comes up
+            if not db_id:
+                continue
+            # Case 1, a simple string ID
+            if isinstance(db_id, str):
+                return db_ns, db_id
+            # Cases 2 and 3 where db_id here is a list
+            elif isinstance(db_id, (list, tuple)):
+                first_entry = db_id[0]
+                # Case 2: each entry is a grounding and a score
+                if len(first_entry) == 2:
+                    top_entry = \
+                        sorted(db_id, key=lambda x: x[1],
+                               reverse=True)[0][0]
+                    return db_ns, top_entry
+                # Case 3: each entry is a tuple with 4 elements
+                # each of which is a tuple consisting of a grounding
+                # and a score
+                else:
+                    top_entry = get_top_compositional_grounding(db_id)
+                    return db_ns, tuple([gr[0] if gr is not None else None
+                                        for gr in top_entry])
+            else:
+                continue
+        return None, None
+
+    def isa(self, other, ontology):
+        # Get the namespaces for the comparison
+        (self_ns, self_id) = self.get_grounding()
+        (other_ns, other_id) = other.get_grounding()
+        # If one of the agents isn't grounded to a relevant namespace,
+        # there can't be an isa relationship
+        if not all((self_ns, self_id, other_ns, other_id)):
+            return False
+        # Check for isa relationship
+        return ontology.isa(self_ns, self_id, other_ns, other_id)
+
+    def is_opposite(self, other, ontology):
+        # Get the namespaces for the comparison
+        (self_ns, self_id) = self.get_grounding()
+        (other_ns, other_id) = other.get_grounding()
+        # If one of the agents isn't grounded to a relevant namespace,
+        # there can't be an is_opposite relationship
+        if not all((self_ns, self_id, other_ns, other_id)):
+            return False
+        # Check for is_opposite relationship
+        return ontology.is_opposite(self_ns, self_id,
+                                    other_ns, other_id)
+
+    def refinement_of(self, other, ontology, entities_refined=False):
+        # Make sure the Agent types match
+        if type(self) != type(other):
+            return False
+
+        # Check that the basic entity of the agent either matches or is related
+        # to the entity of the other agent. If not, no match.
+        # If the entities, match, then we can continue
+        if entities_refined:
+            return True
+        if self.entity_matches(other):
+            return True
+        if self.isa(other, ontology):
+            return True
+        return False
+
+    def to_json(self):
+        json_dict = _o({'name': self.name})
+        json_dict['db_refs'] = self.db_refs
 
 ```

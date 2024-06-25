@@ -1,14 +1,23 @@
 # Description
-This example shows how to use wildcards in patterns and match them against monomer patterns using the match_complex_pattern function.
+Make a request for a complex statement involving agents MEK@FPLX and ERK@FPLX.
 
 # Code
 ```
-from pysb import as_complex_pattern, Monomer
+import pytest
+from indra.sources import indra_db_rest as dbr
+from datetime import datetime
 
-def test_wildcards():
-    a_wild = as_complex_pattern(Monomer('A', ['b'], _export=False)(b=WILD))
-    b_mon = as_complex_pattern(Monomer('B', _export=None))
+EXPECTED_BATCH_SIZE = 500
 
-    # B() should not match A(b=WILD)
+def __check_request(seconds, *args, **kwargs):
+    check_stmts = kwargs.pop('check_stmts', True)
+    now = datetime.now()
+    resp = dbr.get_statements(*args, **kwargs)
+    time_taken = datetime.now() - now
+    if check_stmts:
+        assert resp.statements, "Got no statements."
+
+@pytest.mark.nonpublic
+def test_request_for_complex():
 
 ```

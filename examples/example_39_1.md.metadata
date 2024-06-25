@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.run_tutorial_a",
+  "package": "indra.resources.add_grounding_resources_from_csv",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.run_tutorial_a",
-  "source_uri": "py-mod:pysb.examples.run_tutorial_a",
-  "generated_at": "2024-05-31T18:48:48.169005",
-  "source_sha256_hash": "ccece6aed2106a1fad7564c81341fa4fbf96009756ab825fa5c5cb4dd8dee9fb",
-  "start_line": 4,
-  "stop_line": 8
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.resources.add_grounding_resources_from_csv",
+  "source_uri": "py-mod:indra.resources.add_grounding_resources_from_csv",
+  "generated_at": "2024-06-24T20:16:38.100300",
+  "source_sha256_hash": "5bcecb97466beb7c74753f377efb5fbe5e10fbebd1381501dea8906709c5caa6",
+  "start_line": 34,
+  "stop_line": 203
 }

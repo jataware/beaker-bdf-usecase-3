@@ -1,31 +1,33 @@
 # Description
-This example demonstrates how to use the PySB library to define a simple catalytic process, including defining parameters, monomers, observables, and initial conditions.
+Retrieve the InChIKey for a given PubChem CID.
 
 # Code
 ```
-from pysb import *
+import logging
+import requests
+from functools import lru_cache
 
-Model()
+pubchem_url = 'https://pubchem.ncbi.nlm.nih.gov/rest/pug'
 
-Parameter('vol', 10.) # volume (arbitrary units)
+@lru_cache(maxsize=5000)
+def get_inchi_key(pubchem_cid):
+    """Return the InChIKey for a given PubChem CID.
 
-Parameter('kf',   1./vol.value)
-Parameter('kr',   1000)
-Parameter('kcat', 100)
+    Parameters
+    ----------
+    pubchem_cid : str
+        The PubChem CID whose InChIKey should be returned.
 
-Monomer('E', ['s'])
-Monomer('S', ['e', 'state'], {'state': ['_0', '_1']})
-
-catalyze_state(E(), 's', S(), 'e', 'state', '_0', '_1', [kf, kr, kcat])
-
-Observable("E_free",     E(s=None))
-Observable("S_free",     S(e=None, state='_0'))
-Observable("ES_complex", E(s=1) % S(e=1))
-Observable("Product",    S(e=None, state='_1'))
-
-Parameter("Etot", 1.*vol.value)
-Initial(E(s=None), Etot)
-
-Parameter('S0', 10.*vol.value)
+    Returns
+    -------
+    str
+        The InChIKey corresponding to the PubChem CID.
+    """
+    url = '%s/compound/cid/%s/property/InChIKey/TXT' % \
+        (pubchem_url, pubchem_cid)
+    res = requests.get(url)
+    if res.status_code != 200:
+        logger.error('Could not retrieve InChIKey for %s' % pubchem_cid)
+        return None
 
 ```

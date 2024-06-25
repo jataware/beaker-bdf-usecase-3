@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.michment",
+  "package": "indra.databases.pubchem_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.michment",
-  "source_uri": "py-mod:pysb.examples.michment",
-  "generated_at": "2024-05-31T18:48:05.605782",
-  "source_sha256_hash": "ae41648fb4ed2a02fb09cd7b37a3ebf80ee685b569d5346dd0dc4d6140480944",
-  "start_line": 3,
-  "stop_line": 26
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.pubchem_client",
+  "source_uri": "py-mod:indra.databases.pubchem_client",
+  "generated_at": "2024-06-24T20:13:14.833076",
+  "source_sha256_hash": "b7f1ae739736e58d0458f848c72735c9d18f30e34974267fda5a265119bca8cc",
+  "start_line": 14,
+  "stop_line": 35
 }

@@ -1,10 +1,11 @@
 {
-  "package": "pysb.export.json",
+  "package": "indra.statements.concept",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.export.json",
-  "source_uri": "py-mod:pysb.export.json",
-  "generated_at": "2024-05-31T18:49:41.097799",
-  "source_sha256_hash": "29c3f8e27dc695679ae81856d412187747fe76bee9c874a1b0294f371cc51492",
-  "start_line": 20,
-  "stop_line": 37
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.statements.concept",
+  "source_uri": "py-mod:indra.statements.concept",
+  "generated_at": "2024-06-24T20:18:07.720223",
+  "source_sha256_hash": "10180dd456eb6ffcedec15b86ae5827a1e6e5626dc668018777b843c1f32fa7b",
+  "start_line": 9,
+  "stop_line": 126
 }

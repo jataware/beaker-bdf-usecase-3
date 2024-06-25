@@ -1,16 +1,12 @@
 # Description
-Test reversible synthesis and degradation in the `pysb` library.
+Testing the conversion from HMDB to ChEBI identifiers.
 
 # Code
 ```
+indra.databases import chebi_client
+indra.util import unicode_strs
 
-@with_model
-def test_reversible_synth_deg():
-    Monomer('A')
-    Parameter('k_synth', 2.0)
-    Parameter('k_deg', 1.0)
-    Rule('synth_deg', A() | None, k_deg, k_synth)
-    assert synth_deg.is_synth()
-    assert synth_deg.is_deg()
+def test_hmdb_to_chebi():
+    chebi_id = chebi_client.get_chebi_id_from_hmdb('HMDB0000122')
 
 ```

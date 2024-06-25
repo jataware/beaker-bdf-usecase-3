@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_obo_clients.test_doid_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_obo_clients.test_doid_client",
+  "source_uri": "py-mod:indra.tests.test_obo_clients.test_doid_client",
+  "generated_at": "2024-06-24T21:06:36.823679",
+  "source_sha256_hash": "540cf4c5780c9c161e1bfa8b6d97f7f6f09005b0f02d672cef6ebf79cf9b6be8",
+  "start_line": 4,
+  "stop_line": 8
+}

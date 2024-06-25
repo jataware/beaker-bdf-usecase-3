@@ -1,0 +1,11 @@
+{
+  "package": "indra.literature.crossref_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.literature.crossref_client",
+  "source_uri": "py-mod:indra.literature.crossref_client",
+  "generated_at": "2024-06-24T20:14:31.361098",
+  "source_sha256_hash": "6285517f1f10a045906dffdcb68a4edff44d01b9471e0a75a83cb1be3b4575a0",
+  "start_line": 56,
+  "stop_line": 62
+}

@@ -1,22 +1,23 @@
 # Description
-Demonstrate handling of None in reaction patterns and verify complex pattern parsing.
+Test for cited statements using `CxAssembler` to verify citations in the generated CX model.
 
 # Code
 ```
-pysb.testing import *
-pysb import *
-pysb.kappa import *
+from indra.statements import *
+from indra.assemblers.cx import CxAssembler
 
-@with_model
-def test_none_in_rxn_pat():
-    Monomer('A')
-    Monomer('B')
-    Rule('rule1', A() + None >> None + B(), Parameter('k', 1))
-    Initial(A(), Parameter('A_0', 100))
-    Observable('B_', B())
-    npts = 200
-    kres = run_simulation(model, time=100, points=npts, seed=_KAPPA_SEED)
+mek = Agent('MAP2K1', db_refs={'HGNC': '6840'})
+erk = Agent('MAPK1', db_refs={'UP': 'P28482'})
 
-    # check that rule1's reaction pattern parses with ComplexPatterns
+def test_cited():
+    cxa = CxAssembler()
+    cxa.add_statements([st_cited])
+    cxa.make_model()
+    assert len(cxa.cx['citations']) == 1
+    assert len(cxa.cx['edgeCitations']) == 1
+    citation = cxa.cx['citations'][0]
+    assert citation.get('dc:identifier') == 'pmid:12345'
+    cid = citation.get('@id')
+    assert cxa.cx['edgeCitations'][0]['citations'][0] == cid
 
 ```

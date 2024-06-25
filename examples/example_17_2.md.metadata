@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.earm_1_0",
+  "package": "indra.databases.hp_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.earm_1_0",
-  "source_uri": "py-mod:pysb.examples.earm_1_0",
-  "generated_at": "2024-05-31T18:46:55.494147",
-  "source_sha256_hash": "a940b92e2ae491d2737358e02c10f31030e6fc0e2421dfc5d9bb6ce8d9ba2fcb",
-  "start_line": 42,
-  "stop_line": 78
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.hp_client",
+  "source_uri": "py-mod:indra.databases.hp_client",
+  "generated_at": "2024-06-24T20:11:45.534175",
+  "source_sha256_hash": "8c8f11ab07f56bc8dfaa181b34800548cca911a3336e2c96527fe8972b5fbec6",
+  "start_line": 23,
+  "stop_line": 37
 }

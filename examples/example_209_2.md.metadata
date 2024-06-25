@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.rlimsp.api",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.rlimsp.api",
+  "source_uri": "py-mod:indra.sources.rlimsp.api",
+  "generated_at": "2024-06-24T21:03:56.163639",
+  "source_sha256_hash": "9195647beb73a1d3c4c7471cfe1e0c7bda627a6fef6d388213f7d227074ec428",
+  "start_line": 61,
+  "stop_line": 85
+}

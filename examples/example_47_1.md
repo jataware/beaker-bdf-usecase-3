@@ -1,56 +1,37 @@
 # Description
-This example script validates the command-line arguments for exporting a PySB model to a specified format. It imports a PySB model from a Python file, checks its validity, and exports the model to a format provided as an argument. If the arguments or model file are incorrect, appropriate exceptions or messages are raised.
+This example demonstrates how to create an `Agent` instance with bound conditions, using the `BoundCondition` class. The first Agent (`EGFR`) is bound to another Agent (`EGF`), and the second Agent (`BRAF`) is bound with a condition specifying that it is not bound to another Agent (`YWHAB`).
 
 # Code
 ```
-os
-sys
-re
+from collections import OrderedDict as _o
+from indra.statements.statements import modtype_conditions, modtype_to_modclass
+from .concept import Concept
+from .resources import get_valid_residue, activity_types, amino_acids
+import logging
 
-def validate_argv(argv):
-    return len(argv) == 3
+logger = logging.getLogger(__name__)
 
+default_ns_order = ['FPLX', 'UPPRO', 'HGNC', 'UP', 'CHEBI', 'GO', 'MESH', 'MIRBASE', 'DOID', 'HP', 'EFO']
 
-def main(argv):
-    if not validate_argv(argv):
-        print(pysb.export.__doc__, end=' ')
-        return 1
+class Agent(Concept):
+    def __init__(self, name, mods=None, activity=None, bound_conditions=None, mutations=None, location=None, db_refs=None):
+        super(Agent, self).__init__(name, db_refs=db_refs)
+        self.mods = [] if mods is None else ([mods] if isinstance(mods, ModCondition) else mods)
+        self.bound_conditions = [] if bound_conditions is None else ([bound_conditions] if isinstance(bound_conditions, BoundCondition) else bound_conditions)
+        self.mutations = [] if mutations is None else ([mutations] if isinstance(mutations, MutCondition) else mutations)
+        self.activity = activity
+        self.location = location
 
-    model_filename = argv[1]
-    format = argv[2]
+class BoundCondition(object):
+    def __init__(self, agent, is_bound=True):
+        self.agent = agent
 
-    # Make sure that the user has supplied an allowable format
-    if format not in pysb.export.formats.keys():
-        raise Exception("The format must be one of the following: " +
-                ", ".join(pysb.export.formats.keys()) + ".")
+    >>> egf = Agent('EGF')
+    >>> egfr = Agent('EGFR', bound_conditions=[BoundCondition(egf)])
 
-    # Sanity checks on filename
-    if not os.path.exists(model_filename):
-        raise Exception("File '%s' doesn't exist" % model_filename)
-    if not re.search(r'\.py$', model_filename):
-        raise Exception("File '%s' is not a .py file" % model_filename)
-    sys.path.insert(0, os.path.dirname(model_filename))
-    model_name = re.sub(r'\.py$', '', os.path.basename(model_filename))
-    # import it
-    try:
-        # FIXME if the model has the same name as some other "real" module
-        # which we use, there will be trouble (use the imp package and import
-        # as some safe name?)
-        model_module = __import__(model_name)
-    except Exception as e:
-        print("Error in model script:\n")
-        raise
-    # grab the 'model' variable from the module
-    try:
-        model = model_module.__dict__['model']
-    except KeyError:
-        raise Exception("File '%s' isn't a model file" % model_filename)
+    BRAF *not* bound to a 14-3-3 protein (YWHAB):
 
-    # Export the model
-    print(pysb.export.export(model, format, model_module.__doc__))
-
-    return 0
-
-if __name__ == "__main__":
+    >>> ywhab = Agent('YWHAB')
+    >>> braf = Agent('BRAF', bound_conditions=[BoundCondition(ywhab, False)])
 
 ```

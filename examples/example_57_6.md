@@ -1,14 +1,23 @@
 # Description
-Accessing combined array of species, observables, and expressions.
+Testing the belief engine's hierarchical probabilities with evidence hierarchies.
 
 # Code
 ```
-from pysb.examples.expression_observables import model
-from pysb.simulator import ScipyOdeSimulator
-import numpy as np
-np.set_printoptions(precision=4)
-sim = ScipyOdeSimulator(model, tspan=np.linspace(0, 40, 10), integrator_options={'atol': 1e-20})
+from copy import deepcopy
+import pytest
+from indra.statements import Evidence, Agent, Phosphorylation
+from indra.belief import BeliefEngine, load_default_probs
 
-    >>> print(simulation_result.all[0]) #doctest: +SKIP
+default_probs = load_default_probs()
+ev1 = Evidence(source_api='reach')
+
+def test_hierarchy_probs1():
+    be = BeliefEngine()
+    st1 = Phosphorylation(None, Agent('a'), evidence=[ev1])
+    st2 = Phosphorylation(None, Agent('b'), evidence=[ev2])
+    st2.supports = [st1]
+    st1.supported_by = [st2]
+    be.set_hierarchy_probs([st1, st2])
+    assert_close_enough(st1.belief, 1-0.35)
 
 ```

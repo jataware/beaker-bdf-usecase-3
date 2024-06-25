@@ -1,10 +1,11 @@
 {
-  "package": "pysb.importers.json",
+  "package": "indra.tests.test_adeft_tools",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.importers.json",
-  "source_uri": "py-mod:pysb.importers.json",
-  "generated_at": "2024-05-31T18:51:01.199633",
-  "source_sha256_hash": "4321b65b3443c4b3d9375a074b75886ce6bb0012fc56c7b4e51d02c65052c305",
-  "start_line": 274,
-  "stop_line": 276
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_adeft_tools",
+  "source_uri": "py-mod:indra.tests.test_adeft_tools",
+  "generated_at": "2024-06-24T20:20:10.328678",
+  "source_sha256_hash": "190e6979b5e4c6714607861d05ff58ab65388f8de48ffdcb45e6d1911b9ecfaf",
+  "start_line": 23,
+  "stop_line": 29
 }

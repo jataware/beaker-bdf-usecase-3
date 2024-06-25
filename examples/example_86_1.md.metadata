@@ -1,10 +1,11 @@
 {
-  "package": "pysb.tools.render_species",
+  "package": "indra.tests.test_go_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.tools.render_species",
-  "source_uri": "py-mod:pysb.tools.render_species",
-  "generated_at": "2024-05-31T18:59:02.221307",
-  "source_sha256_hash": "bd589529fc68d870352b1f195d3222c3e839dd0fcde53f872e5f142d8c591ade",
-  "start_line": 2,
-  "stop_line": 23
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_go_client",
+  "source_uri": "py-mod:indra.tests.test_go_client",
+  "generated_at": "2024-06-24T20:26:38.179417",
+  "source_sha256_hash": "1b940d870b5d86c82f8b980463905ae8767bda7d8804c5effb5e193011e15961",
+  "start_line": 3,
+  "stop_line": 6
 }

@@ -1,21 +1,19 @@
 # Description
-Generate a contact map using static analysis and verify its type.
+Test for the more complex statement using `CxAssembler` to verify the generated CX model when duplicated elements are present.
 
 # Code
 ```
-pysb.testing import *
-pysb import *
-pysb.kappa import *
+from indra.statements import *
+from indra.assemblers.cx import CxAssembler
 
-@with_model
-def test_run_static_analysis_cmap():
-    """Test generation of contact map by run_static_analysis"""
-    Monomer('A', ['b'])
-    Monomer('B', ['b'])
-    Rule('A_binds_B', A(b=None) + B(b=None) >> A(b=1) % B(b=1),
-         Parameter('k_A_binds_B', 1))
-    Observable('AB', A(b=1) % B(b=1))
-    res = run_static_analysis(model, contact_map=True, influence_map=False)
-    ok_(isinstance(res.contact_map, nx.MultiGraph))
+mek = Agent('MAP2K1', db_refs={'HGNC': '6840'})
+erk = Agent('MAPK1', db_refs={'UP': 'P28482'})
+dusp = Agent('DUSP4')
+
+def test_complex2():
+    cxa = CxAssembler()
+    cxa.add_statements([st_complex2])
+    cxa.make_model()
+    assert len(cxa.cx['nodes']) == 3
 
 ```

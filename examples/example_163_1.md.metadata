@@ -1,0 +1,11 @@
+{
+  "package": "indra.assemblers.kami.assembler",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.assemblers.kami.assembler",
+  "source_uri": "py-mod:indra.assemblers.kami.assembler",
+  "generated_at": "2024-06-24T20:54:34.417323",
+  "source_sha256_hash": "2d55f830b7c09b4c6f8f33956810670015bce4d895822b0f691b2a0c6e943c6c",
+  "start_line": 215,
+  "stop_line": 275
+}

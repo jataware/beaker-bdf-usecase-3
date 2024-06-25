@@ -1,30 +1,24 @@
 # Description
-EARM 1.3 model simulation and dynamic observable tests
+Shows how to search for recent abstracts in PubMed, process abstracts using REACH, and collect extracted statements.
 
 # Code
 ```
-from pysb.simulator import ScipyOdeSimulator
-from nose.tools import raises
-from pysb.examples import earm_1_3
-import numpy as np
+indra.sources import reach
+indra.literature import pubmed_client
 
-class TestSimulationResultEarm13(object):
-    def setUp(self):
-        self.model = earm_1_3.model
-        self.tspan = np.linspace(0, 100, 101)
-        self.sim = ScipyOdeSimulator(self.model, tspan=self.tspan)
-        self.simres = self.sim.run()
-
-    @raises(ValueError)
-    def test_dynamic_observable_nonpattern(self):
-        self.simres.observable('cSmac')
-
-    @raises(ValueError)
-    def test_match_nonexistent_pattern(self):
-        m = self.model.monomers
-        self.simres.observable(m.cSmac() % m.Bid())
-
-    def test_on_demand_observable(self):
-        m = self.model.monomers
+@pytest.mark.slow
+@pytest.mark.nogha
+def test_readme_using_indra3():
+    from indra.sources import reach
+    from indra.literature import pubmed_client
+    # Search for 10 most recent abstracts in PubMed on 'BRAF'
+    pmids = pubmed_client.get_ids('BRAF', retmax=10)
+    all_statements = []
+    for pmid in pmids:
+        abs = pubmed_client.get_abstract(pmid)
+        if abs is not None:
+            reach_processor = reach.process_text(abs, url=reach.local_text_url)
+            if reach_processor is not None:
+                all_statements += reach_processor.statements
 
 ```

@@ -1,10 +1,11 @@
 {
-  "package": "pysb.export.sbml",
+  "package": "indra.tests.make_mock_ontology",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.export.sbml",
-  "source_uri": "py-mod:pysb.export.sbml",
-  "generated_at": "2024-05-31T18:50:40.455600",
-  "source_sha256_hash": "74bed86118d3672d65f76a578efce74e8a6cca9f35718a5c83aec755bba92a8e",
-  "start_line": 102,
-  "stop_line": 296
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.make_mock_ontology",
+  "source_uri": "py-mod:indra.tests.make_mock_ontology",
+  "generated_at": "2024-06-24T20:19:48.884929",
+  "source_sha256_hash": "4bc5264340aaf947c34350806c968467116bf770b5f0d344a5932dee21d31cf5",
+  "start_line": 71,
+  "stop_line": 93
 }

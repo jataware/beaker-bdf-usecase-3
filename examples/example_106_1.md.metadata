@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_mgi_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_mgi_client",
+  "source_uri": "py-mod:indra.tests.test_mgi_client",
+  "generated_at": "2024-06-24T20:35:18.442182",
+  "source_sha256_hash": "8e1a5bec7c524ccdd6ee135d2e12f7a6343202bba0a96b4293dbc3d91a3972b8",
+  "start_line": 3,
+  "stop_line": 10
+}

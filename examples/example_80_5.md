@@ -1,14 +1,20 @@
 # Description
-Example of configuring and running the CupSodaSimulator with a specified number of blocks.
+Test for retrieving an article's text where the expected result is no text (article body is None).
 
 # Code
 ```
-import numpy as np
-from pysb.examples.tyson_oscillator import model
+import logging
+from indra.literature import elsevier_client as ec
+import pytest
 
-def test_n_blocks(self):
-    print(self.solver.n_blocks)
-    self.solver.n_blocks = 128
-    assert self.solver.n_blocks == 128
+
+@pytest.mark.nonpublic
+@pytest.mark.webservice
+@pytest.mark.nogha
+def test_article():
+    # PMID: 11302724
+    doi = '10.1006/bbrc.2001.4693'
+    xml_str = ec.download_article(doi)
+    body = ec.extract_text(xml_str)
 
 ```

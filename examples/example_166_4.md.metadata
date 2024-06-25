@@ -1,0 +1,11 @@
+{
+  "package": "indra.assemblers.pysb.export",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.assemblers.pysb.export",
+  "source_uri": "py-mod:indra.assemblers.pysb.export",
+  "generated_at": "2024-06-24T20:54:57.598080",
+  "source_sha256_hash": "dada68b3f694ffa664c95f9fdda9f035f35a0a2100c0341536ba8c89301307a1",
+  "start_line": 140,
+  "stop_line": 158
+}

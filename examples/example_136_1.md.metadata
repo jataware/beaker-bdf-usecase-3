@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_taxonomy_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_taxonomy_client",
+  "source_uri": "py-mod:indra.tests.test_taxonomy_client",
+  "generated_at": "2024-06-24T20:46:08.004729",
+  "source_sha256_hash": "a126dc4ffff3bd1d4fe74d26d51481ef8c37c208056cbe5e4c6678df35c06f1a",
+  "start_line": 3,
+  "stop_line": 6
+}

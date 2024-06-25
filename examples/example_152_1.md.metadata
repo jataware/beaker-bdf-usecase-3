@@ -1,0 +1,11 @@
+{
+  "package": "indra.util.aws",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.util.aws",
+  "source_uri": "py-mod:indra.util.aws",
+  "generated_at": "2024-06-24T20:50:47.137200",
+  "source_sha256_hash": "c200b3028014ab1745fe70f7fab84af538805303787beed63b750bb4f33b6b68",
+  "start_line": 25,
+  "stop_line": 84
+}

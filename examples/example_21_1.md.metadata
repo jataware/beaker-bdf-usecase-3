@@ -1,10 +1,11 @@
 {
-  "package": "pysb.examples.fixed_initial",
+  "package": "indra.databases.mgi_client",
   "type": "code",
-  "resource_id": "python:py-mod:pysb.examples.fixed_initial",
-  "source_uri": "py-mod:pysb.examples.fixed_initial",
-  "generated_at": "2024-05-31T18:47:24.958554",
-  "source_sha256_hash": "176dca7e35c7b14474a670a1d0b109a39bea8b016ff02ef0c9a0e2508c658d43",
-  "start_line": 0,
-  "stop_line": 38
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.mgi_client",
+  "source_uri": "py-mod:indra.databases.mgi_client",
+  "generated_at": "2024-06-24T20:12:44.404504",
+  "source_sha256_hash": "e700e605d10f06567cec2af934e36ca322c0197235986a31c5eb2089c4e83e5e",
+  "start_line": 9,
+  "stop_line": 23
 }

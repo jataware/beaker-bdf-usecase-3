@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_isi",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_isi",
+  "source_uri": "py-mod:indra.tests.test_isi",
+  "generated_at": "2024-06-24T20:32:39.043908",
+  "source_sha256_hash": "d6f535bb826a4eda2a9567332bf44a50d70895af1fa8256df2bb6d478766cf59",
+  "start_line": 36,
+  "stop_line": 67
+}
