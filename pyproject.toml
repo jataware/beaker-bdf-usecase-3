@@ -25,7 +25,8 @@ classifiers = [
 dependencies = [
     "beaker-bunsen>=0.0.6",
     "pysb",
-    "indra@git+https://github.com/sorgerlab/indra.git"
+    "indra@git+https://github.com/sorgerlab/indra.git",
+    "openpyxl"
 ]
 
 [tool.hatch.build.hooks.bunsen]

@@ -17,9 +17,4 @@ services:
       - ENABLE_CHECKPOINTS=true  
       - PYTHONPATH = /jupyter
     working_dir: /jupyter
-    command: [
-      "python",
-      "-m",
-      "beaker_kernel.server.dev",
-      "watch",
-    ]
+    command: ["beaker", "dev", "watch", "--ip", "0.0.0.0"]
