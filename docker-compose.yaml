@@ -15,6 +15,8 @@ services:
       - ENABLE_USER_PROMPT=true
       - OPENAI_API_KEY
       - ENABLE_CHECKPOINTS=true  
+      - PYTHONPATH = /jupyter
+    working_dir: /jupyter
     command: [
       "python",
       "-m",
