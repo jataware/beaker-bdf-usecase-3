@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_hypothesis",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_hypothesis",
+  "source_uri": "py-mod:indra.tests.test_hypothesis",
+  "generated_at": "2024-06-24T20:29:10.043324",
+  "source_sha256_hash": "72a805eae8d8bdcefece0c437fd4f4167da5a467c6712263fae349ea96ef13b2",
+  "start_line": 176,
+  "stop_line": 188
+}

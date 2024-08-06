@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.drugbank.processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.drugbank.processor",
+  "source_uri": "py-mod:indra.sources.drugbank.processor",
+  "generated_at": "2024-06-24T21:00:14.459972",
+  "source_sha256_hash": "4dbcddaaf251cf14f1ec9ea8f34c037aef51808b03c444835217c9326fe7ee98",
+  "start_line": 14,
+  "stop_line": 181
+}

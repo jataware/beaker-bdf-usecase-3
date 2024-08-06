@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_coci_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_coci_client",
+  "source_uri": "py-mod:indra.tests.test_coci_client",
+  "generated_at": "2024-06-24T20:23:13.374232",
+  "source_sha256_hash": "2da5031d5d5a566170377c0b5750e399fd25de73de4ece35218f7773a711694c",
+  "start_line": 4,
+  "stop_line": 10
+}

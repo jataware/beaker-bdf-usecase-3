@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_preassembler",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_preassembler",
+  "source_uri": "py-mod:indra.tests.test_preassembler",
+  "generated_at": "2024-06-24T20:38:52.898444",
+  "source_sha256_hash": "ecf058f1d99faa993959c17fce75642512be7fea401de88bb07c87b853949f6a",
+  "start_line": 195,
+  "stop_line": 211
+}

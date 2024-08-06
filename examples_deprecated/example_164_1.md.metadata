@@ -1,0 +1,11 @@
+{
+  "package": "indra.assemblers.pybel.assembler",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.assemblers.pybel.assembler",
+  "source_uri": "py-mod:indra.assemblers.pybel.assembler",
+  "generated_at": "2024-06-24T20:54:36.500459",
+  "source_sha256_hash": "a385eb32490e295ceb1e8cf736ce3d473e974d7256a2afe9e9c0ab1b35ecd065",
+  "start_line": 73,
+  "stop_line": 85
+}

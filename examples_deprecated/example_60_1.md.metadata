@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_biogrid",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_biogrid",
+  "source_uri": "py-mod:indra.tests.test_biogrid",
+  "generated_at": "2024-06-24T20:21:24.963178",
+  "source_sha256_hash": "3b26d5a14dda71df0b25f90b99a10277c5e6ca72ce8b335a9717744f95ac6e78",
+  "start_line": 8,
+  "stop_line": 30
+}

@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.biopax.processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.biopax.processor",
+  "source_uri": "py-mod:indra.sources.biopax.processor",
+  "generated_at": "2024-06-24T20:57:38.405800",
+  "source_sha256_hash": "6f654e52efb5c7d7665aa1c053b7eb8ba10d7a13df5b0ec31f2736d7008386b5",
+  "start_line": 388,
+  "stop_line": 415
+}

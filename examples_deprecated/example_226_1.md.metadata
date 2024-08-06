@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_obo_clients.test_hp_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_obo_clients.test_hp_client",
+  "source_uri": "py-mod:indra.tests.test_obo_clients.test_hp_client",
+  "generated_at": "2024-06-24T21:06:39.488564",
+  "source_sha256_hash": "d2ba919363c7ff10d02633c6ced1f6918cbcf991498837c7024fa8fc6a67b456",
+  "start_line": 10,
+  "stop_line": 12
+}

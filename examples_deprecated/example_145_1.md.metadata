@@ -1,0 +1,11 @@
+{
+  "package": "indra.tools.assemble_corpus",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tools.assemble_corpus",
+  "source_uri": "py-mod:indra.tools.assemble_corpus",
+  "generated_at": "2024-06-24T20:49:52.486007",
+  "source_sha256_hash": "6eabd7d7ba7e6d05e30b23a82b3bb7d3cc2cd7a6705fb3d2d1c6ef33108825b9",
+  "start_line": 36,
+  "stop_line": 52
+}

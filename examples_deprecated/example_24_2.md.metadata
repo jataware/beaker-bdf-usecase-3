@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.ndex_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.ndex_client",
+  "source_uri": "py-mod:indra.databases.ndex_client",
+  "generated_at": "2024-06-24T20:12:59.099777",
+  "source_sha256_hash": "0e2ed1b95a514b22ba7a0e6de927db22d66fccfd68a7d9c6cbe849a376d6c7b5",
+  "start_line": 168,
+  "stop_line": 227
+}

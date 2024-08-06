@@ -16,5 +16,6 @@ services:
       - OPENAI_API_KEY
       - ENABLE_CHECKPOINTS=true  
       - PYTHONPATH = /jupyter
+      - INDRA_DB_REST_URL=https://db.indra.bio
     working_dir: /jupyter
     command: ["beaker", "dev", "watch", "--ip", "0.0.0.0"]

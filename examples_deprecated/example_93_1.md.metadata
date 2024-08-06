@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_identifiers",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_identifiers",
+  "source_uri": "py-mod:indra.tests.test_identifiers",
+  "generated_at": "2024-06-24T20:30:14.233246",
+  "source_sha256_hash": "b6c1319cc9b71ae1708f896c132c04399ba3afff7946f7794c4d046e172340db",
+  "start_line": 7,
+  "stop_line": 11
+}

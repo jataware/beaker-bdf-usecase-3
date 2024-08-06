@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_bmi_wrapper",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_bmi_wrapper",
+  "source_uri": "py-mod:indra.tests.test_bmi_wrapper",
+  "generated_at": "2024-06-24T20:22:28.936415",
+  "source_sha256_hash": "1d202305bb8ed9d5a17aaba8b8c0209ad9fd91b4799c5da73b3ebe3768af74d8",
+  "start_line": 10,
+  "stop_line": 16
+}

@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.eidos.reader",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.eidos.reader",
+  "source_uri": "py-mod:indra.sources.eidos.reader",
+  "generated_at": "2024-06-24T21:01:08.816380",
+  "source_sha256_hash": "ae48762bae17e92b87243673d332f22c0880d7a645bf89cf15f801307530a674",
+  "start_line": 65,
+  "stop_line": 85
+}

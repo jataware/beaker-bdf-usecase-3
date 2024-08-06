@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_biolookup_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_biolookup_client",
+  "source_uri": "py-mod:indra.tests.test_biolookup_client",
+  "generated_at": "2024-06-24T20:21:28.778094",
+  "source_sha256_hash": "a5e7deb440d0984ce8771ee46be8cd7948476fde3d3367599211efaf0d56e980",
+  "start_line": 3,
+  "stop_line": 9
+}

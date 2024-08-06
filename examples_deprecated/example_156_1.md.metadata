@@ -1,0 +1,11 @@
+{
+  "package": "indra.assemblers.cx.assembler",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.assemblers.cx.assembler",
+  "source_uri": "py-mod:indra.assemblers.cx.assembler",
+  "generated_at": "2024-06-24T20:52:31.451421",
+  "source_sha256_hash": "9b1a64f085e3bc0bea9fed68c0eb5a51b0f9b204fca655327af2beb457674928",
+  "start_line": 0,
+  "stop_line": 37
+}

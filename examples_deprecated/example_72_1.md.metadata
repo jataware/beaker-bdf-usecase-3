@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_custom_preassembly",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_custom_preassembly",
+  "source_uri": "py-mod:indra.tests.test_custom_preassembly",
+  "generated_at": "2024-06-24T20:23:54.066713",
+  "source_sha256_hash": "f6f3c5c4e05481fceaaafcb785dba13d98ff2781737c5b9e1c170c0f6d233a22",
+  "start_line": 5,
+  "stop_line": 12
+}

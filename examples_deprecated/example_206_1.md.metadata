@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.omnipath.processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.omnipath.processor",
+  "source_uri": "py-mod:indra.sources.omnipath.processor",
+  "generated_at": "2024-06-24T21:03:22.427593",
+  "source_sha256_hash": "b2312fef87346f994f36259f6c6bfd3d5156cc113d7549073603ea3a4d2f382e",
+  "start_line": 23,
+  "stop_line": 86
+}

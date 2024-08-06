@@ -1,0 +1,11 @@
+{
+  "package": "indra.tools.mechlinker_queries",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tools.mechlinker_queries",
+  "source_uri": "py-mod:indra.tools.mechlinker_queries",
+  "generated_at": "2024-06-24T20:50:36.322500",
+  "source_sha256_hash": "d34b5ddda431afcfdcff6b7c3e0edc119549f5612d4bb6c7e2eea81af6ae333c",
+  "start_line": 23,
+  "stop_line": 33
+}

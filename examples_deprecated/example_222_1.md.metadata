@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.ubibrowser.processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.ubibrowser.processor",
+  "source_uri": "py-mod:indra.sources.ubibrowser.processor",
+  "generated_at": "2024-06-24T21:05:56.411097",
+  "source_sha256_hash": "f619a47299bee895c8fdb157ebc56468f31d292b3b299ac15bbe39cca98421a9",
+  "start_line": 4,
+  "stop_line": 49
+}

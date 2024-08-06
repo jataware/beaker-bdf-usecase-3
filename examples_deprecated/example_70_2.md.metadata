@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_crossref_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_crossref_client",
+  "source_uri": "py-mod:indra.tests.test_crossref_client",
+  "generated_at": "2024-06-24T20:23:43.128171",
+  "source_sha256_hash": "6bbb18d6fa2a7897e07b4292c5c698d721160084167a5b359bb9d593bfddafb4",
+  "start_line": 20,
+  "stop_line": 27
+}

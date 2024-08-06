@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_pipeline",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_pipeline",
+  "source_uri": "py-mod:indra.tests.test_pipeline",
+  "generated_at": "2024-06-24T20:38:01.309488",
+  "source_sha256_hash": "1d2823518aef6b992ffaa62b6124920bb5051da699e0db3ebbd41da299274971",
+  "start_line": 115,
+  "stop_line": 130
+}

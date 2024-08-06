@@ -1,0 +1,11 @@
+{
+  "package": "indra.literature.biorxiv_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.literature.biorxiv_client",
+  "source_uri": "py-mod:indra.literature.biorxiv_client",
+  "generated_at": "2024-06-24T20:14:04.393029",
+  "source_sha256_hash": "ccf9d24916c46b51c7b984d0311a30e12d98946d61b55cd01374fd460b805efd",
+  "start_line": 193,
+  "stop_line": 210
+}

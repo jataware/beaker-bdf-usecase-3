@@ -1,0 +1,11 @@
+{
+  "package": "indra.belief",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.belief",
+  "source_uri": "py-mod:indra.belief",
+  "generated_at": "2024-06-24T20:07:49.271584",
+  "source_sha256_hash": "b64a38bf3b8667d287b9eb24f28e227d01210242aaa7004206174846d668c07c",
+  "start_line": 90,
+  "stop_line": 232
+}

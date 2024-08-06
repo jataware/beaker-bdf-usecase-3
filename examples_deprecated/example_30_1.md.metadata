@@ -1,0 +1,11 @@
+{
+  "package": "indra.literature.coci_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.literature.coci_client",
+  "source_uri": "py-mod:indra.literature.coci_client",
+  "generated_at": "2024-06-24T20:14:09.211011",
+  "source_sha256_hash": "6db7a7b2cdc14e79d9c18d35dbd76a40d4201b4fcbe97aec44ddc97d47d7de1f",
+  "start_line": 16,
+  "stop_line": 37
+}

@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.eidos.client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.eidos.client",
+  "source_uri": "py-mod:indra.sources.eidos.client",
+  "generated_at": "2024-06-24T21:00:55.000067",
+  "source_sha256_hash": "1fa95fd750bbd1dbcd919da254abcd9791cf05053fa3a1e0c7cf39a9580a73e9",
+  "start_line": 5,
+  "stop_line": 30
+}

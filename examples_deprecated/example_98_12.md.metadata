@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_json_schema",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_json_schema",
+  "source_uri": "py-mod:indra.tests.test_json_schema",
+  "generated_at": "2024-06-24T20:33:31.878106",
+  "source_sha256_hash": "cbbabbfe43062d7f9355ebde75a0f18a7baa8d397b6abd915923950d39060344",
+  "start_line": 233,
+  "stop_line": 244
+}

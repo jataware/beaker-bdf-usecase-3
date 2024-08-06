@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_expand_families",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_expand_families",
+  "source_uri": "py-mod:indra.tests.test_expand_families",
+  "generated_at": "2024-06-24T20:26:05.650656",
+  "source_sha256_hash": "ea0681f071defca5d25fdfd8878827c3d6c7a3e25d8af9b349894204c95c8a81",
+  "start_line": 88,
+  "stop_line": 96
+}

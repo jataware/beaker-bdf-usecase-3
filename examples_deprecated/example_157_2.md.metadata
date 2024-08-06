@@ -1,0 +1,11 @@
+{
+  "package": "indra.assemblers.cx.hub_layout",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.assemblers.cx.hub_layout",
+  "source_uri": "py-mod:indra.assemblers.cx.hub_layout",
+  "generated_at": "2024-06-24T20:52:53.354799",
+  "source_sha256_hash": "8ddc8f2d3e423b83f8f2d3f6a9d31d6db84d63f2bbe113fe254b621850ba66d1",
+  "start_line": 148,
+  "stop_line": 152
+}

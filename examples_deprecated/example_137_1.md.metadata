@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_tees",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_tees",
+  "source_uri": "py-mod:indra.tests.test_tees",
+  "generated_at": "2024-06-24T20:46:25.301107",
+  "source_sha256_hash": "d133e996438da21079d6bf8e0c583c6f32fa0a3d010738e0601cc0c657ea8287",
+  "start_line": 9,
+  "stop_line": 33
+}

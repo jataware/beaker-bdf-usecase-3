@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.mgi_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.mgi_client",
+  "source_uri": "py-mod:indra.databases.mgi_client",
+  "generated_at": "2024-06-24T20:12:44.404504",
+  "source_sha256_hash": "e700e605d10f06567cec2af934e36ca322c0197235986a31c5eb2089c4e83e5e",
+  "start_line": 9,
+  "stop_line": 23
+}

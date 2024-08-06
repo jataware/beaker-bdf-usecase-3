@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.chembl_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.chembl_client",
+  "source_uri": "py-mod:indra.databases.chembl_client",
+  "generated_at": "2024-06-24T20:11:15.854568",
+  "source_sha256_hash": "39d741c7a98116d20fcb066448b9a923d6900a4c4fc79774c63cd85056d76573",
+  "start_line": 45,
+  "stop_line": 102
+}

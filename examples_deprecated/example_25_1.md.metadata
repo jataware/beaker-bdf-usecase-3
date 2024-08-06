@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.obo_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.obo_client",
+  "source_uri": "py-mod:indra.databases.obo_client",
+  "generated_at": "2024-06-24T20:13:05.706875",
+  "source_sha256_hash": "156deb703cc404eda6335a2c91a037d8d2536fe0c380835e3ef120f489e2599f",
+  "start_line": 365,
+  "stop_line": 408
+}

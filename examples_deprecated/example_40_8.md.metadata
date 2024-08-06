@@ -1,0 +1,11 @@
+{
+  "package": "indra.resources.update_resources",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.resources.update_resources",
+  "source_uri": "py-mod:indra.resources.update_resources",
+  "generated_at": "2024-06-24T20:16:58.015616",
+  "source_sha256_hash": "54572225755b486d6e0a2d17ba0165ac978f7397a0500f77ebb88279d154f4c3",
+  "start_line": 778,
+  "stop_line": 803
+}

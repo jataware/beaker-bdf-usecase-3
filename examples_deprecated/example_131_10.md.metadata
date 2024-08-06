@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_sitemapper",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_sitemapper",
+  "source_uri": "py-mod:indra.tests.test_sitemapper",
+  "generated_at": "2024-06-24T20:43:54.736876",
+  "source_sha256_hash": "d69359dd594c48547458a98a10bd864a05ed42d499d23f5b6530f34ea9af6d03",
+  "start_line": 193,
+  "stop_line": 213
+}
