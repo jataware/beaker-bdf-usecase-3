@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.taxonomy_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.taxonomy_client",
+  "source_uri": "py-mod:indra.databases.taxonomy_client",
+  "generated_at": "2024-06-24T20:13:18.742844",
+  "source_sha256_hash": "dc8b619e771a269b9bdf5430fc2cc7a12250c33c0714942c476301c5b0d25be5",
+  "start_line": 18,
+  "stop_line": 38
+}

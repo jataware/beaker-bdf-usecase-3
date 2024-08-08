@@ -1,0 +1,11 @@
+{
+  "package": "indra.tools.executable_subnetwork",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tools.executable_subnetwork",
+  "source_uri": "py-mod:indra.tools.executable_subnetwork",
+  "generated_at": "2024-06-24T20:49:55.908179",
+  "source_sha256_hash": "148ce05db01e6a793e78bbe2e0cc8c5f1f47ad5b5db230ea350045ee31ef2e3e",
+  "start_line": 58,
+  "stop_line": 70
+}

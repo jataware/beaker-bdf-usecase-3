@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.phosphoelm.processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.phosphoelm.processor",
+  "source_uri": "py-mod:indra.sources.phosphoelm.processor",
+  "generated_at": "2024-06-24T21:03:35.065170",
+  "source_sha256_hash": "bfe15eb245de8c98216b98fb86cb0d86d16611457d7dda980e5bf749ab5625b2",
+  "start_line": 33,
+  "stop_line": 90
+}

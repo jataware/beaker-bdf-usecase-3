@@ -23,7 +23,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-    "beaker-bunsen>=0.0.6",
+    "beaker-bunsen~=0.0.13",
     "pysb",
     "indra@git+https://github.com/sorgerlab/indra.git",
     "openpyxl"
@@ -37,6 +37,7 @@ examples_path = "examples"
 
 [tool.hatch.build.hooks.bunsen.libraries.python3]
 indra = "Automated model assembly system, originally developed for molecular systems biology"
+protmapper = "Map amino acid sites of post-translational modifications from models or data to reference positions."
 
 
 [project.urls]

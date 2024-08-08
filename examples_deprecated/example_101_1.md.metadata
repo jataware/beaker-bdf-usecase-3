@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_lincs_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_lincs_client",
+  "source_uri": "py-mod:indra.tests.test_lincs_client",
+  "generated_at": "2024-06-24T20:34:06.458068",
+  "source_sha256_hash": "439835b5da81efd5cceac05845bf41d256e9e6333dcd64ff186fa6908fcab8fd",
+  "start_line": 10,
+  "stop_line": 15
+}

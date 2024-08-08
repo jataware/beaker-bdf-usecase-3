@@ -1,0 +1,11 @@
+{
+  "package": "indra.tools.machine",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tools.machine",
+  "source_uri": "py-mod:indra.tools.machine",
+  "generated_at": "2024-06-24T20:50:31.248879",
+  "source_sha256_hash": "8797659c3b1b2351bcf4ed4a122788c2e49b408d2dc042b1e5184848e89786a5",
+  "start_line": 19,
+  "stop_line": 22
+}

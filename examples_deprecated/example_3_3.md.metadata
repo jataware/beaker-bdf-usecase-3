@@ -1,0 +1,11 @@
+{
+  "package": "indra.mechlinker",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.mechlinker",
+  "source_uri": "py-mod:indra.mechlinker",
+  "generated_at": "2024-06-24T20:08:22.218274",
+  "source_sha256_hash": "86c3993eb7e7eea7a9486db86755eef200c6240a3ed7f9b50d907e1ff525b93b",
+  "start_line": 327,
+  "stop_line": 382
+}

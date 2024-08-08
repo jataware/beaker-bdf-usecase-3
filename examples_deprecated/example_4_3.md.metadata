@@ -1,0 +1,11 @@
+{
+  "package": "indra.preassembler",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.preassembler",
+  "source_uri": "py-mod:indra.preassembler",
+  "generated_at": "2024-06-24T20:08:34.923408",
+  "source_sha256_hash": "d50d4993eb8f51ed4e140190b7b57653f854837ed3cb50253fac218ce0555c8c",
+  "start_line": 643,
+  "stop_line": 654
+}

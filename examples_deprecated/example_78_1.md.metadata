@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_drugbank",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_drugbank",
+  "source_uri": "py-mod:indra.tests.test_drugbank",
+  "generated_at": "2024-06-24T20:25:34.286300",
+  "source_sha256_hash": "0e6a30c65ceafb62ffdf16fe09f9d59ab3a123cf2717404c374ca6b95a9152b3",
+  "start_line": 7,
+  "stop_line": 24
+}

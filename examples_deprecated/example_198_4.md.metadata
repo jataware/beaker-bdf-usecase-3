@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.indra_db_rest.query",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.indra_db_rest.query",
+  "source_uri": "py-mod:indra.sources.indra_db_rest.query",
+  "generated_at": "2024-06-24T21:02:27.631951",
+  "source_sha256_hash": "5802b7f679dd0d9d3ea2474073741d3b302a47788549cb3003629b3fdb3e52ab",
+  "start_line": 149,
+  "stop_line": 195
+}

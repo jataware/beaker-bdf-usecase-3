@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_elsevier_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_elsevier_client",
+  "source_uri": "py-mod:indra.tests.test_elsevier_client",
+  "generated_at": "2024-06-24T20:25:46.345893",
+  "source_sha256_hash": "285db4cabe6f717604cdc9746e0a8b19b1b17cce8747733f726649506111029f",
+  "start_line": 7,
+  "stop_line": 17
+}

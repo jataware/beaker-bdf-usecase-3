@@ -1,0 +1,11 @@
+{
+  "package": "indra.databases.hp_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.databases.hp_client",
+  "source_uri": "py-mod:indra.databases.hp_client",
+  "generated_at": "2024-06-24T20:11:45.534175",
+  "source_sha256_hash": "8c8f11ab07f56bc8dfaa181b34800548cca911a3336e2c96527fe8972b5fbec6",
+  "start_line": 7,
+  "stop_line": 21
+}

@@ -1,0 +1,11 @@
+{
+  "package": "indra.assemblers.indranet.net",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.assemblers.indranet.net",
+  "source_uri": "py-mod:indra.assemblers.indranet.net",
+  "generated_at": "2024-06-24T20:54:12.294316",
+  "source_sha256_hash": "9f71d49623689fa1b9e87353ed8a97bca561ccd914ae2e8f7538307e7d8017d6",
+  "start_line": 288,
+  "stop_line": 310
+}

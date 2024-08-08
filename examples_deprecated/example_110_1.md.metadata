@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_ndex_cx_processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_ndex_cx_processor",
+  "source_uri": "py-mod:indra.tests.test_ndex_cx_processor",
+  "generated_at": "2024-06-24T20:36:20.035696",
+  "source_sha256_hash": "0d3e768b2c131229b5d89ecd2149b93a27e0242198d3796c79631891200e4f23",
+  "start_line": 11,
+  "stop_line": 17
+}

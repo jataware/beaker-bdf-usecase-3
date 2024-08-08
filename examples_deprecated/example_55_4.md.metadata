@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_adeft_tools",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_adeft_tools",
+  "source_uri": "py-mod:indra.tests.test_adeft_tools",
+  "generated_at": "2024-06-24T20:20:10.328678",
+  "source_sha256_hash": "190e6979b5e4c6714607861d05ff58ab65388f8de48ffdcb45e6d1911b9ecfaf",
+  "start_line": 39,
+  "stop_line": 48
+}

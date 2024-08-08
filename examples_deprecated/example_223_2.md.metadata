@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.virhostnet.api",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.virhostnet.api",
+  "source_uri": "py-mod:indra.sources.virhostnet.api",
+  "generated_at": "2024-06-24T21:06:08.779060",
+  "source_sha256_hash": "a28b495dbabf2cafafca1b2b6fa23402c191d76f52354f68c22d6f05f7e8e5f4",
+  "start_line": 46,
+  "stop_line": 64
+}

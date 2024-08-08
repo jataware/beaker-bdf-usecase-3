@@ -1,0 +1,11 @@
+{
+  "package": "indra.literature.pubmed_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.literature.pubmed_client",
+  "source_uri": "py-mod:indra.literature.pubmed_client",
+  "generated_at": "2024-06-24T20:16:08.552996",
+  "source_sha256_hash": "fa2c13e3561d87af54e2df3ab6f4ad06e9ea04d2b88d07639178999ebc0d3c4f",
+  "start_line": 253,
+  "stop_line": 280
+}

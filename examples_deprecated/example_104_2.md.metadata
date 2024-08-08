@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_medscan",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_medscan",
+  "source_uri": "py-mod:indra.tests.test_medscan",
+  "generated_at": "2024-06-24T20:35:01.389019",
+  "source_sha256_hash": "696446ec77c63c4475a2bcd9f2fc1ca9edde3b3855bb6e2cb47461c40b81c958",
+  "start_line": 86,
+  "stop_line": 119
+}

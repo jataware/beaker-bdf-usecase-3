@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.omnipath.api",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.omnipath.api",
+  "source_uri": "py-mod:indra.sources.omnipath.api",
+  "generated_at": "2024-06-24T21:03:10.957623",
+  "source_sha256_hash": "275234b1f924c26596dddd40dcc790c412e8fd51a74eeafd43e947883ad463d4",
+  "start_line": 45,
+  "stop_line": 75
+}

@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_belief_sklearn",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_belief_sklearn",
+  "source_uri": "py-mod:indra.tests.test_belief_sklearn",
+  "generated_at": "2024-06-24T20:21:21.012884",
+  "source_sha256_hash": "0230784d9ac1b72e026f6213fc6e2645e36ee0a5d06425fbd9d79a47fb7277e5",
+  "start_line": 86,
+  "stop_line": 105
+}

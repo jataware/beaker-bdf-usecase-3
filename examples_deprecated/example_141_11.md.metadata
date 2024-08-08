@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_uniprot_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_uniprot_client",
+  "source_uri": "py-mod:indra.tests.test_uniprot_client",
+  "generated_at": "2024-06-24T20:48:59.949515",
+  "source_sha256_hash": "8aab58eeaa4189499ee6dfe9af6d97d91371efd249b1c1728a40378881898242",
+  "start_line": 185,
+  "stop_line": 189
+}

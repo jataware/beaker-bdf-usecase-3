@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_db_rest",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_db_rest",
+  "source_uri": "py-mod:indra.tests.test_db_rest",
+  "generated_at": "2024-06-24T20:24:58.682960",
+  "source_sha256_hash": "1ec2d847da5682a3cde5bb8c41167c23d003acf8bbcfa55e8ae445582c5fe8ab",
+  "start_line": 30,
+  "stop_line": 33
+}

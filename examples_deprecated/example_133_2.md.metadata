@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_sparser_xml",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_sparser_xml",
+  "source_uri": "py-mod:indra.tests.test_sparser_xml",
+  "generated_at": "2024-06-24T20:44:28.982485",
+  "source_sha256_hash": "bb78220d724e305ebc203366edb00692b34a721d352f8c1f3c9a5c0150ced9b8",
+  "start_line": 9,
+  "stop_line": 19
+}

@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_phosphoelm_processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_phosphoelm_processor",
+  "source_uri": "py-mod:indra.tests.test_phosphoelm_processor",
+  "generated_at": "2024-06-24T20:37:50.247898",
+  "source_sha256_hash": "6a890a7dd803db085012ead522fd4a2384081ab376ccf96232973d6bc5dc9210",
+  "start_line": 32,
+  "stop_line": 43
+}

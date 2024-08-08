@@ -1,0 +1,11 @@
+{
+  "package": "indra.tests.test_hgnc_client",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.tests.test_hgnc_client",
+  "source_uri": "py-mod:indra.tests.test_hgnc_client",
+  "generated_at": "2024-06-24T20:28:09.296904",
+  "source_sha256_hash": "2c2122c990cf8b1d65a3673fe89f0898b5e325a75de872ae61fc501f40c0f49f",
+  "start_line": 73,
+  "stop_line": 80
+}

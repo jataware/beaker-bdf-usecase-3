@@ -1,0 +1,11 @@
+{
+  "package": "indra.assemblers.index_card.assembler",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.assemblers.index_card.assembler",
+  "source_uri": "py-mod:indra.assemblers.index_card.assembler",
+  "generated_at": "2024-06-24T20:53:40.674444",
+  "source_sha256_hash": "f28921080f3157bfcf84e3b89afcb0fe5b580d4bf8dc6916c3d40b32266d392f",
+  "start_line": 12,
+  "stop_line": 116
+}

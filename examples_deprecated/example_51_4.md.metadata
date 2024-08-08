@@ -1,0 +1,11 @@
+{
+  "package": "indra.statements.statements",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.statements.statements",
+  "source_uri": "py-mod:indra.statements.statements",
+  "generated_at": "2024-06-24T20:19:12.808913",
+  "source_sha256_hash": "e7c270ee1affdd1afef9f01dba0f67b12a81314aea1bf04c40321b681fb108d6",
+  "start_line": 1230,
+  "stop_line": 1235
+}

@@ -1,0 +1,11 @@
+{
+  "package": "indra.sources.rlimsp.processor",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.sources.rlimsp.processor",
+  "source_uri": "py-mod:indra.sources.rlimsp.processor",
+  "generated_at": "2024-06-24T21:04:09.464018",
+  "source_sha256_hash": "f68bb8093714b52f0554600272942e0a1971854942d8892848f7bf752c3e9e50",
+  "start_line": 22,
+  "stop_line": 32
+}

@@ -1,0 +1,11 @@
+{
+  "package": "indra.util.perm_cache",
+  "type": "code",
+  "language": "python3",
+  "resource_id": "python:py-mod:indra.util.perm_cache",
+  "source_uri": "py-mod:indra.util.perm_cache",
+  "generated_at": "2024-06-24T20:51:01.006181",
+  "source_sha256_hash": "5950cf5724682dfd00ffaca83568290210ba2082d44a46994e97576da81e8fa7",
+  "start_line": 8,
+  "stop_line": 67
+}
